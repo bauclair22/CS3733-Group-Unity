@@ -23,7 +23,7 @@ paths:
     post:
       tags:
       - teamMembers
-      summary: creates Choice
+      summary: creates Choice based on the given parameters
       operationId: createChoice
       description: |
         By passing in the appropriate options, you can create a choice in the app
@@ -46,6 +46,20 @@ paths:
         type: integer
         format: int32
         minimum: 1
+      - in: query
+        name: alternatives
+        description: list of descriptions of alternatives
+        type: array
+        items:
+          type: string
+        required: true
+      - in: query
+        name: alternativeTitles
+        description: list of titles of alternatives
+        type: array
+        items:
+          type: string
+        required: true
       responses:
         200:
           description: response message with Choice id
@@ -76,7 +90,7 @@ paths:
         200:
           description: login allowed
         400:
-          description: bad input
+          description: bad input or max teamMembers already reached
   /addFeedback:
     post:
       tags:
@@ -102,81 +116,57 @@ paths:
     post: 
       tags:
       - teamMembers
-      summary: adds Approval to Alternative
+      summary: adds approval to Alternative by adding the username to the list of approvers 
       operationId: selectApproval
       description: |
-        By passing in the appropriate options, you can select Approval
+        By pressing a button, you can select approval
       produces:
       - application/json
-      parameters:
-      - in: query
-        name: approvalButton
-        description: like button
-        required: true
-        type: boolean
       responses:
         200:
-          description: updates Approvals
+          description: updates approvals
         400:
           description: bad input
   /selectDisapproval:
     post: 
       tags:
       - teamMembers
-      summary: adds Disapproval to Alternative
+      summary: adds disapproval to Alternative by adding the username to the list of disapprovers
       operationId: selectDisapproval
       description: |
-        By passing in the appropriate options, you can select Disapproval
+        By pressing a button, you can select disapproval
       produces:
       - application/json
-      parameters:
-      - in: query
-        name: disapprovalButton
-        description: dislike button
-        required: true
-        type: boolean
       responses:
         200:
-          description: updates Disapprovals
+          description: updates disapprovals
         400:
           description: bad input
   /unselectReaction:
     post: 
       tags:
       - teamMembers
-      summary: removes Approval or Disapproval from Alternative
+      summary: removes approval or disapproval from Alternative
       operationId: unselectReaction
       description: |
-        By passing in the appropriate options, you can unselect reaction
+        By pressing a button, you can unselect reaction
       produces:
       - application/json
-      parameters:
-      - in: query
-        name: clearButton
-        description: clear button
-        required: true
-        type: boolean
       responses:
         200:
-          description: Approvals or Disapprovals has been updated
+          description: approvals or disapprovals has been updated
         400:
           description: bad input
   /completeChoice:
     post: 
       tags:
       - teamMembers
-      summary: completes Choice
+      summary: marks Choice as complete and stops user from adding Feedback or approvals or disapprovals
       operationId: completeChoice
       description: |
-        By passing in the appropriate options, you can complete Choice
+        By pressing a button, you can complete Choice
       produces:
       - application/json
-      parameters:
-      - in: query
-        name: completeButton
-        description: complete Choice button
-        required: true
-        type: boolean
       responses:
         200:
           description: marks Choice as completed
@@ -186,7 +176,7 @@ paths:
     get:
       tags:
       - admins
-      summary: produces report
+      summary: produces report of Choices
       operationId: produceReport
       description: |
         Request to produce report
