@@ -1,0 +1,260 @@
+swagger: '2.0'
+info:
+  description: Questionnaire App Creation
+  version: 1.0.0
+  title: Questionnaire App API
+  # put the contact info for your development or API team
+  contact:
+    email: brauclair@wpi.edu
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: teamMembers
+  description: Operations available to regular teamMembers
+
+paths:
+  /createChoice:
+    post:
+      tags:
+      - teamMembers
+      summary: creates Choice based on the given parameters
+      operationId: createChoice
+      description: |
+        By passing in the appropriate options, you can create a choice in the app
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: title
+        description: title of Choice
+        required: true
+        type: string
+      - in: query
+        name: description
+        description: description of Choice
+        type: string
+        required: true
+      - in: query
+        name: numMembers
+        description: maximum number of members
+        type: integer
+        format: int32
+        minimum: 1
+      - in: query
+        name: alternatives
+        description: list of descriptions of alternatives
+        type: array
+        items:
+          type: string
+        required: true
+      - in: query
+        name: alternativeTitles
+        description: list of titles of alternatives
+        type: array
+        items:
+          type: string
+        required: true
+      responses:
+        200:
+          description: response message with Choice id
+        400:
+          description: bad input parameter
+  /participateChoice:
+    post:
+      tags:
+      - teamMembers
+      summary: adds teamMember to participants
+      operationId: participateChoice
+      description: |
+        By passing in the appropriate options, you can participate in a Choice
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: username
+        description: username
+        required: true
+        type: string
+      - in: query
+        name: password
+        description: password
+        required: false
+        type: string
+      responses:
+        200:
+          description: login allowed
+        400:
+          description: bad input or max teamMembers already reached
+  /addFeedback:
+    post:
+      tags:
+      - teamMembers
+      summary: adds Feedback to Alternative
+      operationId: addFeedback
+      description: |
+        By passing in the appropriate options, you can add Feedback
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: description
+        description: comments on the Alternative
+        required: true
+        type: string
+      responses:
+        200: 
+          description: posts Feedback with user's name and timestamp
+        400:
+          description: bad input
+  /selectApproval:
+    post: 
+      tags:
+      - teamMembers
+      summary: adds approval to Alternative by adding the username to the list of approvers 
+      operationId: selectApproval
+      description: |
+        By pressing a button, you can select approval
+      produces:
+      - application/json
+      responses:
+        200:
+          description: updates approvals
+        400:
+          description: bad input
+  /selectDisapproval:
+    post: 
+      tags:
+      - teamMembers
+      summary: adds disapproval to Alternative by adding the username to the list of disapprovers
+      operationId: selectDisapproval
+      description: |
+        By pressing a button, you can select disapproval
+      produces:
+      - application/json
+      responses:
+        200:
+          description: updates disapprovals
+        400:
+          description: bad input
+  /unselectReaction:
+    post: 
+      tags:
+      - teamMembers
+      summary: removes approval or disapproval from Alternative
+      operationId: unselectReaction
+      description: |
+        By pressing a button, you can unselect reaction
+      produces:
+      - application/json
+      responses:
+        200:
+          description: approvals or disapprovals has been updated
+        400:
+          description: bad input
+  /completeChoice:
+    post: 
+      tags:
+      - teamMembers
+      summary: marks Choice as complete and stops user from adding Feedback or approvals or disapprovals
+      operationId: completeChoice
+      description: |
+        By pressing a button, you can complete Choice
+      produces:
+      - application/json
+      responses:
+        200:
+          description: marks Choice as completed
+        400:
+          description: bad input
+  /produceReport:
+    get:
+      tags:
+      - admins
+      summary: produces report of Choices
+      operationId: produceReport
+      description: |
+        Request to produce report
+      produces:
+      - application/json
+      responses:
+        200:
+          description: shows report of Choices
+        400:
+          description: Choices not found
+  /deleteStale:
+    post:
+      tags:
+      - admins
+      summary: deletes old Choices
+      operationId: deleteChoices
+      description: |
+        By passing in the appropriate options, you can delete Choices
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: staleTimeLength
+        description: length of time to be considered stale
+        required: true
+        type: number
+      responses:
+        200:
+          description: deletes stale Choices
+        400:
+          description: bad input
+definitions:
+  Choice:
+    type: object
+    required:
+    - title
+    - description
+    - alternatives
+    - numMembers
+    - id
+    - isCompleted
+    properties:
+      title:
+        type: string
+      description: 
+        type: string
+      alternatives:
+        $ref: '#/definitions/Alternative'
+      numMembers:
+        type: integer
+      id:
+        type: integer
+      isCompleted:
+        type: boolean
+  Alternative:
+    type: object
+    required:
+    - description
+    - disapprovals
+    - approvals
+    properties:
+      description:
+        type: string
+      disapprovals:
+        $ref: '#/definitions/TeamMember'
+      approvals:
+        $ref: '#/definitions/TeamMember'
+  TeamMember:
+    type: object
+    required:
+    - name
+    properties:
+      name:
+        type: string
+      password:
+        type: string
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /CS3733Unity/QuestionnaireAPI/1.0.0
+schemes:
+ - https
