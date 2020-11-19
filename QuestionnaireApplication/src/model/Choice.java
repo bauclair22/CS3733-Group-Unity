@@ -11,7 +11,7 @@ public class Choice {
 	boolean isCompleted;
 	float dateCompleted;
 	
-	Choice(String description, Alternative[] alts, int numMembers){
+	public Choice(String description, Alternative[] alts, int numMembers){
 		this.description = description;
 		this.alternatives = alts;
 		this.numMembers = numMembers;
@@ -21,7 +21,7 @@ public class Choice {
 	
 	//Add a TeamMember to the list of TeamMembers as long as the list isn't already at max size
 	//Return false if unsuccessful
-	boolean addTeamMember(TeamMember t){
+	public boolean addTeamMember(TeamMember t){
 		if(teamMembers.size() < numMembers) {
 			teamMembers.add(t);
 			return true;
@@ -29,21 +29,21 @@ public class Choice {
 		return false;
 	}
 	
-	int getID() {
+	public int getID() {
 		return this.idNumber;
 	}
 	
-	boolean getIsCompleted() {
+	public boolean getIsCompleted() {
 		return this.isCompleted;
 	}
-	void setIsCompleted(boolean flag) {
+	public void setIsCompleted(boolean flag) {
 		this.isCompleted = flag;
 	}
 	
-	float getDateCompleted() {
+	public float getDateCompleted() {
 		return this.dateCompleted;
 	}
-	void setDateCompleted(float d) {
+	public void setDateCompleted(float d) {
 		this.dateCompleted = d;
 	}
 }
