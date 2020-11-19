@@ -13,7 +13,7 @@ public class Choice {
 	
 	public Choice(String description, Alternative[] alts, int numMembers){
 		this.description = description;
-		this.alternatives = alts;
+		this.alternatives = alts; //Should this be changed to a list of strings of titles and descriptions to form the alternatives?
 		this.numMembers = numMembers;
 		this.isCompleted = false;
 		//Need something here to randomly assign a unique id number

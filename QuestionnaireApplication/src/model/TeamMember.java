@@ -12,4 +12,9 @@ public class TeamMember {
 	public String getName() {
 		return this.name;
 	}
+	
+	public int createChoice(String description, Alternative[] alts, int numMembers) {
+		Choice c = new Choice(description, alts, numMembers);
+		return c.idNumber;
+	}
 }
