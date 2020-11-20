@@ -29,6 +29,21 @@ public class Choice {
 		return false;
 	}
 	
+	//Add an Alternative to the array of alternatives to the next empty spot, if there are already 5 alternativesw othing will be added
+	//return false if unsuccessful
+	public boolean addAlternative(Alternative a) {
+		boolean added = false;
+		for(int i=0; i<5; i++) {
+			if(this.alternatives[i]== null)
+				this.alternatives[i]= a;
+				added = true;
+				i = 5;
+			}
+		}
+		return added;
+	}
+	
+	
 	public int getID() {
 		return this.idNumber;
 	}
