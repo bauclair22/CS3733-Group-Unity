@@ -1,0 +1,51 @@
+<html><head>
+    <!-- relative path-name to access js -->
+<!--    <script type='text/javascript' src='../js/api.js'></script>-->
+<!--    <script type='text/javascript' src='../js/get_constantList.js'></script>-->
+<!--    <script type='text/javascript' src='../js/add.js'></script>-->
+<!--    <script type='text/javascript' src='../js/create.js'></script>-->
+<!--    <script type='text/javascript' src='../js/delete.js'></script>-->
+
+    <script type="text/javascript">
+        function initialize() {
+
+            // get all constants
+            refreshConstantsList();
+        }
+    </script>
+</head>
+<body onload="initialize()">
+
+<h1>Create a new Choice</h1>
+
+<form name="addForm" method="post" name="addValues">
+    <label for="TitleInput">Title:</label>
+    <input name="arg1" value="" id="TitleInput"/>
+
+    <!--<label for="Description">Description:</label>
+    <input name="arg2" value="" id="Description"/>
+-->
+    <label for="Description">Description:</label>
+    <textarea id="Description" name="Description" rows="4" cols="50">
+    </textarea>
+
+    <label for="MaxUsers">Max Users:</label>
+    <input name="arg2" value="" id="MaxUsers"/>
+
+    <input type="button" value="Create"  onClick="JavaScript:handleAddClick(this)">
+</form>
+
+<h2>Choice</h2>
+
+<form name="createForm" method="post">
+    <input name="constantName" value="tile" />
+    <input name="constantValue" value="description"/>
+
+    <input type="button" id="createButton" value="Add Alternative" onClick="JavaScript:handleCreateClick(this)">
+    <br>   <input type="checkbox" name="system">Create System Constant<br>
+</form>
+
+<div id="constantList"></div>
+
+</body>
+</html>
