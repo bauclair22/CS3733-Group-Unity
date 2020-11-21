@@ -29,7 +29,7 @@ public class Choice {
 		return false;
 	}
 	
-	//Add an Alternative to the array of alternatives to the next empty spot, if there are already 5 alternativesw othing will be added
+	//Add an Alternative to the array of alternatives to the next empty spot, if there are already 5 alternatives nothing will be added
 	//return false if unsuccessful
 	public boolean addAlternative(Alternative a) {
 		boolean added = false;
