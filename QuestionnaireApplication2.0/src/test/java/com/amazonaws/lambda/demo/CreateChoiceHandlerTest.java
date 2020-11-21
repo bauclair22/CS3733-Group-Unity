@@ -29,15 +29,4 @@ public class CreateChoiceHandlerTest {
 
         return ctx;
     }
-
-    @Test
-    public void testCreateChoiceHandler() {
-        CreateChoiceHandler handler = new CreateChoiceHandler();
-        Context ctx = createContext();
-
-        String output = handler.handleRequest(input, ctx);
-
-        // TODO: validate output here if needed.
-        Assert.assertEquals("Hello from Lambda!", output);
-    }
 }

@@ -1,28 +1,20 @@
 package httpRequestsAndResponses;
 
 public class CreateChoiceResponse {
-	public String result;
-	public int statusCode; //HTTP status code
-	public String error;
+	public String response;
+	public final int httpCode;
 	
-	public CreateChoiceResponse (double value, int statusCode) {
-		this.result = "" + value; // doesn't matter since error
-		this.statusCode = statusCode;
-		this.error = "";
+	public CreateChoiceResponse (String s, int code) {
+		this.response = s;
+		this.httpCode = code;
 	}
 	
-	public CreateChoiceResponse (int statusCode, String errorMessage) {
-		this.result = ""; // doesn't matter since error
-		this.statusCode = statusCode;
-		this.error = errorMessage;
+	public CreateChoiceResponse (String s) {
+		this.response = s;
+		this.httpCode = 200;
 	}
 	
 	public String toString() {
-		if (statusCode == 200) {
-			return "Result(" + result + ")";
-		}
-		else {
-			return "ErrorResult(" + statusCode + ", err=" + error + ")";
-		}
+		return "Response(" + response + ")";
 	}
 }
