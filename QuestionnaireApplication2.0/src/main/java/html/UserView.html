@@ -11,18 +11,41 @@
 
 <h2>Create Choice</h2>
 
-<form name="addChoiceForm" method="post">
+<form name="creatChoiceForm" method="post">
+
+	<!-- Title, decription and max Users -->
+
     <label for="TitleInput">Title:</label><br>
     <input name="title" value="" id="TitleInput" maxlength = "20"/><br><br>
 
     <label for="DescriptionInput">Description:</label><br>
-    <textarea name="Description" id="DescriptionInput" maxlength = "280" rows="4" cols="50">
+    <textarea name="description" id="DescriptionInput" maxlength = "280" rows="4" cols="50">
     </textarea><br><br>
 
     <label for="MaxUsers">Max Users:</label>
-    <input name="arg2" value="" id="MaxUsers"/>
-
-    <input type="button" value="Create"  onClick="JavaScript:handleAddClick(this)">
+    <input name="maxUser" value="" id="MaxUsers"/><br><br>
+    
+    <!-- Alternate Positions (no descriptions yet) -->
+    
+    <label for="Alternate1">Alternate 1:</label>
+    <input name=alt1 id = "Alternate1" value=""/><br><br>
+    
+    <label for="Alternate2">Alternate 2:</label>
+    <input name=alt2 id = "Alternate2" value=""/><br><br>
+    
+    <label for="Alternate3">Alternate 3:</label>
+    <input name=alt3 id = "Alternate3" value=""/><br><br>
+    
+    <label for="Alternate4">Alternate 4:</label>
+    <input name=alt4 id = "Alternate4" value=""/><br><br>
+    
+    <label for="Alternate5">Alternate 5:</label>
+    <input name=alt5 id = "Alternate5" value=""/><br><br>
+    
+    <input type="button" value="Create"  onClick="">
+    
+    
+    
 </form>
 
 <h2>Choice And Alternatives</h2>
