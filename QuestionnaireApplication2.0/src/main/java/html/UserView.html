@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>UserView</title>
+</head>
+
+<body>
+
+<h2>Login</h2>
+
+<h2>Create Choice</h2>
+
+<form name="addChoiceForm" method="post">
+    <label for="TitleInput">Title:</label><br>
+    <input name="title" value="" id="TitleInput" maxlength = "20"/><br><br>
+
+    <label for="DescriptionInput">Description:</label><br>
+    <textarea name="Description" id="DescriptionInput" maxlength = "280" rows="4" cols="50">
+    </textarea><br><br>
+
+    <label for="MaxUsers">Max Users:</label>
+    <input name="arg2" value="" id="MaxUsers"/>
+
+    <input type="button" value="Create"  onClick="JavaScript:handleAddClick(this)">
+</form>
+
+<h2>Choice And Alternatives</h2>
+
+<h2>Feedback</h2>
+
+</body>
+</html>
