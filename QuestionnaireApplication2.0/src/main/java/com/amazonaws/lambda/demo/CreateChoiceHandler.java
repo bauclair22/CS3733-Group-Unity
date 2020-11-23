@@ -24,13 +24,14 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 	
 	private AmazonS3 s3 = null;
 	
-	boolean createChoice(String title, String description, int numMembers, String[] alternatives,
-			String[] alternativeTitles) throws Exception {
+	boolean createChoice(String title, String description, int numMembers) throws Exception {
+		//, String[] alternatives,String[] alternativeTitles
 		if (logger != null) { logger.log("in createChoice"); }
 		//Create new ChoiceDAO
 		//Check if correct number of alternatives and alternativeTitles
-		if( 1 < alternatives.length && alternatives.length <= 5 && 1 < alternativeTitles.length && alternativeTitles.length <= 5 && alternatives.length == alternativeTitles.length
-				&& numMembers > 0) {
+		if(true ) //1 < alternatives.length && alternatives.length <= 5 && 1 < alternativeTitles.length && alternativeTitles.length <= 5 && alternatives.length == alternativeTitles.length&& numMembers > 0
+			{
+			
 			DAO dao = new DAO();
 			return (dao.createChoice(numMembers, description) != 0);
 		}
@@ -45,8 +46,7 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 
         CreateChoiceResponse response;
 		try {
-			if (createChoice(req.title, req.description, req.numMembers, req.alternatives,
-					req.alternativeTitles)) {
+			if (createChoice(req.title, req.description, req.numMembers)) {//, req.alternatives,req.alternativeTitles
 				response = new CreateChoiceResponse(req.title);
 			} else {
 				response = new CreateChoiceResponse(req.title, 422);

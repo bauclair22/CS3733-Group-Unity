@@ -16,7 +16,7 @@ public class DatabaseUtil {
     // Make sure matches Schema created from MySQL WorkBench
     // Make sysEnv variable lambdaTesting so we know we are locally testing
     public final static String lambdaTesting = "lambdaTesting";
-    public final static String dbName = "sys";
+    public final static String dbName = "ChoicesDatabase";
     public final static String testName = "test";
 
     // pooled across all usages.
