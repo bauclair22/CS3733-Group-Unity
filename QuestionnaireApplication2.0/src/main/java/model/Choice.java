@@ -10,13 +10,14 @@ public class Choice {
 	int idNumber;
 	boolean isCompleted;
 	float dateCompleted;
+	public static int id=0;
 	
 	public Choice(String description, Alternative[] alts, int numMembers){
 		this.description = description;
 		this.alternatives = alts; //Should this be changed to a list of strings of titles and descriptions to form the alternatives?
 		this.numMembers = numMembers;
 		this.isCompleted = false;
-		//Need something here to randomly assign a unique id number
+		this.idNumber = id++;
 	}
 	
 	
