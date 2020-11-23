@@ -34,7 +34,7 @@ public class Choice {
 	public boolean addAlternative(Alternative a) {
 		boolean added = false;
 		for(int i=0; i<5; i++) {
-			if(this.alternatives[i]== null)
+			if(this.alternatives[i]== null) {
 				this.alternatives[i]= a;
 				added = true;
 				i = 5;

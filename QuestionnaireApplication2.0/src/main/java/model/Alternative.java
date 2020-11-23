@@ -37,7 +37,7 @@ public class Alternative {
 		return disapprovers;
 	}
 
-	public void addDispprover(TeamMember disapprover) {
+	public void addDisapprover(TeamMember disapprover) {
 		this.disapprovers.add(disapprover);
 	}
 	public void removeDisapprover(TeamMember disapprover) {
