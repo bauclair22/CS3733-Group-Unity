@@ -9,7 +9,15 @@
 
 <h2>Login</h2>
 
-<h2>Create Choice</h2>
+<form name="loginForm" method="post">
+	<label for="username">Username:</label><br>
+  	<input name="username" type="text" id="username" value=""><br>
+ 	<label for="password">Password:</label><br>
+  	<input name="password" type="password" id="password" value=""><br><hr>
+ 	<input type="button" value="Login"  onClick="">
+</form>
+
+<h2>Create A Choice</h2>
 
 <form name="creatChoiceForm" method="post">
 
@@ -43,12 +51,48 @@
     <input name=alt5 id = "Alternate5" value=""/><br><br>
     
     <input type="button" value="Create"  onClick="">
-    
-    
-    
 </form>
 
 <h2>Choice And Alternatives</h2>
+
+<form name="reactionForm" method="get">
+	<label for="Alternate1">Alternate 1:</label><br>
+	<input type="radio" id="agree" name="reaction1" value="agree">
+  	<label for="agree">Agree</label><br>
+  	<input type="radio" id="disagree" name="reaction1" value="disagree">
+ 	<label for="disagree">Disagree</label><br>
+ 	<input name= "view1" type="button" value="View"  onClick=""><br><br>
+ 	
+ 	<label for="Alternate2">Alternate 2:</label><br>
+	<input type="radio" id="agree" name="reaction2" value="agree">
+  	<label for="agree">Agree</label><br>
+  	<input type="radio" id="disagree" name="reaction2" value="disagree">
+ 	<label for="disagree">Disagree</label><br>
+ 	<input name= "view2" type="button" value="View"  onClick=""><br><br>
+ 	
+ 	<label for="Alternate3">Alternate 3:</label><br>
+	<input type="radio" id="agree" name="reaction3" value="agree">
+  	<label for="agree">Agree</label><br>
+  	<input type="radio" id="disagree" name="reaction3" value="disagree">
+ 	<label for="disagree">Disagree</label><br>
+ 	<input name= "view3" type="button" value="View"  onClick=""><br><br>
+ 	
+ 	<label for="Alternate4">Alternate 4:</label><br>
+	<input type="radio" id="agree" name="reaction4" value="agree">
+  	<label for="agree">Agree</label><br>
+  	<input type="radio" id="disagree" name="reaction4" value="disagree">
+ 	<label for="disagree">Disagree</label><br>
+ 	<input name= "view4" type="button" value="View"  onClick=""><br><br>
+ 	
+ 	<label for="Alternate5">Alternate 5:</label><br>
+	<input type="radio" id="agree" name="reaction5" value="agree">
+  	<label for="agree">Agree</label><br>
+  	<input type="radio" id="disagree" name="reaction5" value="disagree">
+ 	<label for="disagree">Disagree</label><br>
+ 	<input name= "view5" type="button" value="View"  onClick=""><br><br>
+ 	
+ 	 <input type="button" value="Save"  onClick="">
+</form>
 
 <h2>Feedback</h2>
 
