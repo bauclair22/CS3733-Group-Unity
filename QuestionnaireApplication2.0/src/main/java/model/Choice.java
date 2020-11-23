@@ -10,7 +10,7 @@ public class Choice {
 	int idNumber;
 	boolean isCompleted;
 	float dateCompleted;
-	public static int id=0;
+	static int id=0;
 	
 	public Choice(String description, Alternative[] alts, int numMembers){
 		this.description = description;
