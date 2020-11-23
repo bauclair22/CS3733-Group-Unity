@@ -14,6 +14,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 
+import database.DAO;
 import httpRequestsAndResponses.CreateChoiceRequest;
 import httpRequestsAndResponses.CreateChoiceResponse;
 
@@ -27,9 +28,13 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 			String[] alternativeTitles) throws Exception {
 		if (logger != null) { logger.log("in createChoice"); }
 		//Create new ChoiceDAO
-		//Check if choice already exists in DAO (possibly can skip this since choices don't have to be unique besides the id?)
-		//If it doesn't exist add it
-		//If it does exist return false
+		//Check if correct number of alternatives and alternativeTitles
+		if( 1 < alternatives.length && alternatives.length <= 5 && 1 < alternativeTitles.length && alternativeTitles.length <= 5 && alternatives.length == alternativeTitles.length
+				&& numMembers > 0) {
+			DAO dao = new DAO();
+			return (dao.createChoice(numMembers, description) != 0);
+		}
+		//If parameters incorrect return false
 		return false;
 	}
 	
