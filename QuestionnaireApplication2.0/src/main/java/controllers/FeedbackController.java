@@ -1,5 +1,7 @@
 package controllers;
 
+import java.sql.Timestamp;
+
 import model.Alternative;
 import model.Feedback;
 
@@ -9,7 +11,8 @@ public class FeedbackController {
 		//TODO: add parsing to determine Strings from the HTML request, set success to true if it succeeds, leave false if fails;
 		String member="";
 		String desc="";
-		Feedback f=new Feedback(member, desc);
+		Timestamp time = new Timestamp(System.currentTimeMillis());
+		Feedback f=new Feedback(member, desc, time );
 		alt.addFeedback(f);
         success=false; 
 	}

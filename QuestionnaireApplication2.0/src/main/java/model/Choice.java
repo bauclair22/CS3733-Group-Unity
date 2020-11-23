@@ -11,6 +11,7 @@ public class Choice {
 	boolean isCompleted;
 	float dateCompleted;
 	
+	
 	public Choice(String description, Alternative[] alts, int numMembers){
 		this.description = description;
 		this.alternatives = alts; //Should this be changed to a list of strings of titles and descriptions to form the alternatives?
@@ -34,7 +35,7 @@ public class Choice {
 	public boolean addAlternative(Alternative a) {
 		boolean added = false;
 		for(int i=0; i<5; i++) {
-			if(this.alternatives[i]== null)
+			if(this.alternatives[i]== null) {
 				this.alternatives[i]= a;
 				added = true;
 				i = 5;

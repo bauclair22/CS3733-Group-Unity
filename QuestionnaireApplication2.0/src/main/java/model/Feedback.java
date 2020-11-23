@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -7,15 +8,12 @@ import java.util.TimeZone;
 public class Feedback {
 	String memberName;
 	String description;
-	Date timestamp;
-	Calendar calendar;
+	Timestamp timestamp;
 	
-	public Feedback(String memberName, String description) {
-		TimeZone est=TimeZone.getTimeZone("EST");
-		this.calendar =Calendar.getInstance(est);
+	public Feedback(String memberName, String description, Timestamp time) {
 		this.memberName = memberName;
 		this.description = description;
-		this.timestamp =this.calendar.getTime() ;
+		this.timestamp = time;
 	}
 
 	public String getMemberName() {

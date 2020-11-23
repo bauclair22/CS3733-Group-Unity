@@ -3,13 +3,14 @@ package model;
 import java.util.ArrayList;
 
 public class Alternative {
+	int id;
 	String title;
 	String description;
-	ArrayList<TeamMember> approvers = new ArrayList<>();
-	ArrayList<TeamMember> disapprovers = new ArrayList<>();
+	ArrayList<String> approvers = new ArrayList<>();
+	ArrayList<String> disapprovers = new ArrayList<>();
 	ArrayList<Feedback> feedback = new ArrayList<>();
 	
-	public Alternative(String title, String description) {
+	public Alternative(String title, String description, int id) {
 		this.title = title;
 		this.description = description;
 	}
@@ -22,26 +23,34 @@ public class Alternative {
 		return description;
 	}
 
-	public ArrayList<TeamMember> getApprovers() {
+	public ArrayList<String> getApprovers() {
 		return approvers;
 	}
 
 	public void addApprover(TeamMember approver) {
-		this.approvers.add(approver);
+		this.approvers.add(approver.name);
+	}
+	public void setApprovers(ArrayList<String> approvers) {
+		this.approvers= approvers;
 	}
 	public void removeApprover(TeamMember approver) {
-		this.approvers.remove(approver);
+		this.approvers.remove(approver.name);
 	}
 
-	public ArrayList<TeamMember> getDisapprovers() {
+	public ArrayList<String> getDisapprovers() {
 		return disapprovers;
 	}
 
 	public void addDispprover(TeamMember disapprover) {
-		this.disapprovers.add(disapprover);
+		this.disapprovers.add(disapprover.name);
 	}
+	
+	public void setDisapprovers(ArrayList<String> disapprovers) {
+		this.disapprovers = disapprovers;
+	}
+	
 	public void removeDisapprover(TeamMember disapprover) {
-		this.disapprovers.remove(disapprover);
+		this.disapprovers.remove(disapprover.name);
 	}
 
 	public ArrayList<Feedback> getFeedback() {
@@ -50,6 +59,10 @@ public class Alternative {
 
 	public void addFeedback(Feedback feedback) {
 		this.feedback.add(feedback);
+	}
+	
+	public void setFeedback(ArrayList<Feedback> feedback) {
+		this.feedback = feedback;
 	}
 	
 	public void removeFeedback(Feedback feedback) {

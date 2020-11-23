@@ -13,7 +13,7 @@ public class ControllerChain {// Need to add access to overarching model where c
 	public static boolean parseController(int code) {// A code is given to the parser, and it delegates to another controller according to code
 		switch(code) {
 			case FEEDBACK:{
-				Alternative a=new Alternative("place","holder");// placeholder for parsing, this should just find the alternative feedback is being given on
+				Alternative a=new Alternative("place","holder", 0);// placeholder for parsing, this should just find the alternative feedback is being given on
 				FeedbackController fc=new FeedbackController(a);
 				return fc.success;	
 			}
