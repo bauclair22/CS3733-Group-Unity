@@ -77,7 +77,7 @@ public class DAO {
                 ArrayList<String> disapprovers = getDislikedBy(altID);
                 ArrayList<Feedback> feedback = getAlternativesFeedback(altID);
                 alt.setApprovers(approvers);
-                alt.setDisapprovers(disapprovers);
+                alt.setDispprovers(disapprovers);
                 alt.setFeedback(feedback);
                 A[counter] = alt;
                 counter++;
