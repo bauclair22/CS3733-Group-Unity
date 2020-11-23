@@ -19,8 +19,13 @@ public class Choice {
 		//Need something here to randomly assign a unique id number
 	}
 	
-	//Add a TeamMember to the list of TeamMembers as long as the list isn't already at max size
-	//Return false if unsuccessful
+	
+	
+	/**
+	 * Add a TeamMember to the list of TeamMembers as long as the list isn't already at max size
+	 * @param TeamMembert
+	 * @return Return false if unsuccessful
+	 */
 	public boolean addTeamMember(TeamMember t){
 		if(teamMembers.size() < numMembers) {
 			teamMembers.add(t);
@@ -29,8 +34,12 @@ public class Choice {
 		return false;
 	}
 	
-	//Add an Alternative to the array of alternatives to the next empty spot, if there are already 5 alternatives nothing will be added
-	//return false if unsuccessful
+	
+	/**
+	 * Add an Alternative to the array of alternatives to the next empty spot, if there are already 5 alternatives nothing will be added
+	 * @param Alternative a
+	 * @return false if unsuccessful
+	 */
 	public boolean addAlternative(Alternative a) {
 		boolean added = false;
 		for(int i=0; i<5; i++) {

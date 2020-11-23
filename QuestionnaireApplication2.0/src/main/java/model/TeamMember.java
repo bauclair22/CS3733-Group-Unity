@@ -9,7 +9,10 @@ public class TeamMember {
 		this.password = password;
 	}
 	
-	
+	/**
+	 * Create a team member without a password
+	 * @param username
+	 */
 	public TeamMember(String name){
 		this.name = name;
 		this.password = null;
@@ -28,12 +31,20 @@ public class TeamMember {
 		return c.idNumber;
 	}
 
-
-	public boolean isEqual(TeamMember m) {
-		return this.isEqual(m.getName(), m.getPassword());
+	/**
+	 * Checks to see if the teamMember and their password and username match
+	 * @param TeamMember
+	 * @return
+	 */
+	public boolean isEqual(TeamMember teamMember) {
+		return this.isEqual(teamMember.getName(), teamMember.getPassword());
 	}
 
-
+	/**
+	 * Checks to see the name and password match
+	 * @param TeamMember
+	 * @return
+	 */
 	public boolean isEqual(String name, String password) {
 		return this.name == name && this.password == password;
 	}
