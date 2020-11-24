@@ -22,14 +22,15 @@
 
 <h2>Create A Choice</h2>
 
-<form name="creatChoiceForm" method="post">
+<form name="createChoiceForm" method="post">
 
-	<!-- Title, decription and max Users -->
-
+	<!-- Description and max Users -->
+	<!--
     <label for="TitleInput">Title:</label><br>
     <input name="title" value="" id="TitleInput" maxlength = "20"/><br><br>
+    -->
 
-    <label for="DescriptionInput">Description:</label><br>
+    <label for="DescriptionInput">Choice Description:</label><br>
     <textarea name="description" id="DescriptionInput" maxlength = "280" rows="4" cols="50">
     </textarea><br><br>
 
@@ -38,19 +39,19 @@
     
     <!-- Alternate Positions (no descriptions yet) -->
     
-    <label for="Alternate1">Alternate 1:</label>
+    <label for="Alternate1">(Required)Alternate 1:</label>
     <input name=alt1 id = "Alternate1" value=""/><br><br>
     
-    <label for="Alternate2">Alternate 2:</label>
+    <label for="Alternate2">(Required)Alternate 2:</label>
     <input name=alt2 id = "Alternate2" value=""/><br><br>
     
-    <label for="Alternate3">Alternate 3:</label>
+    <label for="Alternate3">(Optional)Alternate 3:</label>
     <input name=alt3 id = "Alternate3" value=""/><br><br>
     
-    <label for="Alternate4">Alternate 4:</label>
+    <label for="Alternate4">(Optional)Alternate 4:</label>
     <input name=alt4 id = "Alternate4" value=""/><br><br>
     
-    <label for="Alternate5">Alternate 5:</label>
+    <label for="Alternate5">(Optional)Alternate 5:</label>
     <input name=alt5 id = "Alternate5" value=""/><br><br>
     
     <input type="button" value="Create"  onClick="">
