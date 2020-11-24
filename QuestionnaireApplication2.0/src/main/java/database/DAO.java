@@ -167,11 +167,12 @@ public class DAO {
     }
 
 
-    public int createChoice(int maxUsers, String description) throws Exception {
+    public String createChoice(int maxUsers, String description) throws Exception {
+    	String newID;
         try {
             String query = "INSERT INTO " + tblchoices + " (idChoice, maxUsers, description) VALUES (?, ?, ?);";
             PreparedStatement ps = conn.prepareStatement(query);
-            String newID = UUID.randomUUID().toString();
+            newID = UUID.randomUUID().toString();
             ps.setString(1, newID);
             ps.setInt(2, maxUsers);
             ps.setString(3, description);
@@ -179,26 +180,30 @@ public class DAO {
             ps.close();
 
         } catch (Exception e) {
+        	newID = null;
             throw new Exception("Failed to update report: " + e.getMessage());
         }
-
+        return newID;
+    }
+    
+    public String createAlternative(String title, String description, String choiceID) throws Exception {
+    	String newID;
         try {
-            int id = 0;
-            PreparedStatement ps = conn.prepareStatement("SELECT LAST_INSERT_ID() as id;");
-            ResultSet resultSet = ps.executeQuery();
-
-            while (resultSet.next()) {
-                id = resultSet.getInt("id");
-            }
-            resultSet.close();
+            String query = "INSERT INTO " + tblAlternative + " (idAlternative, choiceID, alternative, description) VALUES (?, ?, ?, ?);";
+            PreparedStatement ps = conn.prepareStatement(query);
+            newID = UUID.randomUUID().toString();
+            ps.setString(1, newID);
+            ps.setString(2, choiceID);
+            ps.setString(3, title);
+            ps.setString(4, description);
+            ps.executeUpdate();
             ps.close();
 
-            return id;
-
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception("Failed in getting constant: " + e.getMessage());
+        	newID = null;
+            throw new Exception("Failed to update report: " + e.getMessage());
         }
+        return newID;
     }
     
     public boolean addUser(String Username, String Password, int choiceid) throws Exception {

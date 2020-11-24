@@ -33,7 +33,7 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 			{
 			
 			DAO dao = new DAO();
-			return (dao.createChoice(numMembers, description) != 0);
+			return (dao.createChoice(numMembers, description) != null);
 		}
 		//If parameters incorrect return false
 		return false;

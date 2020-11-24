@@ -10,7 +10,13 @@ public class createChoiceTest {
 	public void test1() {
 		DAO dao = new DAO();
 		try {
-			dao.createChoice(2,"hi");
+			String Cid = dao.createChoice(2,"hi");
+			try {
+				dao.createAlternative("title", "description", Cid);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
