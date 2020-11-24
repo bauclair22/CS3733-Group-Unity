@@ -1,6 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class Admin {
 	ArrayList<Choice> choices = new ArrayList<>();
@@ -17,9 +20,16 @@ public class Admin {
 	}
 	
 	public void deleteOld(float n) {
-		//Need to fix this to take into account current date
+		//Make sure works
+		Calendar cal=Calendar.getInstance();
+		TimeZone est=TimeZone.getTimeZone("EST");
+		cal.setTimeZone(est);// Should set calendar to today
+		int mins= (int) Math.floor(n/1440.0);// finds how many minutes to go back in time
+		cal.add(Calendar.MINUTE, -1*mins);// Sets calendar BACKWARDS that many minutes
+		Date purge=cal.getTime();// gets time (current time minus that many minutes
+		
 		for(Choice c: choices) {
-			if(c.getDateCompleted() > n) {
+			if(c.getDateCompleted().before(purge)); {// IF DATE COMPLETED IS BEFORE PURGE DATE
 				choices.remove(c);
 			}
 		}

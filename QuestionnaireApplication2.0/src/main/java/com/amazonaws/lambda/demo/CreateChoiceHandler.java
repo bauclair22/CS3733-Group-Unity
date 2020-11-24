@@ -53,7 +53,7 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 			}
 		}
 		catch (Exception e) {
-			response = new CreateChoiceResponse("Unable to create constant: " + req.title + "(" + e.getMessage() + ")", 400);
+			response = new CreateChoiceResponse("Unable to create Choice: " + req.title + "(" + e.getMessage() + ")", 400);
 		}
 
 		return response;

@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Choice {
@@ -9,7 +10,7 @@ public class Choice {
 	ArrayList<TeamMember> teamMembers = new ArrayList<>();
 	int idNumber;
 	boolean isCompleted;
-	float dateCompleted;
+	Timestamp dateCompleted;
 	static int id=0;
 	
 	public Choice(String description, Alternative[] alts, int numMembers){
@@ -65,10 +66,10 @@ public class Choice {
 		this.isCompleted = flag;
 	}
 	
-	public float getDateCompleted() {
+	public Timestamp getDateCompleted() {
 		return this.dateCompleted;
 	}
-	public void setDateCompleted(float d) {
-		this.dateCompleted = d;
+	public void setDateCompleted(Timestamp t) {
+		this.dateCompleted = t;
 	}
 }
