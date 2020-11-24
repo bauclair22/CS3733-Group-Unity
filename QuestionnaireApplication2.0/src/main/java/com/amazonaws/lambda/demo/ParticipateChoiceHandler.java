@@ -22,7 +22,7 @@ public class ParticipateChoiceHandler implements RequestHandler<ParticipateChoic
 		DAO dao = new DAO();
 		ParticipateChoiceResponse response;
 		try {
-			if (dao.addUser(input.getUsername(),input.getPassword(), input.getId())) {//, req.alternatives,req.alternativeTitles
+			if (dao.addUser(input.getUsername(),input.getPassword(), input.getId())) {
 				response = new ParticipateChoiceResponse("Added user to database");
 			} else {
 				response = new ParticipateChoiceResponse("FAILED TO ADD USER TO SYSTEM", 422);
