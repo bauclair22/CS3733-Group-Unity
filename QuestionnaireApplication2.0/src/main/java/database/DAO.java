@@ -173,7 +173,7 @@ public class DAO {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setDouble(1, maxUsers);
             ps.setString(2, description);
-            ps.executeQuery();
+            ps.executeUpdate();
             ps.close();
 
         } catch (Exception e) {

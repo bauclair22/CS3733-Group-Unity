@@ -7,7 +7,7 @@ import org.junit.Test;
 public class createChoiceTest {
 
 	@Test
-	public void test() {
+	public void test1() {
 		DAO dao = new DAO();
 		try {
 			dao.createChoice(2,"hi");
@@ -16,5 +16,6 @@ public class createChoiceTest {
 			e.printStackTrace();
 		}
 	}
+	
 
 }
