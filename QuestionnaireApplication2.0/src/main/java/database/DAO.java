@@ -198,6 +198,47 @@ public class DAO {
             throw new Exception("Failed in getting constant: " + e.getMessage());
         }
     }
+    
+    public boolean addUser(String Username, String Password, int choiceid) throws Exception {
+
+    	boolean flagMatchFound = false;
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM" + tblTeamMember + " WHERE name=? AND choiceID=?;");
+            ps.setString(1,Username);
+            ps.setInt(2,choiceid);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+            	flagMatchFound = true;
+                String name = resultSet.getString("name");
+                String password = resultSet.getString("password");
+                if(Password != password) {
+                	 throw new Exception("Password is incorrect");
+                }
+            }
+            resultSet.close();
+            ps.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Failed in getting constant: " + e.getMessage());
+        }
+        if(!flagMatchFound) {
+        	try {
+                String query = "INSERT INTO " + tblTeamMember + "  VALUES (seq_TeamMember.nextval, ?, ?, ?);";
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.setInt(1, choiceid);
+                ps.setString(2, Username);
+                ps.setString(2, Password);
+                ps.executeQuery();
+                ps.close();
+
+            } catch (Exception e) {
+                throw new Exception("Failed to update report: " + e.getMessage());
+            }
+        }
+        return flagMatchFound;
+    }
 
 
 }
