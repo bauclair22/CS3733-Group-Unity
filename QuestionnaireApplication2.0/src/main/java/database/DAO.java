@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.UUID;
 
 import model.Choice;
 import model.Alternative;
@@ -169,10 +169,12 @@ public class DAO {
 
     public int createChoice(int maxUsers, String description) throws Exception {
         try {
-            String query = "INSERT INTO " + tblchoices + " (idChoice, maxUsers, description) VALUES (seq_Choices.nextval, ?, ?);";
+            String query = "INSERT INTO " + tblchoices + " (idChoice, maxUsers, description) VALUES (?, ?, ?);";
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setDouble(1, maxUsers);
-            ps.setString(2, description);
+            String newID = UUID.randomUUID().toString();
+            ps.setString(1, newID);
+            ps.setInt(2, maxUsers);
+            ps.setString(3, description);
             ps.executeUpdate();
             ps.close();
 
