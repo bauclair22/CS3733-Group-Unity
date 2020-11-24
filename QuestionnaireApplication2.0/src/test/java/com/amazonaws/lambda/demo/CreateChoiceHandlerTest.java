@@ -29,4 +29,10 @@ public class CreateChoiceHandlerTest {
 
         return ctx;
     }
+    
+    public void testCreateChoice&Alternative() {
+    	CreateChoiceHandler ch = new CreateChoiceHandler();
+    	String id = ch.createChoice("movie to watch", "move night at my place", 5);
+    	ch.createAlternative("scary movie", "scary move 3");
+    }
 }

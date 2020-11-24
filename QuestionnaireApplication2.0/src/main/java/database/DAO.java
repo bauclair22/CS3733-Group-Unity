@@ -168,8 +168,9 @@ public class DAO {
 
 
     public String createChoice(int maxUsers, String description) throws Exception {
-    	String newID;
+    	String newID =null;
         try {
+        	System.out.printf("trying to create choice" + "maxUsers: " + maxUsers + "description" + description);
             String query = "INSERT INTO " + tblchoices + " (idChoice, maxUsers, description) VALUES (?, ?, ?);";
             PreparedStatement ps = conn.prepareStatement(query);
             newID = UUID.randomUUID().toString();
@@ -181,6 +182,7 @@ public class DAO {
 
         } catch (Exception e) {
         	newID = null;
+        	System.out.println(" failed to create choice ");
             throw new Exception("Failed to update report: " + e.getMessage());
         }
         return newID;

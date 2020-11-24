@@ -10,9 +10,9 @@ public class createChoiceTest {
 	public void test1() {
 		DAO dao = new DAO();
 		try {
-			String Cid = dao.createChoice(2,"hi");
+			String Cid = dao.createChoice(2,"new test");
 			try {
-				dao.createAlternative("title", "description", Cid);
+				dao.createAlternative("test choice", "showing bridget", Cid);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
