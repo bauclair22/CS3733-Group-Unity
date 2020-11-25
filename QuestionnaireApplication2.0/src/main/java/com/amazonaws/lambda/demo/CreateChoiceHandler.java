@@ -24,19 +24,24 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 	
 	private AmazonS3 s3 = null;
 	
-	boolean createChoice(String title, String description, int numMembers) throws Exception {
-		//, String[] alternatives,String[] alternativeTitles
+	String createChoice(String description, int numMembers, String[] alternativeTitles,String[] alternatives) throws Exception {
+		
 		if (logger != null) { logger.log("in createChoice"); }
 		//Create new ChoiceDAO
 		//Check if correct number of alternatives and alternativeTitles
-		if(true ) //1 < alternatives.length && alternatives.length <= 5 && 1 < alternativeTitles.length && alternativeTitles.length <= 5 && alternatives.length == alternativeTitles.length&& numMembers > 0
+		
+		if(1 < alternatives.length 
+				&& alternatives.length <= 5  && 1 < alternativeTitles.length 
+				&& alternativeTitles.length <= 5 
+				&& alternatives.length == alternativeTitles.length
+				&& numMembers > 0) 
 			{
 			
 			DAO dao = new DAO();
-			return (dao.createChoice(numMembers, description) != null);
+			return dao.createChoice(numMembers, description, alternativeTitles, alternatives);
 		}
 		//If parameters incorrect return false
-		return false;
+		return null;
 	}
 	
     @Override
@@ -46,14 +51,15 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 
         CreateChoiceResponse response;
 		try {
-			if (createChoice(req.title, req.description, req.numMembers)) {//, req.alternatives,req.alternativeTitles
-				response = new CreateChoiceResponse(req.title);
+			String myID = createChoice( req.description, req.numMembers, req.alternativeTitles, req.alternatives);
+			if (myID != null) {
+				response = new CreateChoiceResponse(myID);
 			} else {
-				response = new CreateChoiceResponse(req.title, 422);
+				response = new CreateChoiceResponse("Unable to create choice", 422);
 			}
 		}
 		catch (Exception e) {
-			response = new CreateChoiceResponse("Unable to create Choice: " + req.title + "(" + e.getMessage() + ")", 400);
+			response = new CreateChoiceResponse("Unable to create Choice: " +  "(" + e.getMessage() + ")", 400);
 		}
 
 		return response;
