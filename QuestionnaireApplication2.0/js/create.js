@@ -25,39 +25,39 @@ function handleCreateClick(e) {
   
   if(form.alt1.value != ""){
 	  //return false;
-	  altTitles.push(form.alt1.value)  
+	  altTitles.push(form.alt1.value);  
   }
   if(form.alt2.value != ""){
 	  //return false;
-	  altTitles.push(form.alt2.value)  
+	  altTitles.push(form.alt2.value); 
   }
   if(form.alt3.value != ""){
-	  altTitles.push(form.alt3.value)  
+	  altTitles.push(form.alt3.value); 
   }
   if(form.alt4.value != ""){
-	  altTitles.push(form.alt4.value)  
+	  altTitles.push(form.alt4.value);
   }
   if(form.alt5.value != ""){
-	  altTitles.push(form.alt5.value)  
+	  altTitles.push(form.alt5.value);
   }
   
   
   if(form.alt1_d.value != ""){
 	  //return false;
-	  altTitles.push(form.alt1_d.value)  
+	  alts.push(form.alt1_d.value);  
   }
   if(form.alt2_d.value != ""){
 	  //return false;
-	  altTitles.push(form.alt2_d.value)  
+	  alts.push(form.alt2_d.value);  
   }
   if(form.alt3_d.value != ""){
-	  altTitles.push(form.alt3_d.value)  
+	  alts.push(form.alt3_d.value);  
   }
   if(form.alt4_d.value != ""){
-	  altTitles.push(form.alt4_d.value)  
+	  alts.push(form.alt4_d.value);  
   }
   if(form.alt5_d.value != ""){
-	  altTitles.push(form.alt5_d.value)  
+	  alts.push(form.alt5.value);  
   }
   
   
