@@ -6,6 +6,8 @@ function processCreateResponse(result) {
   //refreshChoicesList();
 }
 
+
+
 function handleCreateClick(e) {
   var form = document.createChoiceForm;
  
@@ -17,9 +19,48 @@ function handleCreateClick(e) {
   data["description"] = form.dInput.value;
   data["numMembers"] = form.maxUsers.value;
   
-  var altTitles = ["alt1", "alt2", "alt3"];
-  var alts = ["is alt1", "is alt2", "is alt3"];
- 
+  var altTitles = [];
+  var alts = [];
+  
+  
+  if(form.alt1.value != ""){
+	  //return false;
+	  altTitles.push(form.alt1.value)  
+  }
+  if(form.alt2.value != ""){
+	  //return false;
+	  altTitles.push(form.alt2.value)  
+  }
+  if(form.alt3.value != ""){
+	  altTitles.push(form.alt3.value)  
+  }
+  if(form.alt4.value != ""){
+	  altTitles.push(form.alt4.value)  
+  }
+  if(form.alt5.value != ""){
+	  altTitles.push(form.alt5.value)  
+  }
+  
+  
+  if(form.alt1_d.value != ""){
+	  //return false;
+	  altTitles.push(form.alt1_d.value)  
+  }
+  if(form.alt2_d.value != ""){
+	  //return false;
+	  altTitles.push(form.alt2_d.value)  
+  }
+  if(form.alt3_d.value != ""){
+	  altTitles.push(form.alt3_d.value)  
+  }
+  if(form.alt4_d.value != ""){
+	  altTitles.push(form.alt4_d.value)  
+  }
+  if(form.alt5_d.value != ""){
+	  altTitles.push(form.alt5_d.value)  
+  }
+  
+  
   
   data["alternativeTitles"] = altTitles;
   data["alternatives"] = alts;
