@@ -6,8 +6,9 @@
 </head>
 
 <script type='text/javascript' src='../js/api.js'></script>
-<script type='text/javascript' src='../js/create.js'></script>
+<script type='text/javascript' src='../js/createChoice.js'></script>
 <script type='text/javascript' src='../js/getChoices.js'></script>
+<script type='text/javascript' src='../js/createMember.js'></script>
 
 <script type="text/javascript">
 function initialize() {
@@ -32,7 +33,7 @@ function initialize() {
   	
   	<label for="choiceId">Pre-Existing Choice ID:</label><br>
   	<input name="choiceId" type="text" id="choiceId" value=""><br><br>
- 	<input type="button" value="Sign In"  onClick="">
+ 	<input type="button" value="Sign In"  onClick="handleCreateMemberClick(this)">
 </form>
 
 <h2>Create A Choice</h2>
