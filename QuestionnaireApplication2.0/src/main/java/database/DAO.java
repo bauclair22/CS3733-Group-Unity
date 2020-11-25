@@ -167,8 +167,9 @@ public class DAO {
     }
 
 
-    public String createChoice(int maxUsers, String description) throws Exception {
+    public String createChoice(int maxUsers, String description, String[] titleAlt, String[] descriptionAlt) throws Exception {
     	String newID =null;
+    	boolean flag = true;
         try {
         	System.out.printf("trying to create choice" + "maxUsers: " + maxUsers + "description" + description);
             String query = "INSERT INTO " + tblchoices + " (idChoice, maxUsers, description) VALUES (?, ?, ?);";
@@ -181,10 +182,18 @@ public class DAO {
             ps.close();
 
         } catch (Exception e) {
+        	flag =false;
         	newID = null;
         	System.out.println(" failed to create choice ");
             throw new Exception("Failed to update report: " + e.getMessage());
         }
+        
+        if(flag) {
+        	for(int i=0; i<titleAlt.length; i++) {
+        		createAlternative(titleAlt[i], descriptionAlt[i], newID);
+        	}
+        }
+        
         return newID;
     }
     
