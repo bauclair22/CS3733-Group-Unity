@@ -6,18 +6,18 @@
  */
 function refreshConstantsList() {
    var xhr = new XMLHttpRequest();
-   xhr.open("GET", list_url, true);
+   xhr.open("GET", choice_list_url, true);
    xhr.send();
    
-   console.log("sent");
+   console.log("sent request");
 
   // This will process results and update HTML as appropriate. 
   xhr.onloadend = function () {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       console.log ("XHR:" + xhr.responseText);
-      processListResponse(xhr.responseText);
+      processResponse(xhr.responseText);
     } else {
-      processListResponse("N/A");
+      processResponse("N/A");
     }
   };
 }
@@ -27,27 +27,27 @@ function refreshConstantsList() {
  *
  * Replace the contents of 'constantList' with a <br>-separated list of name,value pairs.
  */
-function processListResponse(result) {
+function processResponse(result) {
   console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
   var js = JSON.parse(result);
-  var constList = document.getElementById('constantList');
+  var choiceDisplay = document.getElementById('selectedChoice');
   
   var output = "";
   for (var i = 0; i < js.list.length; i++) {
-    var constantJson = js.list[i];
-    console.log(constantJson);
+    var choiceJson = js.list[i];
+    console.log(choiceJson);
     
-    var cname = constantJson["name"];
-    var cval = constantJson["value"];
-    var sysvar = constantJson["system"];
-    if (sysvar) {
-    	output = output + "<div id=\"const" + cname + "\"><b>" + cname + ":</b> = " + cval + "<br></div>";
-    } else {
-    	output = output + "<div id=\"const" + cname + "\"><b>" + cname + ":</b> = " + cval + "(<a href='javaScript:requestDelete(\"" + cname + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
+    
+    
+    var choiceTitle = choiceJson["Title"];
+    var	choiceDescription = choiceJson["Description"];
+    var choiceMembers = choiceJson["numMembers"];
+    if (true) {
+    	output = output + "<div id=\"choice" +  + "\">" + choiceTitle + "<br><br>" + choiceMembers + "<br><br>" + choiceDescription + "<br></div>";
     }
   }
 
   // Update computation result
-  constList.innerHTML = output;
+  choiceDisplay.innerHTML = output;
 }
