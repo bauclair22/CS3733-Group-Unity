@@ -19,5 +19,19 @@ public class createChoiceTest {
 		}
 	}
 	
+	@Test
+	public void testAddUser() {
+		DAO dao = new DAO();
+		String[] titles = {"first", "second", "third"};
+		String[] descriptions = {"is first", "is second", "is third"};
+		try {
+			String Cid = dao.createChoice(3,"withAlternative", titles, descriptions);
+			dao.addUser("Carmen", "Password", Cid);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 }
