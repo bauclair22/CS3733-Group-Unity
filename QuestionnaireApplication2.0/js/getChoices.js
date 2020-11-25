@@ -40,8 +40,8 @@ function processResponse(result) {
     
     
     
-    var choiceTitle = choiceJson["Title"];
-    var	choiceDescription = choiceJson["Description"];
+    var choiceTitle = choiceJson["title"];
+    var	choiceDescription = choiceJson["description"];
     var choiceMembers = choiceJson["numMembers"];
     if (true) {
     	output = output + "<div id=\"choice" +  + "\">" + choiceTitle + "<br><br>" + choiceMembers + "<br><br>" + choiceDescription + "<br></div>";

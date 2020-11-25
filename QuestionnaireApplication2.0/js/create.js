@@ -13,8 +13,8 @@ function handleCreateClick(e) {
   
   //convert everything that was in the hmtl form to the lamda
   
-  data["Title"] = form.titleInput.value;
-  data["Description"] = form.dInput.value;
+  data["title"] = form.titleInput.value;
+  data["description"] = form.dInput.value;
   data["numMembers"] = form.maxUsers.value;
 
   var js = JSON.stringify(data);
