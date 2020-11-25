@@ -42,6 +42,8 @@ function handleCreateClick(e) {
   }
   
   
+  
+  
   if(form.alt1_d.value != ""){
 	  //return false;
 	  alts.push(form.alt1_d.value);  
