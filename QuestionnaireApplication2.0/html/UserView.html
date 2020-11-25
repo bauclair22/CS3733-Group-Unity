@@ -5,6 +5,21 @@
 <title>UserView</title>
 </head>
 
+<script type='text/javascript' src='../js/api.js'></script>
+<script type='text/javascript' src='../js/create.js'></script>
+<script type='text/javascript' src='../js/getChoices.js'></script>
+
+<script type="text/javascript">
+function initialize() {
+  
+   // get all constants
+   refreshConstantsList();
+}
+</script>
+
+
+
+
 <body>
 
 <h2>SignIn</h2>
@@ -54,7 +69,7 @@
     <label for="Alternate5">(Optional)Alternate 5:</label>
     <input name=alt5 id = "Alternate5" value=""/><br><br>
     
-    <input type="button" value="Create"  onClick="">
+    <input type="button" value="Create"  onClick="handleCreateClick(this)">
 </form>
 
 <h2>Displaying Your Choice</h2>
