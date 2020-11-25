@@ -3,25 +3,24 @@ function processCreateResponse(result) {
   // contents dynamically via javascript
   console.log("result:" + result);
 
-  //refreshConstantsList();
+  //refreshChoicesList();
 }
 
 function handleCreateClick(e) {
-  var form = document.createForm;
+  var form = document.createChoiceForm;
  
   var data = {};
-  data["name"] = form.constantName.value;
   
-  if (form.system.checked) {  // be sure to flag system constant requests...
-     data["system"] = true;
-  }
+  //convert everything that was in the hmtl form to the lamda
   
-  data["value"] = form.constantValue.value;
+  data["Title"] = form.titleInput.value;
+  data["Description"] = form.dInput.value;
+  data["numMembers"] = form.maxUsers.value;
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", create_url, true);
+  xhr.open("POST", create_choice_url, true);
 
   // send the collected data as JSON
   xhr.send(js);
@@ -35,10 +34,10 @@ function handleCreateClick(e) {
 	      console.log ("XHR:" + xhr.responseText);
 	      processCreateResponse(xhr.responseText);
     	 } else {
-    		 console.log("actual:" + xhr.responseText)
-			  var js = JSON.parse(xhr.responseText);
-			  var err = js["response"];
-			  alert (err);
+    		 console.log("issue with construction")
+			  //var js = JSON.parse(xhr.responseText);
+			  //var err = js["response"];
+			  //alert (err);
     	 }
     } else {
       processCreateResponse("N/A");
