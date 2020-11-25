@@ -4,7 +4,7 @@
  *    GET list_url
  *    RESPONSE  list of [name, value, system] constants 
  */
-function refreshConstantsList() {
+function refreshChoicesList() {
    var xhr = new XMLHttpRequest();
    xhr.open("GET", choice_list_url, true);
    xhr.send();
