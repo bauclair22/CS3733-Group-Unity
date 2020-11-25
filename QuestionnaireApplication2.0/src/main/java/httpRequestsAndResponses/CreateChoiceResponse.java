@@ -15,6 +15,6 @@ public class CreateChoiceResponse {
 	}
 	
 	public String toString() {
-		return "Response(" + response + ")";
+		return "Response choice ID(" + response + ")";
 	}
 }

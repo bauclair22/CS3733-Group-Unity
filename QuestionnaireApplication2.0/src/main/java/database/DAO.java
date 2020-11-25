@@ -20,7 +20,7 @@ public class DAO {
 
     final String tblchoices = "Choices";   // Exact capitalization
     final String tblAlternative = "Alternatives";
-    final String tblTeamMember = "TeamMembers";
+    final String tblTeamMember = "TeamMember";
     final String viewFeedbacksWithName = "feedback_withName";
     final String viewLikedBy = "Likedby";
     final String viewDislikedBy = "Dislikedby";
@@ -217,13 +217,13 @@ public class DAO {
         return newID;
     }
     
-    public boolean addUser(String Username, String Password, int choiceid) throws Exception {
+    public boolean addUser(String Username, String Password, String choiceid) throws Exception {
 
     	boolean flagMatchFound = false;
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM" + tblTeamMember + " WHERE name=? AND choiceID=?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblTeamMember + " WHERE name=? AND choiceID=?;");
             ps.setString(1,Username);
-            ps.setInt(2,choiceid);
+            ps.setString(2,choiceid);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
@@ -243,12 +243,14 @@ public class DAO {
         }
         if(!flagMatchFound) {
         	try {
-                String query = "INSERT INTO " + tblTeamMember + "  VALUES (seq_TeamMember.nextval, ?, ?, ?);";
+                String query = "INSERT INTO " + tblTeamMember + "  VALUES (?, ?, ?, ?);";
+                String newMemberID = UUID.randomUUID().toString();
                 PreparedStatement ps = conn.prepareStatement(query);
-                ps.setInt(1, choiceid);
-                ps.setString(2, Username);
-                ps.setString(2, Password);
-                ps.executeQuery();
+                ps.setString(1, newMemberID);
+                ps.setString(2, choiceid);
+                ps.setString(3, Username);
+                ps.setString(4, Password);
+                ps.executeUpdate();
                 ps.close();
 
             } catch (Exception e) {
