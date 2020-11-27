@@ -27,16 +27,24 @@ public class SelectApprovalHandler implements RequestHandler<SelectApprovalReque
 		//In the DAO
 		//Check if user has already liked or disliked this alternative
 		 ArrayList<String> approvers = new ArrayList<>();
+		 ArrayList<String> disapprovers = new ArrayList<>();
 		 try {
 			approvers = dao.getLikedBy(req.getAltid());
+			disapprovers = dao.getDislikedBy(req.getAltid());
 			boolean inList = false;
+			boolean inOtherList = false;
 			for(String s: approvers) {
 				if(s.equals(req.getUsername())) {
 					inList = true;
 				}
 			}
+			for(String s: disapprovers) {
+				if(s.equals(req.getUsername())) {
+					inOtherList = true;
+				}
+			}
 			//If they have not already reacted to this alternative add their approval to the database
-			if(!inList) {
+			if(!inList && !inOtherList) {
 				//Do something here to add approver
 			}
 			else {
