@@ -11,7 +11,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 /**
  * A simple test harness for locally invoking your Lambda function handler.
  */
-public class SelectApprovalHandlerTest {
+public class ProduceReportHandlerTest {
 
     private static Object input;
 
@@ -29,5 +29,4 @@ public class SelectApprovalHandlerTest {
 
         return ctx;
     }
-
 }
