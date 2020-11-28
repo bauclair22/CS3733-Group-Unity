@@ -259,6 +259,22 @@ public class DAO {
         }
         return flagMatchFound;
     }
+    
+    public boolean deleteApprover(String Username, int altid) throws Exception {
+        try {
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + viewLikedBy +  "WHERE name=? AND alternativeID=?;"); //Not sure if this is entirely correct
+            //Should we clear approval for all alternatives in the choice or just one specific alternative in the choice?
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
+            int numAffected = ps.executeUpdate();
+            ps.close();
+            
+            return (numAffected == 1);
+
+        } catch (Exception e) {
+            throw new Exception("Failed to delete approver: " + e.getMessage());
+        }
+    }
 
 
 }
