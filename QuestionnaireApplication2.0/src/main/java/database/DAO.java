@@ -275,6 +275,85 @@ public class DAO {
             throw new Exception("Failed to delete approver: " + e.getMessage());
         }
     }
+    
+    public boolean deleteDisapprover(String Username, int altid) throws Exception {
+        try {
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + viewDislikedBy +  "WHERE name=? AND alternativeID=?;"); //Not sure if this is entirely correct
+            //Should we clear approval for all alternatives in the choice or just one specific alternative in the choice?
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
+            int numAffected = ps.executeUpdate();
+            ps.close();
+            
+            return (numAffected == 1);
+
+        } catch (Exception e) {
+            throw new Exception("Failed to delete disapprover: " + e.getMessage());
+        }
+    }
+    
+    public List<Choice> getAllChoices() throws Exception {
+        
+        List<Choice> allChoices = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            String query = "SELECT * FROM " + tblchoices + ";";
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                Choice c = generateChoice(resultSet);
+                allChoices.add(c);
+            }
+            resultSet.close();
+            statement.close();
+            return allChoices;
+
+        } catch (Exception e) {
+            throw new Exception("Failed in getting choices: " + e.getMessage());
+        }
+    }
+    
+    private Choice generateChoice(ResultSet resultSet) throws Exception {
+    	String description = resultSet.getString("description");
+    	//Need something here to create the alternatives in the choice or need to change the choice constructor
+    	Alternative[] alternatives = new Alternative[5];
+		int numMembers = resultSet.getInt("maxUsers"); 
+        return new Choice (description, alternatives, numMembers);
+    }
+    
+    public boolean addApprover(String Username, int altid) throws Exception {
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + viewLikedBy + "WHERE name=? AND alternativeID=?;");
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
+            ResultSet resultSet = ps.executeQuery();
+            
+            // already present?
+            while (resultSet.next()) {
+                resultSet.close();
+                return false;
+            }
+            //Check if present in dislikes 
+            ps = conn.prepareStatement("SELECT * FROM " + viewDislikedBy + "WHERE name=? AND alternativeID=?;");
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
+            resultSet = ps.executeQuery();
+            
+            // already present?
+            while (resultSet.next()) {
+                resultSet.close();
+                return false;
+            }
+
+            ps = conn.prepareStatement("INSERT INTO " + viewLikedBy + " (name) values(?);"); //Someone should doublecheck this part
+            ps.setString(1, Username);
+            ps.execute();
+            return true;
+
+        } catch (Exception e) {
+            throw new Exception("Failed to insert approver: " + e.getMessage());
+        }
+    }
 
 
 }
