@@ -355,6 +355,39 @@ public class DAO {
         }
     }
 
+    public boolean addDisapprover(String Username, int altid) throws Exception {
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + viewDislikedBy + "WHERE name=? AND alternativeID=?;");
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
+            ResultSet resultSet = ps.executeQuery();
+            
+            // already present?
+            while (resultSet.next()) {
+                resultSet.close();
+                return false;
+            }
+            //Check if present in likes 
+            ps = conn.prepareStatement("SELECT * FROM " + viewLikedBy + "WHERE name=? AND alternativeID=?;");
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
+            resultSet = ps.executeQuery();
+            
+            // already present?
+            while (resultSet.next()) {
+                resultSet.close();
+                return false;
+            }
+
+            ps = conn.prepareStatement("INSERT INTO " + viewDislikedBy + " (name) values(?);"); //Someone should doublecheck this part
+            ps.setString(1, Username);
+            ps.execute();
+            return true;
+
+        } catch (Exception e) {
+            throw new Exception("Failed to insert disapprover: " + e.getMessage());
+        }
+    }
 
 }
 
