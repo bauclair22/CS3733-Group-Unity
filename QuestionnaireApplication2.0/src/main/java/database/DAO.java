@@ -25,6 +25,7 @@ public class DAO {
     final String viewLikedBy = "Likedby";
     final String viewDislikedBy = "Dislikedby";
     final String tblReactions = "Reactions";
+    final String viewCheckMembers = "checkMembers";
 
     public DAO() {
         try  {
@@ -220,19 +221,69 @@ public class DAO {
     public boolean addUser(String Username, String Password, String choiceid) throws Exception {
 
     	boolean flagMatchFound = false;
-        try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblTeamMember + " WHERE name=? AND choiceID=?;");
-            ps.setString(1,Username);
-            ps.setString(2,choiceid);
+    	boolean added =false;
+    	if(canAdd(choiceid)) {
+	        try {
+	            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblTeamMember + " WHERE name=? AND choiceID=?;");
+	            ps.setString(1,Username);
+	            ps.setString(2,choiceid);
+	            ResultSet resultSet = ps.executeQuery();
+	
+	            while (resultSet.next()) {
+	            	flagMatchFound = true;
+	                String name = resultSet.getString("name");
+	                String password = resultSet.getString("password");
+	                if(Password != password) {
+	                	 throw new Exception("Password is incorrect");
+	                }
+	            }
+	            resultSet.close();
+	            ps.close();
+	
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            throw new Exception("Failed in getting constant: " + e.getMessage());
+	        }
+	        if(!flagMatchFound) {
+	        	try {
+	                String query = "INSERT INTO " + tblTeamMember + "  VALUES (?, ?, ?, ?);";
+	                String newMemberID = UUID.randomUUID().toString();
+	                PreparedStatement ps = conn.prepareStatement(query);
+	                ps.setString(1, newMemberID);
+	                ps.setString(2, choiceid);
+	                ps.setString(3, Username);
+	                ps.setString(4, Password);
+	                ps.executeUpdate();
+	                ps.close();
+	                added = true;
+	
+	            } catch (Exception e) {
+	                throw new Exception("Failed to update report: " + e.getMessage());
+	            }
+	        }
+    	}
+        return added;
+    }
+    
+    public boolean canAdd(String ChoiceID) throws Exception {
+    	boolean canadd = false;
+    	int participating=0;
+    	int max = 0;
+    	try {
+            PreparedStatement ps = conn.prepareStatement("SELECT count(idTeamMember) as participating, maxUsers FROM " + tblTeamMember + " join "+ tblchoices + " WHERE choiceID = idChoice AND choiceID=?;");
+            ps.setString(1, ChoiceID);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
-            	flagMatchFound = true;
-                String name = resultSet.getString("name");
-                String password = resultSet.getString("password");
-                if(Password != password) {
-                	 throw new Exception("Password is incorrect");
-                }
+                participating = resultSet.getInt("participating");
+                max = resultSet.getInt("maxUsers");
+                System.out.printf("max: " + max + " participating: " + participating);
+             
+            }
+            if(max > participating || max==0 ) {
+            	canadd= true;
+            }else {
+            	throw new Exception("Choice is full: No more users allowed");
             }
             resultSet.close();
             ps.close();
@@ -241,23 +292,7 @@ public class DAO {
             e.printStackTrace();
             throw new Exception("Failed in getting constant: " + e.getMessage());
         }
-        if(!flagMatchFound) {
-        	try {
-                String query = "INSERT INTO " + tblTeamMember + "  VALUES (?, ?, ?, ?);";
-                String newMemberID = UUID.randomUUID().toString();
-                PreparedStatement ps = conn.prepareStatement(query);
-                ps.setString(1, newMemberID);
-                ps.setString(2, choiceid);
-                ps.setString(3, Username);
-                ps.setString(4, Password);
-                ps.executeUpdate();
-                ps.close();
-
-            } catch (Exception e) {
-                throw new Exception("Failed to update report: " + e.getMessage());
-            }
-        }
-        return flagMatchFound;
+    	return canadd;
     }
     
     public boolean deleteApprover(String Username, int altid) throws Exception {
