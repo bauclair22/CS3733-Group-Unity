@@ -426,6 +426,36 @@ public class DAO {
             throw new Exception("Failed to insert disapprover: " + e.getMessage());
         }
     }
+    
+    //not done
+    public boolean deleteStaleChoices(Timestamp expiration) throws Exception { //might need to delete the alternatiives and teamMembers asociated wit this
+        try {
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblchoices +  "WHERE DateCompleted > ?;"); //Not sure if this is entirely correct
+            //Should we clear approval for all alternatives in the choice or just one specific alternative in the choice?
+            ps.setTimestamp(1, expiration);
+            ps.executeUpdate();
+            ps.close();
+            return true;
+
+        } catch (Exception e) {
+            throw new Exception("Failed to delete old choices: " + e.getMessage());
+        }
+    }
+    
+    public boolean completeChoice(Timestamp expiration, String choiceID) throws Exception {
+        try {
+        	PreparedStatement ps = conn.prepareStatement("UPDATE " + tblchoices + " set DateCompleted = ? Where idchoice = ?"); 
+            ps.setTimestamp(1, expiration);
+            ps.setString(2, choiceID);
+            ps.execute();
+            return true;
+
+        } catch (Exception e) {
+            throw new Exception("Failed to compleate choice: " + e.getMessage());
+        }
+    }
+    
+    //create feedback function
 
 }
 
