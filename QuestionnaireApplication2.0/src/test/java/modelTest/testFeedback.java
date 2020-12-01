@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import model.Feedback;
+import java.sql.Timestamp;
 
 public class testFeedback {
 
@@ -13,7 +14,7 @@ public class testFeedback {
 		@Test
 		public void feedbackConstructor() {
 			
-			Feedback f = new Feedback("Bob", "hi");
+			Feedback f = new Feedback("Bob", "hi", null);
 			assertTrue(f.getDescription() == "hi");
 			assertTrue(f.getMemberName() == "Bob");
 		}

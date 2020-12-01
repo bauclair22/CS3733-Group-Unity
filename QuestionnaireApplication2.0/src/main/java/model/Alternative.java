@@ -5,14 +5,12 @@ import java.util.ArrayList;
 public class Alternative {
 	String title;
 	int AltID;
-	String description;
-	ArrayList<String> approvers = new ArrayList<>();
+	ArrayList<TeamMember> approvers = new ArrayList<>();
 	ArrayList<TeamMember> disapprovers = new ArrayList<>();
 	ArrayList<Feedback> feedback = new ArrayList<>();
 	
-	public Alternative(String title, String description, int altID) {
+	public Alternative(String title, int altID) {
 		this.title = title;
-		this.description = description;
 		this.AltID = altID;
 	}
 
@@ -20,18 +18,14 @@ public class Alternative {
 		return title;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public ArrayList<String> getApprovers() {
+	public ArrayList<TeamMember> getApprovers() {
 		return approvers;
 	}
 
-	public void addApprover(String approver) {
+	public void addApprover(TeamMember approver) {
 		this.approvers.add(approver);
 	}
-	public void removeApprover(String approver) {
+	public void removeApprover(TeamMember approver) {
 		this.approvers.remove(approver);
 	}
 
@@ -58,7 +52,7 @@ public class Alternative {
 		this.feedback.remove(feedback);
 	}
 
-	public void setApprovers(ArrayList<String> approvers) {
+	public void setApprovers(ArrayList<TeamMember> approvers) {
 		this.approvers = approvers;
 		
 	}
@@ -68,7 +62,7 @@ public class Alternative {
 		
 	}
 
-	public void setDispprovers(ArrayList<String> disapprovers) {
+	public void setDisapprovers(ArrayList<TeamMember> disapprovers) {
 		this.approvers = disapprovers;
 	}
 	

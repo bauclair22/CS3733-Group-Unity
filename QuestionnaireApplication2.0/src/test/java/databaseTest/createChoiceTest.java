@@ -10,9 +10,8 @@ public class createChoiceTest {
 	public void test1() {
 		DAO dao = new DAO();
 		String[] titles = {"first", "second", "third"};
-		String[] descriptions = {"is first", "is second", "is third"};
 		try {
-			String Cid = dao.createChoice(2,"withAlternative", titles, descriptions);
+			String Cid = dao.createChoice(2,"withAlternative", titles);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -23,9 +22,8 @@ public class createChoiceTest {
 	public void testAddUser() {
 		DAO dao = new DAO();
 		String[] titles = {"first", "second", "third"};
-		String[] descriptions = {"is first", "is second", "is third"};
 		try {
-			String Cid = dao.createChoice(3,"withAlternative", titles, descriptions);
+			String Cid = dao.createChoice(3,"withAlternative", titles);
 			dao.addUser("Carmen", "Password", Cid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

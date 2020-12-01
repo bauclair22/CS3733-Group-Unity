@@ -71,14 +71,13 @@ public class DAO {
 
             while (resultSet.next()) {
                 String title = resultSet.getString("alternative");
-                String description = resultSet.getString("description");
                 int altID = resultSet.getInt("idAltenative");
-                Alternative alt = new Alternative(title, description, altID);
-                ArrayList<String> approvers = getLikedBy(altID);
-                ArrayList<String> disapprovers = getDislikedBy(altID);
+                Alternative alt = new Alternative(title,altID);
+                ArrayList<TeamMember> approvers = getLikedBy(altID);
+                ArrayList<TeamMember> disapprovers = getDislikedBy(altID);
                 ArrayList<Feedback> feedback = getAlternativesFeedback(altID);
                 alt.setApprovers(approvers);
-                alt.setDispprovers(disapprovers);
+                alt.setDisapprovers(disapprovers);
                 alt.setFeedback(feedback);
                 A[counter] = alt;
                 counter++;
@@ -94,17 +93,19 @@ public class DAO {
         }
     }
 
-    public ArrayList<String> getLikedBy(int altid) throws Exception {
+    public ArrayList<TeamMember> getLikedBy(int altid) throws Exception {
 
         try {
-            ArrayList<String> approvers = new ArrayList<>();
+            ArrayList<TeamMember> approvers = new ArrayList<>();
             PreparedStatement ps = conn.prepareStatement("SELECT name FROM " + viewLikedBy + " WHERE alternativeID=?;");
             ps.setInt(1, altid);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
-                approvers.add(name);
+                String pass = resultSet.getString("password");
+                TeamMember member=new TeamMember(name,pass);
+                approvers.add(member);
             }
             resultSet.close();
             ps.close();
@@ -117,17 +118,20 @@ public class DAO {
         }
     }
 
-    public ArrayList<String> getDislikedBy(int altid) throws Exception {
+    public ArrayList<TeamMember> getDislikedBy(int altid) throws Exception {
 
         try {
-            ArrayList<String> disapprovers = new ArrayList<>();
+            ArrayList<TeamMember> disapprovers = new ArrayList<>();
             PreparedStatement ps = conn.prepareStatement("SELECT name FROM " + viewDislikedBy + " WHERE alternativeID=?;");
             ps.setInt(1, altid);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
+
                 String name = resultSet.getString("name");
-                disapprovers.add(name);
+                String pass = resultSet.getString("password");
+                TeamMember member=new TeamMember(name,pass);
+                disapprovers.add(member);
             }
             resultSet.close();
             ps.close();
@@ -168,7 +172,7 @@ public class DAO {
     }
 
 
-    public String createChoice(int maxUsers, String description, String[] titleAlt, String[] descriptionAlt) throws Exception {
+    public String createChoice(int maxUsers, String description, String[] titleAlt) throws Exception {
     	String newID =null;
     	boolean flag = true;
         try {
@@ -191,14 +195,14 @@ public class DAO {
         
         if(flag) {
         	for(int i=0; i<titleAlt.length; i++) {
-        		createAlternative(titleAlt[i], descriptionAlt[i], newID);
+        		createAlternative(titleAlt[i], newID);
         	}
         }
         
         return newID;
     }
     
-    public String createAlternative(String title, String description, String choiceID) throws Exception {
+    public String createAlternative(String title, String choiceID) throws Exception {
     	String newID;
         try {
             String query = "INSERT INTO " + tblAlternative + " (idAlternative, choiceID, alternative, description) VALUES (?, ?, ?, ?);";
@@ -207,7 +211,6 @@ public class DAO {
             ps.setString(1, newID);
             ps.setString(2, choiceID);
             ps.setString(3, title);
-            ps.setString(4, description);
             ps.executeUpdate();
             ps.close();
 

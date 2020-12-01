@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import com.amazonaws.services.lambda.runtime.Context;
 
+import httpRequestsAndResponses.CreateChoiceResponse;
+
 /**
  * A simple test harness for locally invoking your Lambda function handler.
  */
@@ -30,9 +32,11 @@ public class CreateChoiceHandlerTest {
         return ctx;
     }
     
-    public void testCreateChoice&Alternative() {
+    public CreateChoiceResponse testCreateChoice_Alternative() throws Exception {// must not be void, this is temporary i dont know if correct
     	CreateChoiceHandler ch = new CreateChoiceHandler();
-    	String id = ch.createChoice("movie to watch", "move night at my place", 5);
-    	ch.createAlternative("scary movie", "scary move 3");
+    	String[] alts= {"movie1","movie2"};
+    	String id = ch.createChoice("movie to watch", 5, alts);
+    	//ch.createAlternative("scary movie", 16);
+    	return null;
     }
 }
