@@ -9,6 +9,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import database.DAO;
 import httpRequestsAndResponses.UnselectReactionRequest;
 import httpRequestsAndResponses.UnselectReactionResponse;
+import model.TeamMember;
 
 public class UnselectReactionHandler implements RequestHandler<UnselectReactionRequest, UnselectReactionResponse> {
 	
@@ -25,18 +26,18 @@ public class UnselectReactionHandler implements RequestHandler<UnselectReactionR
 		DAO dao = new DAO();
 		
 		//Check if user is in the list of approvers
-		ArrayList<String> approvers = new ArrayList<>();
-		ArrayList<String> disapprovers = new ArrayList<>();
+		ArrayList<TeamMember> approvers = new ArrayList<>();
+		ArrayList<TeamMember> disapprovers = new ArrayList<>();
 		try {
 			approvers = dao.getLikedBy(req.getAltid());
 			disapprovers = dao.getDislikedBy(req.getAltid());
-			for(String s : approvers) {
-				if(req.getUsername().equals(s)) {
+			for(TeamMember t : approvers) {
+				if(req.getUsername().equals(t.getName())) {
 					//Delete user from list
 				}
 			}
-			for(String s : disapprovers) {
-				if(req.getUsername().equals(s)) {
+			for(TeamMember t : disapprovers) {
+				if(req.getUsername().equals(t.getName())) {
 					//Delete user from list
 				}
 			} 

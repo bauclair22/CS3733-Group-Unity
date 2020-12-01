@@ -12,9 +12,8 @@ public class TestAdduserWithoutpassword {
 	public void test() {
 		DAO dao = new DAO();
 		String[] titles = {"first3", "second3", "third3"};
-		String[] descriptions = {"is first3", "is second3", "is third3"};
 		try {
-			String Cid = dao.createChoice(3,"TestingNoPassword", titles, descriptions);
+			String Cid = dao.createChoice(3,"TestingNoPassword", titles);
 			dao.addUser("UserwithoutPass", null, Cid);
 			dao.addUser("UserwithoutPass", null, Cid);
 			//dao.addUser("maxUser3", "maxUser3Password33", Cid);

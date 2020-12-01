@@ -9,6 +9,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import database.DAO;
 import httpRequestsAndResponses.SelectApprovalRequest;
 import httpRequestsAndResponses.SelectApprovalResponse;
+import model.TeamMember;
 
 public class SelectApprovalHandler implements RequestHandler<SelectApprovalRequest, SelectApprovalResponse> {
 	
@@ -26,20 +27,20 @@ public class SelectApprovalHandler implements RequestHandler<SelectApprovalReque
 		
 		//In the DAO
 		//Check if user has already liked or disliked this alternative
-		 ArrayList<String> approvers = new ArrayList<>();
-		 ArrayList<String> disapprovers = new ArrayList<>();
+		 ArrayList<TeamMember> approvers = new ArrayList<>();
+		 ArrayList<TeamMember> disapprovers = new ArrayList<>();
 		 try {
 			approvers = dao.getLikedBy(req.getAltid());
 			disapprovers = dao.getDislikedBy(req.getAltid());
 			boolean inList = false;
 			boolean inOtherList = false;
-			for(String s: approvers) {
-				if(s.equals(req.getUsername())) {
+			for(TeamMember t: approvers) {
+				if(t.getName().equals(req.getUsername())) {
 					inList = true;
 				}
 			}
-			for(String s: disapprovers) {
-				if(s.equals(req.getUsername())) {
+			for(TeamMember t: disapprovers) {
+				if(t.getName().equals(req.getUsername())) {
 					inOtherList = true;
 				}
 			}

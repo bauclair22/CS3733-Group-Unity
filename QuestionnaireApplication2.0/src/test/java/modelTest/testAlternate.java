@@ -9,6 +9,8 @@ import model.Alternative;
 import model.Feedback;
 import model.TeamMember;
 
+import java.sql.Timestamp;
+
 public class testAlternate {
 
 	Alternative alt;
@@ -23,9 +25,9 @@ public class testAlternate {
 		Ben = new TeamMember("Ben","Ten");
 		David = new TeamMember("David", "password");
 		Bob = new TeamMember("Bob");
-		fromDavid = new Feedback("David", "Yeah No");
+		fromDavid = new Feedback("David", "Yeah No", (Timestamp) null);
 		
-		alt = new Alternative("alt1", "some description");
+		alt = new Alternative("alt1" , 0);
 		alt.addApprover(Bob);
 		alt.addApprover(David);
 		alt.addDisapprover(Ben);
@@ -35,7 +37,6 @@ public class testAlternate {
 	@Test
 	public void testConstructor() {
 		assertTrue(alt.getTitle() == "alt1");
-		assertTrue(alt.getDescription() == "some description");
 		
 		
 		//make sure that the (dis)approvers are the correct size
