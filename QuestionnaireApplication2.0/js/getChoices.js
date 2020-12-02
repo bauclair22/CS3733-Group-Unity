@@ -39,7 +39,6 @@ function processResponse(result) {
     console.log(choiceJson);
     
     
-    
     var choiceTitle = choiceJson["title"];
     var	choiceDescription = choiceJson["description"];
     var choiceMembers = choiceJson["numMembers"];
