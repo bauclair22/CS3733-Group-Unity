@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -177,12 +178,16 @@ public class DAO {
     	boolean flag = true;
         try {
         	System.out.printf("trying to create choice" + "maxUsers: " + maxUsers + "description" + description);
-            String query = "INSERT INTO " + tblchoices + " (idChoice, maxUsers, description) VALUES (?, ?, ?);";
+            String query = "INSERT INTO " + tblchoices + " (idChoice, maxUsers, description, DateCreated, isCompleated) VALUES (?, ?, ?, ?, ?);";
             PreparedStatement ps = conn.prepareStatement(query);
             newID = UUID.randomUUID().toString();
             ps.setString(1, newID);
             ps.setInt(2, maxUsers);
             ps.setString(3, description);
+            LocalDateTime myTime = LocalDateTime.now();
+    		Timestamp ts= Timestamp.valueOf(myTime);
+            ps.setTimestamp(4, ts);
+            ps.setInt(5, 0);
             ps.executeUpdate();
             ps.close();
 
@@ -298,18 +303,35 @@ public class DAO {
     	return canadd;
     }
     
-    public boolean deleteReaction(String id, String altid) throws Exception {
+    public boolean deleteApprover(String Username, int altid) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblReactions +  " WHERE memberID=? AND alternativeID=?;"); //Not sure if this is entirely correct
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + viewLikedBy +  "WHERE name=? AND alternativeID=?;"); //Not sure if this is entirely correct
             //Should we clear approval for all alternatives in the choice or just one specific alternative in the choice?
-            ps.setString(1, id);
-            ps.setString(2, altid);
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
+            int numAffected = ps.executeUpdate();
             ps.close();
             
-            return true;
+            return (numAffected == 1);
 
         } catch (Exception e) {
-            throw new Exception("Failed to delete reaction: " + e.getMessage());
+            throw new Exception("Failed to delete approver: " + e.getMessage());
+        }
+    }
+    
+    public boolean deleteDisapprover(String Username, int altid) throws Exception {
+        try {
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + viewDislikedBy +  "WHERE name=? AND alternativeID=?;"); //Not sure if this is entirely correct
+            //Should we clear approval for all alternatives in the choice or just one specific alternative in the choice?
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
+            int numAffected = ps.executeUpdate();
+            ps.close();
+            
+            return (numAffected == 1);
+
+        } catch (Exception e) {
+            throw new Exception("Failed to delete disapprover: " + e.getMessage());
         }
     }
     
@@ -339,15 +361,14 @@ public class DAO {
     	//Need something here to create the alternatives in the choice or need to change the choice constructor
     	Alternative[] alternatives = new Alternative[5];
 		int numMembers = resultSet.getInt("maxUsers"); 
-        return new Choice (description, alternatives, numMembers); //Probably need to change choice constructor
+        return new Choice (description, alternatives, numMembers);
     }
     
-    public boolean addApprover(String id, String altid) throws Exception {
-    	String newID =null;
+    public boolean addApprover(String Username, int altid) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID=? AND alternativeID=?;");
-            ps.setString(1, id);
-            ps.setString(2, altid);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + viewLikedBy + "WHERE name=? AND alternativeID=?;");
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
             ResultSet resultSet = ps.executeQuery();
             
             // already present?
@@ -355,13 +376,20 @@ public class DAO {
                 resultSet.close();
                 return false;
             }
+            //Check if present in dislikes 
+            ps = conn.prepareStatement("SELECT * FROM " + viewDislikedBy + "WHERE name=? AND alternativeID=?;");
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
+            resultSet = ps.executeQuery();
+            
+            // already present?
+            while (resultSet.next()) {
+                resultSet.close();
+                return false;
+            }
 
-            ps = conn.prepareStatement("INSERT INTO " + tblReactions + " (idReaction, memberID, alternativeID, reaction) values(?,?,?,?);"); //Someone should doublecheck this part
-            newID = UUID.randomUUID().toString();
-            ps.setString(1, newID);
-            ps.setString(2, id);
-            ps.setString(3, altid);
-            ps.setString(4, "Like");
+            ps = conn.prepareStatement("INSERT INTO " + viewLikedBy + " (name) values(?);"); //Someone should doublecheck this part
+            ps.setString(1, Username);
             ps.execute();
             return true;
 
@@ -370,12 +398,11 @@ public class DAO {
         }
     }
 
-    public boolean addDisapprover(String id, String altid) throws Exception {
+    public boolean addDisapprover(String Username, int altid) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID=? AND alternativeID=?;");
-            String newID = null;
-            ps.setString(1, id);
-            ps.setString(2, altid);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + viewDislikedBy + "WHERE name=? AND alternativeID=?;");
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
             ResultSet resultSet = ps.executeQuery();
             
             // already present?
@@ -383,13 +410,20 @@ public class DAO {
                 resultSet.close();
                 return false;
             }
+            //Check if present in likes 
+            ps = conn.prepareStatement("SELECT * FROM " + viewLikedBy + "WHERE name=? AND alternativeID=?;");
+            ps.setString(1, Username);
+            ps.setInt(2, altid);
+            resultSet = ps.executeQuery();
+            
+            // already present?
+            while (resultSet.next()) {
+                resultSet.close();
+                return false;
+            }
 
-            ps = conn.prepareStatement("INSERT INTO " + tblReactions + " (idReaction, memberID, alternativeID, reaction) values(?,?,?,?);"); //Someone should doublecheck this part
-            newID = UUID.randomUUID().toString();
-            ps.setString(1, newID);
-            ps.setString(2, id);
-            ps.setString(3, altid);
-            ps.setString(4, "Dislike");
+            ps = conn.prepareStatement("INSERT INTO " + viewDislikedBy + " (name) values(?);"); //Someone should doublecheck this part
+            ps.setString(1, Username);
             ps.execute();
             return true;
 
@@ -401,7 +435,7 @@ public class DAO {
     //not done
     public boolean deleteStaleChoices(Timestamp expiration) throws Exception { //might need to delete the alternatiives and teamMembers asociated wit this
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblchoices +  " WHERE DateCompleted > ?;"); //Not sure if this is entirely correct
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblchoices +  "WHERE DateCreated > ?;"); //Not sure if this is entirely correct
             //Should we clear approval for all alternatives in the choice or just one specific alternative in the choice?
             ps.setTimestamp(1, expiration);
             ps.executeUpdate();
@@ -413,10 +447,10 @@ public class DAO {
         }
     }
     
-    public boolean completeChoice(Timestamp expiration, String choiceID) throws Exception {
+    public boolean completeChoice( String choiceID) throws Exception {
         try {
-        	PreparedStatement ps = conn.prepareStatement("UPDATE " + tblchoices + " set DateCompleted = ? Where idchoice = ?"); 
-            ps.setTimestamp(1, expiration);
+        	PreparedStatement ps = conn.prepareStatement("UPDATE " + tblchoices + " set isCompleated = ? Where idchoice = ?"); 
+            ps.setInt(1, 1);
             ps.setString(2, choiceID);
             ps.execute();
             return true;
