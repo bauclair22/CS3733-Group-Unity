@@ -59,7 +59,6 @@ function handleCreateClick(e) {
   
   
   
-  /*
   if(form.alt1_d.value != ""){
 	  //return false;
 	  alts.push(form.alt1_d.value);  
@@ -78,10 +77,9 @@ function handleCreateClick(e) {
 	  alts.push(form.alt5.value);  
   }
   
-  */
   
   data["alternativeTitles"] = altTitles;
-  //data["alternatives"] = alts;
+  data["alternatives"] = alts;
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
