@@ -10,7 +10,7 @@ function processCreateChoiceResponse(result) {
   var js = JSON.parse(result);
 
   var id = js["response"];
-  var status = js["statusCode"];
+  var status = js["httpCode"];
   
   console.log("status:" + status)
   
