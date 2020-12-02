@@ -14,7 +14,7 @@ public class CreateChoiceRequest {
 	public int getNumMembers() {return numMembers;}
 	public void setNumMembers(int numMembers) {this.numMembers = numMembers;}
 	
-	public String[] getAlternativeTitles() {return alternativeTitles;}
+	public String getAlternativeTitle(int i) {return alternativeTitles[i];}
 	public void setAlternativeTitles(String[] alternativeTitles) {this.alternativeTitles = alternativeTitles;}
 	
 	
