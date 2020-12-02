@@ -3,7 +3,7 @@
  * Respond to server JSON object. And Gives the Choice ID
  *
  */
-function processCreateResponse(result) {
+function processCreateChoiceResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("result:" + result);
@@ -96,7 +96,7 @@ function handleCreateClick(e) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
     	 if (xhr.status == 200) {
 	      console.log ("XHR:" + xhr.responseText);
-	      processCreateResponse(xhr.responseText);
+	      processCreateChoiceResponse(xhr.responseText);
     	 } else {
     		 console.log("issue with construction")
 			  //var js = JSON.parse(xhr.responseText);
@@ -104,7 +104,7 @@ function handleCreateClick(e) {
 			  //alert (err);
     	 }
     } else {
-      processCreateResponse("N/A");
+      processCreateChoiceResponse("N/A");
     }
   };
 }
