@@ -12,12 +12,14 @@ function processCreateChoiceResponse(result) {
   var id = js["response"];
   var status = js["statusCode"];
   
+  console.log("status:" + status)
+  
   if (status == 200) {
     // Update computation result
 	document.createChoiceForm.choiceID.innerHTML = id;
   } else {
     var msg = js["error"];
-    document.createChoiceForm.choiceID.innerHTML = "error:" + msg;
+    document.createChoiceForm.choiceID.innerHTML = "error:";
   }
   //refreshChoicesList();
 }
