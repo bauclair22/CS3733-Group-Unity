@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Alternative {
 	String title;
-	int AltID;
+	String AltID;
 	ArrayList<TeamMember> approvers = new ArrayList<>();
 	ArrayList<TeamMember> disapprovers = new ArrayList<>();
 	ArrayList<Feedback> feedback = new ArrayList<>();
 	
-	public Alternative(String title, int altID) {
+	public Alternative(String title, String altID) {
 		this.title = title;
 		this.AltID = altID;
 	}

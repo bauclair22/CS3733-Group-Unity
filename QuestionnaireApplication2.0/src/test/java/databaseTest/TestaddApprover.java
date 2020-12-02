@@ -32,10 +32,8 @@ public class TestaddApprover {
 	@Test
 	public void test1() {
 		DAO dao = new DAO();
-		LocalDateTime myTime = LocalDateTime.now();
-		Timestamp ts= Timestamp.valueOf(myTime);
 		try {
-			dao.addApprover( ,"03ab1518-721a-4480-a2b2-04b2381962c2");
+			dao.addApprover("03ab1518-721a-4480-a2b2-04b2381962c2");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
