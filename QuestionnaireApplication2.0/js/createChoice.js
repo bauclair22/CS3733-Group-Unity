@@ -1,9 +1,25 @@
+
+/**
+ * Respond to server JSON object. And Gives the Choice ID
+ *
+ */
 function processCreateResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("result:" + result);
+  var js = JSON.parse(result);
 
-  refreshChoicesList();
+  var id = js["response"];
+  var status = js["statusCode"];
+  
+  if (status == 200) {
+    // Update computation result
+	document.createChoiceForm.choiceID.value = id;
+  } else {
+    var msg = js["error"];
+    document.createChoiceForm.choiceID.value = "error:" + msg;
+  }
+  //refreshChoicesList();
 }
 
 
@@ -43,7 +59,7 @@ function handleCreateClick(e) {
   
   
   
-  
+  /*
   if(form.alt1_d.value != ""){
 	  //return false;
 	  alts.push(form.alt1_d.value);  
@@ -62,10 +78,10 @@ function handleCreateClick(e) {
 	  alts.push(form.alt5.value);  
   }
   
-  
+  */
   
   data["alternativeTitles"] = altTitles;
-  data["alternatives"] = alts;
+  //data["alternatives"] = alts;
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
