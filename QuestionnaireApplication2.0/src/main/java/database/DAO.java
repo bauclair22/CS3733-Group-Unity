@@ -36,12 +36,12 @@ public class DAO {
         }
     }
 
-    public Choice getChoiceswithID(int ID) throws Exception {
+    public Choice getChoiceswithID(String ID) throws Exception {
 
         try {
             Choice choice = null;
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblchoices + " WHERE idChoice=?;");
-            ps.setInt(1,  ID);
+            ps.setString(1,  ID);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
@@ -61,19 +61,19 @@ public class DAO {
         }
     }
 
-    public Alternative[] getChoiceAlternatives(int choiceid) throws Exception {
+    public Alternative[] getChoiceAlternatives(String choiceid) throws Exception {
 
         try {
             Alternative A[] = new Alternative[5];
             int counter =0;
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblAlternative + " WHERE idChoice=?;");
-            ps.setInt(1, choiceid);
+            ps.setString(1, choiceid);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
                 String title = resultSet.getString("alternative");
-                int altID = resultSet.getInt("idAltenative");
-                Alternative alt = new Alternative(title,altID);
+                String altID = resultSet.getString("idAltenative");
+                Alternative alt = new Alternative(title, altID);
                 ArrayList<TeamMember> approvers = getLikedBy(altID);
                 ArrayList<TeamMember> disapprovers = getDislikedBy(altID);
                 ArrayList<Feedback> feedback = getAlternativesFeedback(altID);
@@ -94,12 +94,12 @@ public class DAO {
         }
     }
 
-    public ArrayList<TeamMember> getLikedBy(int altid) throws Exception {
+    public ArrayList<TeamMember> getLikedBy(String altid) throws Exception {
 
         try {
             ArrayList<TeamMember> approvers = new ArrayList<>();
             PreparedStatement ps = conn.prepareStatement("SELECT name FROM " + viewLikedBy + " WHERE alternativeID=?;");
-            ps.setInt(1, altid);
+            ps.setString(1, altid);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
@@ -119,12 +119,12 @@ public class DAO {
         }
     }
 
-    public ArrayList<TeamMember> getDislikedBy(int altid) throws Exception {
+    public ArrayList<TeamMember> getDislikedBy(String altid) throws Exception {
 
         try {
             ArrayList<TeamMember> disapprovers = new ArrayList<>();
             PreparedStatement ps = conn.prepareStatement("SELECT name FROM " + viewDislikedBy + " WHERE alternativeID=?;");
-            ps.setInt(1, altid);
+            ps.setString(1, altid);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
@@ -145,13 +145,12 @@ public class DAO {
         }
     }
 
-    public ArrayList<Feedback> getAlternativesFeedback(int altid) throws Exception {
+    public ArrayList<Feedback> getAlternativesFeedback(String altid) throws Exception {
 
         try {
             ArrayList<Feedback> feedback = new ArrayList<>();
-            int counter =0;
             PreparedStatement ps = conn.prepareStatement("SELECT time, feedback, name FROM " + viewFeedbacksWithName + " WHERE alternativeID=?;");
-            ps.setInt(1, altid);
+            ps.setString(1, altid);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
@@ -226,7 +225,7 @@ public class DAO {
         return newID;
     }
     
-    public boolean addUser(String Username, String Password, String choiceid) throws Exception {
+    public boolean addUser(String Username, String password, String choiceid) throws Exception {
 
     	boolean flagMatchFound = false;
     	boolean added =false;
@@ -239,9 +238,8 @@ public class DAO {
 	
 	            while (resultSet.next()) {
 	            	flagMatchFound = true;
-	                String name = resultSet.getString("name");
-	                String password = resultSet.getString("password");
-	                if(Password != password) {
+	                String correctPassword = resultSet.getString("password");
+	                if(correctPassword != password) {
 	                	 throw new Exception("Password is incorrect");
 	                }
 	            }
@@ -260,7 +258,7 @@ public class DAO {
 	                ps.setString(1, newMemberID);
 	                ps.setString(2, choiceid);
 	                ps.setString(3, Username);
-	                ps.setString(4, Password);
+	                ps.setString(4, password);
 	                ps.executeUpdate();
 	                ps.close();
 	                added = true;
@@ -303,35 +301,19 @@ public class DAO {
     	return canadd;
     }
     
-    public boolean deleteApprover(String Username, int altid) throws Exception {
-        try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + viewLikedBy +  "WHERE name=? AND alternativeID=?;"); //Not sure if this is entirely correct
-            //Should we clear approval for all alternatives in the choice or just one specific alternative in the choice?
-            ps.setString(1, Username);
-            ps.setInt(2, altid);
-            int numAffected = ps.executeUpdate();
-            ps.close();
-            
-            return (numAffected == 1);
-
-        } catch (Exception e) {
-            throw new Exception("Failed to delete approver: " + e.getMessage());
-        }
-    }
     
-    public boolean deleteDisapprover(String Username, int altid) throws Exception {
+    public boolean deleteReaction(String memberID, String altid) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + viewDislikedBy +  "WHERE name=? AND alternativeID=?;"); //Not sure if this is entirely correct
-            //Should we clear approval for all alternatives in the choice or just one specific alternative in the choice?
-            ps.setString(1, Username);
-            ps.setInt(2, altid);
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblReactions +  "WHERE memberID=? AND alternativeID=?;"); 
+            ps.setString(1, memberID);
+            ps.setString(2, altid);
             int numAffected = ps.executeUpdate();
             ps.close();
             
             return (numAffected == 1);
 
         } catch (Exception e) {
-            throw new Exception("Failed to delete disapprover: " + e.getMessage());
+            throw new Exception("Failed to delete reaction: " + e.getMessage());
         }
     }
     
@@ -364,11 +346,12 @@ public class DAO {
         return new Choice (description, alternatives, numMembers);
     }
     
-    public boolean addApprover(String Username, int altid) throws Exception {
-        try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + viewLikedBy + "WHERE name=? AND alternativeID=?;");
-            ps.setString(1, Username);
-            ps.setInt(2, altid);
+    
+   public boolean addApprover(String memberID, String altid) throws Exception {
+	   try {
+		    PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + "WHERE memberID = ? AND alternativeID = ?;");
+            ps.setString(1, memberID);
+            ps.setString(2, altid);
             ResultSet resultSet = ps.executeQuery();
             
             // already present?
@@ -376,33 +359,25 @@ public class DAO {
                 resultSet.close();
                 return false;
             }
-            //Check if present in dislikes 
-            ps = conn.prepareStatement("SELECT * FROM " + viewDislikedBy + "WHERE name=? AND alternativeID=?;");
-            ps.setString(1, Username);
-            ps.setInt(2, altid);
-            resultSet = ps.executeQuery();
-            
-            // already present?
-            while (resultSet.next()) {
-                resultSet.close();
-                return false;
-            }
-
-            ps = conn.prepareStatement("INSERT INTO " + viewLikedBy + " (name) values(?);"); //Someone should doublecheck this part
-            ps.setString(1, Username);
+            ps = conn.prepareStatement("INSERT INTO " + tblReactions + " (idReaction, alternativeID, memberID, reaction) values(?,?,?,?);"); 
+            String newID = UUID.randomUUID().toString();
+            ps.setString(1, newID);
+            ps.setString(2, altid);
+            ps.setString(3, memberID);
+            ps.setString(4, "Like");
             ps.execute();
             return true;
 
         } catch (Exception e) {
-            throw new Exception("Failed to insert approver: " + e.getMessage());
+            throw new Exception("Failed to insert disapprover: " + e.getMessage());
         }
     }
 
-    public boolean addDisapprover(String Username, int altid) throws Exception {
+    public boolean addDisapprover(String memberID, String altid) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + viewDislikedBy + "WHERE name=? AND alternativeID=?;");
-            ps.setString(1, Username);
-            ps.setInt(2, altid);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + "WHERE memberID = ? AND alternativeID = ?;");
+            ps.setString(1, memberID);
+            ps.setString(2, altid);
             ResultSet resultSet = ps.executeQuery();
             
             // already present?
@@ -410,20 +385,12 @@ public class DAO {
                 resultSet.close();
                 return false;
             }
-            //Check if present in likes 
-            ps = conn.prepareStatement("SELECT * FROM " + viewLikedBy + "WHERE name=? AND alternativeID=?;");
-            ps.setString(1, Username);
-            ps.setInt(2, altid);
-            resultSet = ps.executeQuery();
-            
-            // already present?
-            while (resultSet.next()) {
-                resultSet.close();
-                return false;
-            }
-
-            ps = conn.prepareStatement("INSERT INTO " + viewDislikedBy + " (name) values(?);"); //Someone should doublecheck this part
-            ps.setString(1, Username);
+            ps = conn.prepareStatement("INSERT INTO " + tblReactions + " (idReaction, alternativeID, memberID, reaction) values(?,?,?,?);"); 
+            String newID = UUID.randomUUID().toString();
+            ps.setString(1, newID);
+            ps.setString(2, altid);
+            ps.setString(3, memberID);
+            ps.setString(4, "Dislike");
             ps.execute();
             return true;
 
@@ -432,7 +399,7 @@ public class DAO {
         }
     }
     
-    //not done
+    //when old choices are deleted do they have to have been completed?
     public boolean deleteStaleChoices(Timestamp expiration) throws Exception { //might need to delete the alternatiives and teamMembers asociated wit this
         try {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblchoices +  "WHERE DateCreated > ?;"); //Not sure if this is entirely correct
@@ -449,7 +416,7 @@ public class DAO {
     
     public boolean completeChoice( String choiceID) throws Exception {
         try {
-        	PreparedStatement ps = conn.prepareStatement("UPDATE " + tblchoices + " set isCompleated = ? Where idchoice = ?"); 
+        	PreparedStatement ps = conn.prepareStatement("UPDATE " + tblchoices + " set isCompleted = ? Where idchoice = ?"); 
             ps.setInt(1, 1);
             ps.setString(2, choiceID);
             ps.execute();
