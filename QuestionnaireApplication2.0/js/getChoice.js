@@ -15,7 +15,7 @@ function formatAlternates(altNum, altTitle){
 	console.log(view);
 	
 	var output = "";
-	output = output + "<input type=\"button\" id= " + agree + " name= "+ agree+" value=\"^\"  onClick=""> <input type=\"button\" id= " + disagree + " name= "+ disagree+" value=\"v\"  onClick="">  <input type=\"button\" id= "view" name= "view" value="altTitle"  onClick=""><br><br>";
+	//output = output + "<input type=\"button\" id= " + agree + " name= "+ agree+" value=\"^\"  onClick=""> <input type=\"button\" id= " + disagree + " name= "+ disagree+" value=\"v\"  onClick="">  <input type=\"button\" id= "view" name= "view" value="altTitle"  onClick=""><br><br>";
 	console.log(output);
 	return output;
 }
@@ -56,14 +56,14 @@ function processRefreshChoice(result) {
   // example of choice parsed
     
   var choiceJson = {		
-  		"id" : "ChoiceID"
+  		"id" : "ChoiceID",
   		"description":"New Choice",
   		"numMembers":"6",
 		"alternativeTitles":["Alt1","ALt2"],
 		"alternatives":["Alt2 D","Alt2 D"]
 	};	
   
-  concole.log(choiceJson);
+  console.log(choiceJson);
   
   var choiceDisplay = document.getElementById('selectedChoice');
   
@@ -72,13 +72,13 @@ function processRefreshChoice(result) {
 	var choiceTitle = choiceJson["description"];
 	var	choiceDescription = choiceJson["description"];
 	var choiceMembers = choiceJson["numMembers"];
-	var alternatives = choiecJson["alternativeTitles"];
+	var alternatives = choiceJson["alternativeTitles"];
 	
 	if (true) {
 		output = output +
 		"<div id=\"selectedChoice\">" +  
 		"<form name=\"reactionForm\" method=\"get\">" + 
-		formatAlternatives(1, alternatives[1]) + 
+		//formatAlternatives(1, alternatives[1]) + 
 	 	"</form>" +
 	 	"</div>";
 		
