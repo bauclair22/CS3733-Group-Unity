@@ -9,8 +9,14 @@ function formatAlternates(altNum, altTitle){
 	var agree = "alt" + altNum + "_agree";
 	var diagree = "alt" + altNum + "_agree";
 	var view = "alt" + altNum + "_agree";
+	console.log("formating alternatives");
+	console.log(agree);
+	console.log(disagree);
+	console.log(view);
+	
 	var output = "";
 	output = output + "<input type=\"button\" id= " + agree + " name= "+ agree+" value=\"^\"  onClick=""> <input type=\"button\" id= " + disagree + " name= "+ disagree+" value=\"v\"  onClick="">  <input type=\"button\" id= "view" name= "view" value="altTitle"  onClick=""><br><br>";
+	console.log(output);
 	return output;
 }
 
@@ -21,7 +27,7 @@ function formatAlternates(altNum, altTitle){
  *    GET list_url
  *    RESPONSE  list of [name, value, system] constants 
  */
-function refreshChoicesList() {
+function handleRefreshChoice(e) {
    var xhr = new XMLHttpRequest();
    xhr.open("GET", choice_list_url, true);
    xhr.send();
@@ -32,9 +38,9 @@ function refreshChoicesList() {
   xhr.onloadend = function () {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       console.log ("XHR:" + xhr.responseText);
-      processResponse(xhr.responseText);
+      processRefreshChoice(xhr.responseText);
     } else {
-      processResponse("N/A");
+    	processRefreshChoice("N/A");
     }
   };
 }
@@ -42,7 +48,7 @@ function refreshChoicesList() {
 /**
  * Loads the choice that the user signs into
  */
-function processResponse(result) {
+function processRefreshChoice(result) {
   console.log("result: " + result);
   //var choiceJson = JSON.parse(result);
   
@@ -69,21 +75,26 @@ function processResponse(result) {
 	var alternatives = choiecJson["alternativeTitles"];
 	
 	if (true) {
-		output = output + "<div id=\"choice" +  + "\">" + choiceTitle + "<br><br>" + choiceMembers + "<br><br>" + choiceDescription + "<br></div>";
-		
-		<div id="selectedChoice" > 
-		<form name="reactionForm" method="get">
+		output = output +
+		"<div id=\"selectedChoice\">" +  
+		"<form name=\"reactionForm\" method=\"get\">" + 
+		formatAlternatives(1, alternatives[1]) + 
+	 	"</form>" +
+	 	"</div>";
 		
 		/*
+		<div id="selectedChoice" > 
+		<form name="reactionForm" method="get">
+
 		<h2>(5/7) Choice</h2>
 		<input type="button" id= "alt1_agree" name= "alt1_agree" value="^"  onClick="">
 	  	<input type="button" id= "alt1_disagree" name= "alt1_disagree" value="v"  onClick="">
 		<input type="button" id= "alt1_view" name= "alt1_view" value="alt1"  onClick=""><br><br>
-		*/
 		
 	 	 <!-- <input type="button" value="Save Changes"  onClick=""> -->
 	 	 </form>
 	 	</div>
+	 	*/
 		
 	}
  
