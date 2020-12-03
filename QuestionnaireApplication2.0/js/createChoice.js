@@ -64,28 +64,7 @@ function handleCreateClick(e) {
   }
   
   
-  
-  if(form.alt1_d.value != ""){
-	  //return false;
-	  alts.push(form.alt1_d.value);  
-  }
-  if(form.alt2_d.value != ""){
-	  //return false;
-	  alts.push(form.alt2_d.value);  
-  }
-  if(form.alt3_d.value != ""){
-	  alts.push(form.alt3_d.value);  
-  }
-  if(form.alt4_d.value != ""){
-	  alts.push(form.alt4_d.value);  
-  }
-  if(form.alt5_d.value != ""){
-	  alts.push(form.alt5.value);  
-  }
-  
-  
   data["alternativeTitles"] = altTitles;
-  data["alternatives"] = alts;
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
