@@ -5,18 +5,20 @@ function formatHeader(choiceTitle, currentUsers, max){
 	return "<h2>(" + currentUsers + "/" + max +")" + choiceTitle + "</h2>";
 }
 
-function formatAlternates(altNum, altTitle){
-	var agree = "alt" + altNum + "_agree";
-	var diagree = "alt" + altNum + "_agree";
-	var view = "alt" + altNum + "_agree";
-	console.log("formating alternatives");
-	console.log(agree);
-	console.log(disagree);
-	console.log(view);
+function formatAlt(altTitle){
+	//var agree = "alt" + altNum + "_agree";
+	//var diagree = "alt" + altNum + "_agree";
+	//var view = "alt" + altNum + "_agree";
+	//console.log("formating alternatives");
+	//console.log(agree);
+	//console.log(disagree);
+	//console.log(view);
 	
 	var output = "";
-	//output = output + "<input type=\"button\" id= " + agree + " name= "+ agree+" value=\"^\"  onClick=""> <input type=\"button\" id= " + disagree + " name= "+ disagree+" value=\"v\"  onClick="">  <input type=\"button\" id= "view" name= "view" value="altTitle"  onClick=""><br><br>";
-	console.log(output);
+	output = output + 
+	"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"\">" +
+	"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"\">" +
+	"<input type=\"button\" id= \"alt1_view\" name= \"alt1_view\" value=" + altTitle + " onClick=\"\"><br><br>";
 	return output;
 }
 
@@ -58,9 +60,9 @@ function processRefreshChoice(result) {
   var choiceJson = {		
   		"id" : "ChoiceID",
   		"description":"New Choice",
-  		"numMembers":"6",
+  		"numMembers" : 6,
+  		"maxUsers" : 7,
 		"alternativeTitles":["Alt1","ALt2"],
-		"alternatives":["Alt2 D","Alt2 D"]
 	};	
   
   console.log(choiceJson);
@@ -70,15 +72,27 @@ function processRefreshChoice(result) {
   var output = "";
  
 	var choiceTitle = choiceJson["description"];
-	var	choiceDescription = choiceJson["description"];
 	var choiceMembers = choiceJson["numMembers"];
 	var alternatives = choiceJson["alternativeTitles"];
+	var agree = "alt1_agree";
+	var disagree = "alt1_disagree";
+	var veiw = "alt1_view";
+	//var atl1 = formatAlt(alternatives[0].getTitle());
 	
 	if (true) {
 		output = output +
 		"<div id=\"selectedChoice\">" +  
 		"<form name=\"reactionForm\" method=\"get\">" + 
-		//formatAlternatives(1, alternatives[1]) + 
+		"<h2>" + choiceTitle + "</h2>";
+		
+		for(i = 0; i < alternatives.length; i++){
+			output = output + 
+			"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"\">" +
+			"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"\">" +
+			"<input type=\"button\" id= \"alt1_view\" name= \"alt1_view\" value=" + alternatives[i] + " onClick=\"\"><br><br>";
+		}
+		
+	 	output = output +
 	 	"</form>" +
 	 	"</div>";
 		
