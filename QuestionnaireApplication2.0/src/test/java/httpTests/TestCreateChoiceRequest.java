@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import httpRequestsAndResponses.CreateChoiceRequest;
 
-public class testCreateChoiceRequest {
+public class TestCreateChoiceRequest {
 
 	@Test
 	public void test() {
