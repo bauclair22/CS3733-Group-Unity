@@ -2,10 +2,8 @@ function processCreateMemberResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("result:" + result);
+  processRefreshChoice(result);
 
-  
-  
-  
 }
 
 function handleCreateMemberClick(e) {

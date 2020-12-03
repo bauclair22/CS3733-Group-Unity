@@ -1,6 +1,5 @@
 
 
-
 function formatHeader(choiceTitle, currentUsers, max){
 
 	"Choice [" +
@@ -40,10 +39,10 @@ function formatAlt(altTitle){
  */
 function handleRefreshChoice(e) {
    var xhr = new XMLHttpRequest();
-   xhr.open("GET", choice_list_url, true);
+   xhr.open("POST", create_member_url, true);
    xhr.send();
    
-   console.log("sent request to get choices");
+   console.log("Getting the choice o the user");
 
   // This will process results and update HTML as appropriate. 
   xhr.onloadend = function () {
@@ -61,18 +60,11 @@ function handleRefreshChoice(e) {
  */
 function processRefreshChoice(result) {
   console.log("result: " + result);
-  //var choiceJson = JSON.parse(result);
   
-  // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
-  // example of choice parsed
-    
-  var choiceJson = {		
-  		"id" : "ChoiceID",
-  		"description":"New Choice",
-  		"numMembers" : 6,
-  		"maxUsers" : 7,
-		"alternativeTitles":["Alt1","ALt2"],
-	};	
+  // getting the response and the http code
+  var js = JSON.parse(result);
+  // getting the JSON object
+  var choiceJson = JSON.parse(js["response"]);
   
   console.log(choiceJson);
   
@@ -82,11 +74,7 @@ function processRefreshChoice(result) {
  
 	var choiceTitle = choiceJson["description"];
 	var choiceMembers = choiceJson["numMembers"];
-	var alternatives = choiceJson["alternativeTitles"];
-	var agree = "alt1_agree";
-	var disagree = "alt1_disagree";
-	var veiw = "alt1_view";
-	//var atl1 = formatAlt(alternatives[0].getTitle());
+	var alternatives = choiceJson["alternatives"];
 	
 	if (true) {
 		output = output +
