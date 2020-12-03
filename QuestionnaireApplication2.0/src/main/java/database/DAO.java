@@ -240,7 +240,7 @@ public class DAO {
 	            	flagMatchFound = true;
 	                String correctPassword = resultSet.getString("password");
 	                if(!correctPassword.contentEquals(password)) {
-	                	 throw new Exception("Password is incorrect");
+	                	 throw new Exception("Password is NOT NOT incorrect");
 	                }
 	            }
 	            resultSet.close();
