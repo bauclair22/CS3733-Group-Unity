@@ -27,4 +27,8 @@ public class Feedback {
 	public String getDescription() {
 		return description;
 	}
+
+	public Timestamp getTimestamp() {
+		return this.timestamp;
+	}
 }

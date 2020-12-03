@@ -72,4 +72,14 @@ public class Choice {
 	public void setDateCompleted(Timestamp t) {
 		this.dateCompleted = t;
 	}
+
+
+
+	public String getdescription() {
+		return this.description;
+	}
+
+	public int getnumMembers() {
+		return this.numMembers;
+	}
 }
