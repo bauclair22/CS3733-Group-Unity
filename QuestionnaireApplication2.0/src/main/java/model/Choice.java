@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Choice {
 	String description;
@@ -81,5 +82,12 @@ public class Choice {
 
 	public int getnumMembers() {
 		return this.numMembers;
+	}
+
+	@Override
+	public String toString() {
+		return "Choice [description=" + description + ", alternatives=" + Arrays.toString(alternatives)
+				+ ", numMembers=" + numMembers + ", teamMembers=" + teamMembers + ", idNumber=" + idNumber
+				+ ", isCompleted=" + isCompleted + ", dateCompleted=" + dateCompleted + "]";
 	}
 }

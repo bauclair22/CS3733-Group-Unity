@@ -1,5 +1,6 @@
 package com.amazonaws.lambda.demo;
 
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -10,6 +11,7 @@ import httpRequestsAndResponses.CreateChoiceRequest;
 import httpRequestsAndResponses.CreateChoiceResponse;
 import httpRequestsAndResponses.ParticipateChoiceRequest;
 import httpRequestsAndResponses.ParticipateChoiceResponse;
+import model.Choice;
 
 public class ParticipateChoiceHandler implements RequestHandler<ParticipateChoiceRequest, ParticipateChoiceResponse>{
 	
@@ -23,7 +25,8 @@ public class ParticipateChoiceHandler implements RequestHandler<ParticipateChoic
 		ParticipateChoiceResponse response;
 		try {
 			if (dao.addUser(input.getUsername(),input.getPassword(), input.getId())) {
-				response = new ParticipateChoiceResponse("Added user to database");
+				Choice c = dao.getChoiceswithID(input.getId());
+				response = new ParticipateChoiceResponse(c);
 			} else {
 				response = new ParticipateChoiceResponse("FAILED TO ADD USER TO SYSTEM", 422);
 			}
