@@ -177,7 +177,7 @@ public class DAO {
     	boolean flag = true;
         try {
         	System.out.printf("trying to create choice" + "maxUsers: " + maxUsers + "description" + description);
-            String query = "INSERT INTO " + tblchoices + " (idChoice, maxUsers, description, DateCreated, isCompleated) VALUES (?, ?, ?, ?, ?);";
+            String query = "INSERT INTO " + tblchoices + " (idChoice, maxUsers, description, DateCreated, isCompleted) VALUES (?, ?, ?, ?, ?);";
             PreparedStatement ps = conn.prepareStatement(query);
             newID = UUID.randomUUID().toString();
             ps.setString(1, newID);
@@ -209,7 +209,7 @@ public class DAO {
     public String createAlternative(String title, String choiceID) throws Exception {
     	String newID;
         try {
-            String query = "INSERT INTO " + tblAlternative + " (idAlternative, choiceID, alternative, description) VALUES (?, ?, ?, ?);";
+            String query = "INSERT INTO " + tblAlternative + " (idAlternative, choiceID, alternative) VALUES (?, ?, ?);";
             PreparedStatement ps = conn.prepareStatement(query);
             newID = UUID.randomUUID().toString();
             ps.setString(1, newID);
@@ -304,7 +304,7 @@ public class DAO {
     
     public boolean deleteReaction(String memberID, String altid) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblReactions +  "WHERE memberID=? AND alternativeID=?;"); 
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblReactions +  " WHERE memberID=? AND alternativeID=?;"); 
             ps.setString(1, memberID);
             ps.setString(2, altid);
             int numAffected = ps.executeUpdate();
@@ -349,7 +349,7 @@ public class DAO {
     
    public boolean addApprover(String memberID, String altid) throws Exception {
 	   try {
-		    PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + "WHERE memberID = ? AND alternativeID = ?;");
+		    PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID = ? AND alternativeID = ?;");
             ps.setString(1, memberID);
             ps.setString(2, altid);
             ResultSet resultSet = ps.executeQuery();
@@ -375,7 +375,7 @@ public class DAO {
 
     public boolean addDisapprover(String memberID, String altid) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + "WHERE memberID = ? AND alternativeID = ?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID = ? AND alternativeID = ?;");
             ps.setString(1, memberID);
             ps.setString(2, altid);
             ResultSet resultSet = ps.executeQuery();
