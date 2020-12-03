@@ -2,7 +2,16 @@
 
 
 function formatHeader(choiceTitle, currentUsers, max){
-	return "<h2>(" + currentUsers + "/" + max +")" + choiceTitle + "</h2>";
+
+	"Choice [" +
+	"description=why  am i here just to suffer, " +
+	"alternatives=[model.Alternative@7722c3c3, model.Alternative@2ef3eef9, model.Alternative@243c4f91, null, null], " +
+	"numMembers=17, " +
+	"teamMembers=[], " +
+	"idNumber=0, " +
+	"isCompleted=false, " +
+	"dateCompleted=null" +
+	"]"
 }
 
 function formatAlt(altTitle){
