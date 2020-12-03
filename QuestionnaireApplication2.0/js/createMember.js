@@ -1,9 +1,11 @@
-function processCreateResponse(result) {
+function processCreateMemberResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("result:" + result);
 
-  //refreshChoicesList();
+  
+  
+  
 }
 
 function handleCreateMemberClick(e) {
@@ -35,7 +37,7 @@ function handleCreateMemberClick(e) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
     	 if (xhr.status == 200) {
 	      console.log ("XHR:" + xhr.responseText);
-	      processCreateResponse(xhr.responseText);
+	      processCreateMemberResponse(xhr.responseText);
     	 } else {
     		 console.log("issue with adding member - login -")
 			  //var js = JSON.parse(xhr.responseText);
@@ -43,7 +45,7 @@ function handleCreateMemberClick(e) {
 			  //alert (err);
     	 }
     } else {
-      processCreateResponse("N/A");
+      processCreateMemberResponse("N/A");
     }
   };
 }
