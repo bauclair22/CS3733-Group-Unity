@@ -40,7 +40,7 @@ public class DAO {
 
         try {
             Choice choice = null;
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblchoices + " WHERE idChoice=?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblchoices + " WHERE idChoice=?;"); //
             ps.setString(1,  ID);
             ResultSet resultSet = ps.executeQuery();
 
@@ -66,13 +66,13 @@ public class DAO {
         try {
             Alternative A[] = new Alternative[5];
             int counter =0;
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblAlternative + " WHERE idChoice=?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblAlternative + " WHERE choiceID=?;");
             ps.setString(1, choiceid);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
                 String title = resultSet.getString("alternative");
-                String altID = resultSet.getString("idAltenative");
+                String altID = resultSet.getString("idAlternative");
                 Alternative alt = new Alternative(title, altID);
                 ArrayList<TeamMember> approvers = getLikedBy(altID);
                 ArrayList<TeamMember> disapprovers = getDislikedBy(altID);

@@ -17,9 +17,9 @@ public class TestGetChoiceReaction {
 	public void test() {
 		DAO dao = new DAO();
 		ArrayList<Feedback> fb;
-		String alt1 ="c27f4e28-3a18-4a19-b3ec-cdf84edcf976";
+		String alt2 ="bf810642-a0e2-45e0-a92a-820221c8cee6";
 		try {
-			fb = dao.getAlternativesFeedback(alt1);
+			fb = dao.getAlternativesFeedback(alt2);
 			for(int i=0; i<fb.size(); i++) {
 				Feedback f = fb.get(i);
 				System.out.println("memberName: " + f.getMemberName() +

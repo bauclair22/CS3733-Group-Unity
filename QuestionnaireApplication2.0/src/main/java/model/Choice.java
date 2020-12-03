@@ -82,4 +82,22 @@ public class Choice {
 	public int getnumMembers() {
 		return this.numMembers;
 	}
+	
+	public String printAternativeTitles(){
+		String output ="";
+		String s = "";
+		for(int i =0; i<this.alternatives.length; i++) {
+			s= alternatives[i].title;
+			output = output.concat(s);
+			output = output.concat(", ");
+		}
+		System.out.printf("Alternative Titles: " +output);
+		return output;
+	}
+
+
+
+	public Alternative[] getAlternatives() {
+		return alternatives;
+	}
 }
