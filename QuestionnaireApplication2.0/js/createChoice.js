@@ -3,21 +3,24 @@
  * Respond to server JSON object. And Gives the Choice ID
  *
  */
-function processCreateResponse(result) {
+function processCreateChoiceResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("result:" + result);
   var js = JSON.parse(result);
 
   var id = js["response"];
-  var status = js["statusCode"];
+  var status = js["httpCode"];
+  
+  console.log("status:" + status);
+  console.log("id:" + id);
   
   if (status == 200) {
     // Update computation result
-	document.createChoiceForm.choiceID.value = id;
+	  document.getElementById("choiceID_new").innerHTML = id;
   } else {
     var msg = js["error"];
-    document.createChoiceForm.choiceID.value = "error:" + msg;
+    document.getElementById("choiceID_new").innerHTML = "error";
   }
   //refreshChoicesList();
 }
@@ -25,6 +28,9 @@ function processCreateResponse(result) {
 
 
 function handleCreateClick(e) {
+	console.log("Starting to porcess Choice");
+	document.getElementById("choiceID_new").innerHTML = "Processing our choice..wait for a moment";
+	
   var form = document.createChoiceForm;
  
   var data = {};
@@ -96,7 +102,7 @@ function handleCreateClick(e) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
     	 if (xhr.status == 200) {
 	      console.log ("XHR:" + xhr.responseText);
-	      processCreateResponse(xhr.responseText);
+	      processCreateChoiceResponse(xhr.responseText);
     	 } else {
     		 console.log("issue with construction")
 			  //var js = JSON.parse(xhr.responseText);
@@ -104,7 +110,7 @@ function handleCreateClick(e) {
 			  //alert (err);
     	 }
     } else {
-      processCreateResponse("N/A");
+      processCreateChoiceResponse("N/A");
     }
   };
 }
