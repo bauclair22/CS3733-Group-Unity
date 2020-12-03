@@ -17,10 +17,10 @@ function processCreateChoiceResponse(result) {
   
   if (status == 200) {
     // Update computation result
-	  document.createChoiceForm.getElementById("choiceID").innerHTML = id;
+	  document.getElementById("choiceID_new").innerHTML = id;
   } else {
     var msg = js["error"];
-    document.createChoiceForm.getElementById("choiceID").innerHTML = "error";
+    document.getElementById("choiceID_new").innerHTML = "error";
   }
   //refreshChoicesList();
 }
@@ -28,6 +28,9 @@ function processCreateChoiceResponse(result) {
 
 
 function handleCreateClick(e) {
+	console.log("Starting to porcess Choice");
+	document.getElementById("choiceID_new").innerHTML = "Processing our choice..wait for a moment";
+	
   var form = document.createChoiceForm;
  
   var data = {};
