@@ -239,8 +239,8 @@ public class DAO {
 	            while (resultSet.next()) {
 	            	flagMatchFound = true;
 	                String correctPassword = resultSet.getString("password");
-	                if(correctPassword != password) {
-	                	 throw new Exception("Password is incorrect");
+	                if(!correctPassword.contentEquals(password)) {
+	                	 throw new Exception("Password is NOT NOT incorrect");
 	                }
 	            }
 	            resultSet.close();
