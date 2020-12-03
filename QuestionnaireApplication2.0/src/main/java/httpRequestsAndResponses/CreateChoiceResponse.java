@@ -15,6 +15,11 @@ public class CreateChoiceResponse {
 	}
 	
 	public String toString() {
+		if(httpCode == 200) {
 		return "Response choice ID(" + response + ")";
+		}
+		else {
+			return "ErrorResult(" + httpCode + ", err=" + response + ")";
+		}
 	}
 }
