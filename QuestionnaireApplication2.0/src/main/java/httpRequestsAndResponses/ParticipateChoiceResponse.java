@@ -3,17 +3,19 @@ package httpRequestsAndResponses;
 import model.Choice;
 
 public class ParticipateChoiceResponse {
+	public final Choice choice;
 	public final int httpCode;
 	public final String response; //Is the response a string or is the response the alternatives/feedback for the given choice? 
 	
 	public ParticipateChoiceResponse(String s, int code) {
+		this.choice = null;
 		this.response = s;
 		this.httpCode = code;
 	}
 	
 	public ParticipateChoiceResponse(Choice c) {
-		String s = c.toString();
-		this.response = s;
+		this.choice = c;
+		this.response = "everything is fine...we fine here";
 		this.httpCode = 200;
 	}
 	
