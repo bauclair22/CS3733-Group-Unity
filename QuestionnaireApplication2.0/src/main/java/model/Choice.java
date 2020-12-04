@@ -105,9 +105,14 @@ public class Choice {
 
 	@Override
 	public String toString() {
+		/*
 		return "Choice [description=" + description + ", alternatives=" + Arrays.toString(alternatives)
 				+ ", numMembers=" + numMembers + ", teamMembers=" + teamMembers + ", idNumber=" + idNumber
 				+ ", isCompleted=" + isCompleted + ", dateCompleted=" + dateCompleted + "]";
+		*/
+		return "[" + description + Arrays.toString(alternatives)
+		+ numMembers + teamMembers + idNumber
+		+ isCompleted + dateCompleted + "]";
 
 	}
 }
