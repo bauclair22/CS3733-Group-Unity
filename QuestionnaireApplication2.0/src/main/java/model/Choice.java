@@ -8,7 +8,7 @@ public class Choice {
 	String description;
 	Alternative[] alternatives = new Alternative[5];
 	int numMembers;
-	ArrayList<TeamMember> teamMembers = new ArrayList<>();
+	ArrayList<String> teamMembers = new ArrayList<>();
 	int idNumber;
 	boolean isCompleted;
 	Timestamp dateCompleted;
@@ -29,7 +29,7 @@ public class Choice {
 	 * @param TeamMembert
 	 * @return Return false if unsuccessful
 	 */
-	public boolean addTeamMember(TeamMember t){
+	public boolean addTeamMember(String t){
 		if(teamMembers.size() < numMembers) {
 			teamMembers.add(t);
 			return true;

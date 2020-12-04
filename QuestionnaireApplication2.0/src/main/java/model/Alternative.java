@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Alternative {
 	String title;
 	String AltID;
-	ArrayList<TeamMember> approvers = new ArrayList<>();
-	ArrayList<TeamMember> disapprovers = new ArrayList<>();
+	ArrayList<String> approvers = new ArrayList<>();
+	ArrayList<String> disapprovers = new ArrayList<>();
 	ArrayList<Feedback> feedback = new ArrayList<>();
 	
 	public Alternative(String title, String altID) {
@@ -18,25 +18,25 @@ public class Alternative {
 		return title;
 	}
 
-	public ArrayList<TeamMember> getApprovers() {
+	public ArrayList<String> getApprovers() {
 		return approvers;
 	}
 
-	public void addApprover(TeamMember approver) {
+	public void addApprover(String approver) {
 		this.approvers.add(approver);
 	}
-	public void removeApprover(TeamMember approver) {
+	public void removeApprover(String approver) {
 		this.approvers.remove(approver);
 	}
 
-	public ArrayList<TeamMember> getDisapprovers() {
+	public ArrayList<String> getDisapprovers() {
 		return disapprovers;
 	}
 
-	public void addDisapprover(TeamMember disapprover) {
+	public void addDisapprover(String disapprover) {
 		this.disapprovers.add(disapprover);
 	}
-	public void removeDisapprover(TeamMember disapprover) {
+	public void removeDisapprover(String disapprover) {
 		this.disapprovers.remove(disapprover);
 	}
 
@@ -52,7 +52,7 @@ public class Alternative {
 		this.feedback.remove(feedback);
 	}
 
-	public void setApprovers(ArrayList<TeamMember> approvers) {
+	public void setApprovers(ArrayList<String> approvers) {
 		this.approvers = approvers;
 		
 	}
@@ -62,7 +62,7 @@ public class Alternative {
 		
 	}
 
-	public void setDisapprovers(ArrayList<TeamMember> disapprovers) {
+	public void setDisapprovers(ArrayList<String> disapprovers) {
 		this.approvers = disapprovers;
 	}
 	

@@ -1,12 +1,12 @@
 package httpRequestsAndResponses;
 
 public class UnselectReactionResponse {
-	public final String username;
+	public final String memberID;
 	public final int statusCode;
 	public final String error;
 	
 	public UnselectReactionResponse (String username, int statusCode) {
-		this.username = username;
+		this.memberID = username;
 		//Might also need alternative similar to the request
 		this.statusCode = statusCode;
 		this.error = "";
@@ -15,14 +15,14 @@ public class UnselectReactionResponse {
 	public UnselectReactionResponse (String username, int statusCode, String errorMessage) {
 		this.statusCode = statusCode;
 		this.error = errorMessage;
-		this.username = username;
+		this.memberID = username;
 	}
 	
 	public String toString() {
 		if (statusCode == 200) {  // too cute?
-			return "UnselectResponse(" + username + ")";
+			return "UnselectResponse(" + memberID + ")";
 		} else {
-			return "ErrorResult(" + username + ", statusCode=" + statusCode + ", err=" + error + ")";
+			return "ErrorResult(" + memberID + ", statusCode=" + statusCode + ", err=" + error + ")";
 		}
 	}
 }

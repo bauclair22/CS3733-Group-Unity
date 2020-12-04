@@ -74,8 +74,8 @@ public class DAO {
                 String title = resultSet.getString("alternative");
                 String altID = resultSet.getString("idAlternative");
                 Alternative alt = new Alternative(title, altID);
-                ArrayList<TeamMember> approvers = getLikedBy(altID);
-                ArrayList<TeamMember> disapprovers = getDislikedBy(altID);
+                ArrayList<String> approvers = getLikedBy(altID);
+                ArrayList<String> disapprovers = getDislikedBy(altID);
                 ArrayList<Feedback> feedback = getAlternativesFeedback(altID);
                 alt.setApprovers(approvers);
                 alt.setDisapprovers(disapprovers);
@@ -94,19 +94,19 @@ public class DAO {
         }
     }
 
-    public ArrayList<TeamMember> getLikedBy(String altid) throws Exception {
+    public ArrayList<String> getLikedBy(String altid) throws Exception {
 
         try {
-            ArrayList<TeamMember> approvers = new ArrayList<>();
+            ArrayList<String> approvers = new ArrayList<>();
             PreparedStatement ps = conn.prepareStatement("SELECT name FROM " + viewLikedBy + " WHERE alternativeID=?;");
             ps.setString(1, altid);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
-                String pass = resultSet.getString("password");
-                TeamMember member=new TeamMember(name,pass);
-                approvers.add(member);
+                //String pass = resultSet.getString("password");
+                //TeamMember member=new TeamMember(name,pass);
+                approvers.add(name);
             }
             resultSet.close();
             ps.close();
@@ -119,10 +119,10 @@ public class DAO {
         }
     }
 
-    public ArrayList<TeamMember> getDislikedBy(String altid) throws Exception {
+    public ArrayList<String> getDislikedBy(String altid) throws Exception {
 
         try {
-            ArrayList<TeamMember> disapprovers = new ArrayList<>();
+            ArrayList<String> disapprovers = new ArrayList<>();
             PreparedStatement ps = conn.prepareStatement("SELECT name FROM " + viewDislikedBy + " WHERE alternativeID=?;");
             ps.setString(1, altid);
             ResultSet resultSet = ps.executeQuery();
@@ -130,9 +130,9 @@ public class DAO {
             while (resultSet.next()) {
 
                 String name = resultSet.getString("name");
-                String pass = resultSet.getString("password");
-                TeamMember member=new TeamMember(name,pass);
-                disapprovers.add(member);
+                //String pass = resultSet.getString("password");
+                //TeamMember member=new TeamMember(name,pass);
+                disapprovers.add(name);
             }
             resultSet.close();
             ps.close();
@@ -239,9 +239,9 @@ public class DAO {
 	            while (resultSet.next()) {
 	            	flagMatchFound = true;
 	                String correctPassword = resultSet.getString("password");
-	                if(!correctPassword.contentEquals(password)) {
-	                	 throw new Exception("Password is NOT NOT incorrect");
-	                }
+	                if(correctPassword.contentEquals(password)) {
+	                	 added= true;
+	                }else {throw new Exception("Password is NOT NOT incorrect");}
 	            }
 	            resultSet.close();
 	            ps.close();

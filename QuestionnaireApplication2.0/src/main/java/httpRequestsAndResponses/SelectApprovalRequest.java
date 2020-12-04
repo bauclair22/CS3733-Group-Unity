@@ -1,17 +1,17 @@
 package httpRequestsAndResponses;
 
 public class SelectApprovalRequest {
-	String username;
-	int altid;
+	String memberID;
+	String altid;
 
-	public int getAltid() {return altid;}
-	public void setAltid(int altid) {this.altid = altid;}
+	public String getAltid() {return altid;}
+	public void setAltid(String altid) {this.altid = altid;}
 
-	public String getUsername() {return username;}
-	public void setUsername(String username) {this.username = username;}
+	public String getmemberID() {return memberID;}
+	public void setmemberID(String username) {this.memberID = username;}
 	
-	public SelectApprovalRequest(String s, int altid) {
-		this.username = s;
+	public SelectApprovalRequest(String s, String altid) {
+		this.memberID = s;
 		this.altid = altid;
 	}
 	
@@ -19,6 +19,6 @@ public class SelectApprovalRequest {
 	}
 	
 	public String toString() {
-		return username + " approves this Alternative";
+		return memberID + " approves this Alternative";
 	}
 }
