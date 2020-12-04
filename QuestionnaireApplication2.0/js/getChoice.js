@@ -64,7 +64,10 @@ function processRefreshChoice(result) {
   // getting the response and the http code
   var js = JSON.parse(result);
   // getting the JSON object
-  var choiceJson = JSON.parse(js["response"]);
+  
+  var status = js["httpCode"];
+  var choiceJson = js["choice"];
+  
   
   console.log(choiceJson);
   
@@ -76,17 +79,19 @@ function processRefreshChoice(result) {
 	var choiceMembers = choiceJson["numMembers"];
 	var alternatives = choiceJson["alternatives"];
 	
-	if (true) {
+	if (status == 200) {
 		output = output +
 		"<div id=\"selectedChoice\">" +  
 		"<form name=\"reactionForm\" method=\"get\">" + 
 		"<h2>" + choiceTitle + "</h2>";
 		
 		for(i = 0; i < alternatives.length; i++){
-			output = output + 
-			"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"\">" +
-			"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"\">" +
-			"<input type=\"button\" id= \"alt1_view\" name= \"alt1_view\" value=" + alternatives[i] + " onClick=\"\"><br><br>";
+			if(alternatives[i] !=  null){
+				output = output + 
+				"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"\">" +
+				"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"\">" +
+				"<input type=\"button\" id= \"alt1_view\" name= \"alt1_view\" value=" + alternatives[i]["titles"] + " onClick=\"\"><br><br>";
+			}
 		}
 		
 	 	output = output +
@@ -108,8 +113,6 @@ function processRefreshChoice(result) {
 	 	*/
 		
 	}
- 
-
   // Update computation result
   choiceDisplay.innerHTML = output;
 }
