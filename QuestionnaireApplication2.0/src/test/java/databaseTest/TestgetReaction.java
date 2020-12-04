@@ -22,8 +22,20 @@ public class TestgetReaction {
 		
 		try {;
 			ArrayList<String> approvers = dao.getLikedBy(alt1);
+			System.out.printf("Alt1 approvers: ");
+			for(int i=0; i<approvers.size() ; i++) {
+				System.out.printf("%s ,", approvers.get(i));
+			}
 			ArrayList<String> approvers2 = dao.getDislikedBy(alt2);
+			System.out.printf("Alt2 approvers: ");
+			for(int i=0; i<approvers2.size() ; i++) {
+				System.out.printf("%s ,", approvers2.get(i));
+			}
 			ArrayList<String> disapprovers = dao.getDislikedBy(alt3);
+			System.out.printf("Alt3 disapprovers: ");
+			for(int i=0; i<approvers.size() ; i++) {
+				System.out.printf("%s ,", disapprovers.get(i));
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
