@@ -1,8 +1,9 @@
 package httpRequestsAndResponses;
 
-import java.awt.Choice;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Choice;
 
 
 public class ProduceReportResponse {

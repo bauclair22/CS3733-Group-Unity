@@ -1,6 +1,5 @@
 package com.amazonaws.lambda.demo;
 
-import java.awt.Choice;
 import java.util.List;
 
 import com.amazonaws.services.lambda.runtime.Context;
@@ -9,6 +8,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import database.DAO;
 import httpRequestsAndResponses.ProduceReportResponse;
+import model.Choice;
 
 public class ProduceReportHandler implements RequestHandler<Object, ProduceReportResponse> {
 	
@@ -18,8 +18,7 @@ public class ProduceReportHandler implements RequestHandler<Object, ProduceRepor
 		logger.log("in getChoices");
 		DAO dao = new DAO();
 		
-		//Return all choices in the database
-		return null;
+		return dao.getAllChoices();
 	}
 
     @Override
@@ -29,7 +28,6 @@ public class ProduceReportHandler implements RequestHandler<Object, ProduceRepor
 
 		ProduceReportResponse response;
 		try {
-			// get all choices
 			List<Choice> list = getChoices();
 			response = new ProduceReportResponse(list, 200);
 		} catch (Exception e) {
