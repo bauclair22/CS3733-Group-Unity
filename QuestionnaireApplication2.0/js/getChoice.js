@@ -1,36 +1,4 @@
 
-
-function formatHeader(choiceTitle, currentUsers, max){
-
-	"Choice [" +
-	"description=why  am i here just to suffer, " +
-	"alternatives=[model.Alternative@7722c3c3, model.Alternative@2ef3eef9, model.Alternative@243c4f91, null, null], " +
-	"numMembers=17, " +
-	"teamMembers=[], " +
-	"idNumber=0, " +
-	"isCompleted=false, " +
-	"dateCompleted=null" +
-	"]"
-}
-
-function formatAlt(altTitle){
-	//var agree = "alt" + altNum + "_agree";
-	//var diagree = "alt" + altNum + "_agree";
-	//var view = "alt" + altNum + "_agree";
-	//console.log("formating alternatives");
-	//console.log(agree);
-	//console.log(disagree);
-	//console.log(view);
-	
-	var output = "";
-	output = output + 
-	"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"\">" +
-	"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"\">" +
-	"<input type=\"button\" id= \"alt1_view\" name= \"alt1_view\" value=" + altTitle + " onClick=\"\"><br><br>";
-	return output;
-}
-
-
 /**
  * Refresh constant list from server
  *
