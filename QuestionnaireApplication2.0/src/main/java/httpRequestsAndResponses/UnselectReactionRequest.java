@@ -1,17 +1,17 @@
 package httpRequestsAndResponses;
 
 public class UnselectReactionRequest {
-	String username;
-	int altid;
+	String memberID;
+	String altid;
 
-	public int getAltid() {return altid;}
-	public void setAltid(int altid) {this.altid = altid;}
+	public String getAltid() {return altid;}
+	public void setAltid(String altid) {this.altid = altid;}
 
-	public String getUsername() {return username;}
-	public void setUsername(String username) {this.username = username;}
+	public String getmemberID() {return memberID;}
+	public void setmemberID(String username) {this.memberID = username;}
 	
-	public UnselectReactionRequest(String s, int altid) {
-		this.username = s;
+	public UnselectReactionRequest(String s, String altid) {
+		this.memberID = s;
 		this.altid = altid;
 	}
 	
@@ -19,6 +19,6 @@ public class UnselectReactionRequest {
 	}
 	
 	public String toString() {
-		return username + " unselects their reaction to this Alternative";
+		return memberID + " unselects their reaction to this Alternative";
 	}
 }

@@ -27,33 +27,14 @@ public class SelectApprovalHandler implements RequestHandler<SelectApprovalReque
 		
 		//In the DAO
 		//Check if user has already liked or disliked this alternative
-		 ArrayList<TeamMember> approvers = new ArrayList<>();
-		 ArrayList<TeamMember> disapprovers = new ArrayList<>();
 		 try {
-			approvers = dao.getLikedBy(req.getAltid());
-			disapprovers = dao.getDislikedBy(req.getAltid());
-			boolean inList = false;
-			boolean inOtherList = false;
-			for(TeamMember t: approvers) {
-				if(t.getName().equals(req.getUsername())) {
-					inList = true;
-				}
+			if(dao.addApprover(req.getmemberID() ,req.getAltid())) {
+				response = new SelectApprovalResponse(req.getmemberID(), 200);
 			}
-			for(TeamMember t: disapprovers) {
-				if(t.getName().equals(req.getUsername())) {
-					inOtherList = true;
-				}
-			}
-			//If they have not already reacted to this alternative add their approval to the database
-			if(!inList && !inOtherList) {
-				//Do something here to add approver
-			}
-			else {
-				response = new SelectApprovalResponse(req.getUsername(), 422, "Unable to add approval");
-			}
+			
 			//Return error message if an exception is caught
 		} catch (Exception e) {
-			response = new SelectApprovalResponse(req.getUsername(), 403, "Unable to add approval: " + req.getUsername() + req.getAltid() + "(" + e.getMessage() + ")");
+			response = new SelectApprovalResponse(req.getmemberID(), 403, "Unable to add approval: " + req.getmemberID() + req.getAltid() + "(" + e.getMessage() + ")");
 		}
 		 return response;
     }
