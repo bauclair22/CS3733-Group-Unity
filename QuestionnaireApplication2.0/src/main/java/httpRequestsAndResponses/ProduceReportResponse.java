@@ -7,24 +7,24 @@ import model.Choice;
 
 
 public class ProduceReportResponse {
-	public final List<Choice> list;
+	public final String choiceReport;
 	public final int statusCode;
 	public final String error;
 	
-	public ProduceReportResponse (List<Choice> list, int code) {
-		this.list = list;
+	public ProduceReportResponse ( String choiceReport, int code) {
+		this.choiceReport = choiceReport;
 		this.statusCode = code;
 		this.error = "";
 	}
 	
 	public ProduceReportResponse (int code, String errorMessage) {
-		this.list = new ArrayList<Choice>();
+		this.choiceReport = null;
 		this.statusCode = code;
 		this.error = errorMessage;
 	}
 	
 	public String toString() {
-		if (list == null) { return "EmptyChoices"; }
-		return "AllChoices(" + list.size() + ")";
+		if (choiceReport == null) { return "EmptyChoices"; }
+		return "AllChoices(" + choiceReport + ")";
 	}
 }
