@@ -20,6 +20,8 @@ public class SelectApprovalHandler implements RequestHandler<SelectApprovalReque
     	logger = context.getLogger();
 		logger.log("Loading Java Lambda handler to approve Alternative");
 		
+		
+		
 		SelectApprovalResponse response = null;
 		logger.log(req.toString());
 		
@@ -29,6 +31,7 @@ public class SelectApprovalHandler implements RequestHandler<SelectApprovalReque
 		//Check if user has already liked or disliked this alternative
 		 try {
 			if(dao.addApprover(req.getmemberID() ,req.getAltid())) {
+				
 				response = new SelectApprovalResponse(req.getmemberID(), 200);
 			}
 			
