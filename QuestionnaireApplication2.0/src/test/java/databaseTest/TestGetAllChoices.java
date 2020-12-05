@@ -18,11 +18,7 @@ public class TestGetAllChoices {
 			choices = dao.getAllChoices();
 			for(int i=0; i<choices.size(); i++) {
 				Choice c = choices.get(i);
-				System.out.println("choice ID: " + c.getID() +
-						" description: " + c.getdescription() 
-						+ " maxUsers: " + c.getnumMembers() 
-						+ " DateCreated: " + c.getDateCompleted() 
-						+ " isCompleated: "+ c.getIsCompleted() + "\n");
+				System.out.println(c.toString());
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
