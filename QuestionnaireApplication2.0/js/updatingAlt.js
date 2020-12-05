@@ -36,31 +36,37 @@ function handleUpdatingAltClick(e) {
 }
 
 
-/*
+
 function addTeamMemberToAlt(result) {
   console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
   var js = JSON.parse(result);
+  var approversList = document.getElementById('approvers');       //just ganna place all my code within this space
+  //var disapproverstList = document.getElementById('disapprovers');
   
-
-  var approverstList = document.getElementById('approvers');
+  var altTitle = js["title"];
+  var approvers = js["approvers"];
+  var disappovers = js["disapprovers"];
+  var feedback = js["feedback"];
   
   var output = "";
-  for (var i = 0; i < js.list.length; i++) {
-    var constantJson = js.list[i];
-    console.log(constantJson);
-    
-    var cname = constantJson["name"];
-    var cval = constantJson["value"];
-    var sysvar = constantJson["system"];
-    if (sysvar) {
-    	output = output + "<div id=\"const" + cname + "\"><b>" + cname + ":</b> = " + cval + "<br></div>";
-    } else {
-    	output = output + "<div id=\"const" + cname + "\"><b>" + cname + ":</b> = " + cval + "(<a href='javaScript:requestDelete(\"" + cname + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
-    }
+  output = output +
+  "<div id=\"approvers\">" +
+  "<h2>" + altTitle + "</h2>" +
+  "<label>Approvers</label>" +
+  "<p>";
+  
+  for(i = 0; i < approvers.length; i++){
+	  if(approvers[i] != null){
+		output = output + approvers[i] + "<br>";
+		}
   }
+  output = output +
+  "</p>" +	
+  "<label>Disapprovers (Not Installed) </label>" +
+  "</div>";
+  
 
   // Update computation result
-  constList.innerHTML = output;
+  approversList.innerHTML = output;
 }
-*/
