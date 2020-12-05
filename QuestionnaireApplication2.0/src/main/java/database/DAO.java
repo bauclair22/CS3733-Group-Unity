@@ -375,7 +375,7 @@ public class DAO {
 
     public boolean addDisapprover(String memberID, String altid) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID = ? AND alternativeID = ?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID =? AND alternativeID =?;");
             ps.setString(1, memberID);
             ps.setString(2, altid);
             ResultSet resultSet = ps.executeQuery();
