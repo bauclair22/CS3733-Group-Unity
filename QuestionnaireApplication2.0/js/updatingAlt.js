@@ -29,22 +29,38 @@ function handleUpdatingAltClick(e) {
       else{
     	  
     	  console.log("attempting to remove user from Alt");
+    	  console.log(js);
     	  xhr = new XMLHttpRequest();
+    	  
     	   xhr.open("POST", unselectApprover_url, true);
     	   xhr.send(js);
-    	   
-    	   json = JSON.parse(xhr.responseText);
-    	   var isRemoved_Status = json["statusCode"];
-    	   if(isRemoved_Status == 200){
-    		   console.log("team mate removed"); 		   
-    	   }
-    	   else{
-    		   console.log("unable to process request")
+    	   xhr.onloadend = function(){
+	    	   if(xhr.readyState == XMLHttpRequest.DONE){
+	    		   console.log ("XHR:" + xhr.responseText);
+	    		   json = JSON.parse(xhr.responseText);
+	    		   console.log(json);
+	    		   var isRemoved_Status = json["statusCode"];
+	    		   if(isRemoved_Status == 200){
+	        		   console.log("team mate removed"); 		   
+	        	   }
+	        	   else{
+	        		   console.log("unable to process request")
+	        	   }
+	    	   }
+	    	   else{
+	    		   console.log("something else happened");
+	
+	    	   }
     	   }
       }
     }
   }
 }
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 
 
