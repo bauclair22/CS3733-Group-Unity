@@ -4,6 +4,7 @@ function formatHeader(choiceTitle, currentUsers, max){
 	/*
 	"httpCode": 200,
 	"response": "everything went through",
+	"memberId";
 	"choice": 
 	{
 	  "description": "why  am i here just to suffer",

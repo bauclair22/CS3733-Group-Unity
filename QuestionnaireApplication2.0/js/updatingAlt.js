@@ -1,5 +1,21 @@
 
 function handleUpdatingAltClick(e) {
+	
+	
+	var form = document.SignInForm;
+	 
+	  var data = {};
+	  
+	  //convert everything that was in the hmtl form to the lamda
+	  
+	  //data["title"] = form.titleInput.value;
+	  data["username"] = form.username.value;
+	  data["password"] = form.password.value;
+	  data["id"] = form.choiceId.value;
+	 
+
+	  var js = JSON.stringify(data);
+	  console.log("JS:" + js);
 
    var xhr = new XMLHttpRequest();
    xhr.open("POST", selectApprover_url, true);
@@ -37,12 +53,22 @@ function handleUpdatingAltClick(e) {
 
 
 
-function addTeamMemberToAlt(result) {
+function updateAltDisplay(result) {
   console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
-  var js = JSON.parse(result);
+  //var js = JSON.parse(result);
   var approversList = document.getElementById('approvers');       //just ganna place all my code within this space
   //var disapproverstList = document.getElementById('disapprovers');
+  
+  var js = {
+		  alt:{
+			title: "vdjsvdcjvd",
+			approvers :["iceikking888", "Hoeny"],
+  			disapprovers :["candyPop"],
+			feedback : []
+		  },
+		  statusCode : 200
+  }
   
   var altTitle = js["title"];
   var approvers = js["approvers"];
