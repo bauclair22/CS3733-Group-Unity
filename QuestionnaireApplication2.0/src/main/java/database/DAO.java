@@ -427,6 +427,34 @@ public class DAO {
         }
     }
     
+    
+    public Alternative getAlternativewithID(String ID) throws Exception {
+    	try {
+            Alternative alt = null;
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblAlternative + " WHERE idAlternative=?;"); //
+            ps.setString(1,  ID);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                String description = resultSet.getString("alternative");
+                Alternative[] alternatives = getChoiceAlternatives(ID);
+                ArrayList<String>  approvers = getLikedBy(ID);
+                ArrayList<String>  disapprovers = getDislikedBy(ID);
+                alt = new Alternative(description, ID);
+                alt.setApprovers(approvers);
+                alt.setDisapprovers(disapprovers);
+            }
+            resultSet.close();
+            ps.close();
+
+            return alt;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Failed in getting alternative: " + e.getMessage());
+        }
+    }
+    
     //create feedback function
 
 }

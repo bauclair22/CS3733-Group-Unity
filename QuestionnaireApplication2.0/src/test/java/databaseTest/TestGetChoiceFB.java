@@ -11,7 +11,7 @@ import database.DAO;
 import model.Choice;
 import model.Feedback;
 
-public class TestGetChoiceReaction {
+public class TestGetChoiceFB {
 
 	@Test
 	public void test() {
