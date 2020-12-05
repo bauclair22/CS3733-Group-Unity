@@ -47,8 +47,9 @@ public class DAO {
             while (resultSet.next()) {
                 int maxUsers = resultSet.getInt("maxUsers");
                 String description = resultSet.getString("description");
+                Timestamp time = resultSet.getTimestamp("DateCreated");
                 Alternative[] alternatives = getChoiceAlternatives(ID);
-                choice = new Choice(ID, description, alternatives, maxUsers);
+                choice = new Choice(ID, description, alternatives, maxUsers, time);
             }
             resultSet.close();
             ps.close();
@@ -344,7 +345,8 @@ public class DAO {
     	Alternative[] alternatives = new Alternative[5];
 		int numMembers = resultSet.getInt("maxUsers"); 
 		String ID = resultSet.getString("idChoice");
-        return new Choice (ID, description, alternatives, numMembers);
+		Timestamp date = resultSet.getTimestamp("DateCreated");
+        return new Choice (ID, description, alternatives, numMembers, date);
     }
     
     

@@ -13,12 +13,13 @@ public class Choice {
 	boolean isCompleted;
 	Timestamp dateCompleted;
 	
-	public Choice(String ID, String description, Alternative[] alts, int numMembers){
+	public Choice(String ID, String description, Alternative[] alts, int numMembers, Timestamp date){
 		this.description = description;
 		this.alternatives = alts; //Should this be changed to a list of strings of titles and descriptions to form the alternatives?
 		this.numMembers = numMembers;
 		this.isCompleted = false;
 		this.choiceID = ID;
+		this.dateCompleted= date;
 	}
 	
 	
@@ -108,10 +109,26 @@ public class Choice {
 		return "Choice [description=" + description + ", alternatives=" + Arrays.toString(alternatives)
 				+ ", numMembers=" + numMembers + ", teamMembers=" + teamMembers + ", idNumber=" + idNumber
 				+ ", isCompleted=" + isCompleted + ", dateCompleted=" + dateCompleted + "]";
+				
 		*/
+		
 		return "[" + description + Arrays.toString(alternatives)
 		+ numMembers + teamMembers + choiceID
 		+ isCompleted + dateCompleted + "]";
+
+	}
+	
+	
+	public String choicereport() {
+		/*
+		return "Choice [description=" + description + ", alternatives=" + Arrays.toString(alternatives)
+				+ ", numMembers=" + numMembers + ", teamMembers=" + teamMembers + ", idNumber=" + idNumber
+				+ ", isCompleted=" + isCompleted + ", dateCompleted=" + dateCompleted + "]";
+				
+		*/
+		String date="";
+		if(dateCompleted != null) {date= dateCompleted.toString();}
+		return "["+"choiceid: " +choiceID + "isCompleated: " +isCompleted + "date created: " +date + "\n" +"]";
 
 	}
 }
