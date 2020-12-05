@@ -63,7 +63,7 @@ public class Alternative {
 	}
 
 	public void setDisapprovers(ArrayList<String> disapprovers) {
-		this.approvers = disapprovers;
+		this.disapprovers = disapprovers;
 	}
 
 	@Override
