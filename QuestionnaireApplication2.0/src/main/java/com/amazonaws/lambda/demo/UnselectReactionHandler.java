@@ -31,12 +31,13 @@ public class UnselectReactionHandler implements RequestHandler<UnselectReactionR
 		//Check if user has already liked or disliked this alternative
 		 try {
 			if(dao.deleteReaction(req.getmemberID() ,req.getAltid())) {
-				response = new UnselectReactionResponse(req.getmemberID(), 200);
+				
+				response = new UnselectReactionResponse(dao.getAlternativewithID(req.getAltid()), 200);
 			}
 			
 			//Return error message if an exception is caught
 		} catch (Exception e) {
-			response = new UnselectReactionResponse(req.getmemberID(), 403, "Unable to add approval: " + req.getmemberID() + req.getAltid() + "(" + e.getMessage() + ")");
+			response = new UnselectReactionResponse(403, "Unable to add approval: " + req.getmemberID() + req.getAltid() + "(" + e.getMessage() + ")");
 		}
 		 return response;
     }

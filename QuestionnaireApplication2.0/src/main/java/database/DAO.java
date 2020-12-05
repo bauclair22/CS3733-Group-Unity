@@ -437,7 +437,6 @@ public class DAO {
 
             while (resultSet.next()) {
                 String description = resultSet.getString("alternative");
-                Alternative[] alternatives = getChoiceAlternatives(ID);
                 ArrayList<String>  approvers = getLikedBy(ID);
                 ArrayList<String>  disapprovers = getDislikedBy(ID);
                 alt = new Alternative(description, ID);
