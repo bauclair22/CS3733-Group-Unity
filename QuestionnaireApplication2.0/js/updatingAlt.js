@@ -1,11 +1,23 @@
 
-function handleUpdatingAltClick(e) {
+/**
+ * Adds and removes a approver from the alternative
+ * @param e event
+ * @param alt, the number that the alt is displayed if it was an array (ex: first alt is 0, sencond is 1...) 
+ * @returns
+ */
+function handleUpdatingAltClick(e,alt) {
+	
 	  var data = {};
 	  
 	  //convert everything that was in the hmtl form to the lamda
 	  
 	  //data["title"] = form.titleInput.value;
 	  data["memberID"] = document.getElementById("memberID").innerHTML;
+	  
+	  
+	  //gets, and splits the alt id array and gives back one to process
+	  var altIDString = document.getElementById("altID").innerHTML;
+	  var ltID = altIDString.split(",")[alt];
 	  data["altid"] = document.getElementById("altID").innerHTML;
 	 
 	  var js = JSON.stringify(data);

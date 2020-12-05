@@ -102,16 +102,18 @@ function processRefreshChoice(result) {
 		  }
 	  }
 	
-	console.log(choiceTitle);
-	console.log(choiceMembers);
-	console.log(alternatives);
-	console.log(altIDList[0]);
-	console.log(alternatives[0]["altID"]);
+	//console.log(choiceTitle);
+	//console.log(choiceMembers);
+	//console.log(alternatives);
+	//console.log(altIDList[0]);
+	//console.log(alternatives[0]["altID"]);
 	
 	if (status == 200) {
 		//Storing the member ID  and alt Somewhere
+		
+		
 		document.getElementById("memberID").innerHTML = memberID;
-		//document.getElementById("altID").innterHTML = altIDList[0];
+		document.getElementById("altID").innerHTML = altIDList.toString();
 		//document.getElementById("altID").innterHTML = alternatives[0]["altID"];
 		//document.getElementById("altID").innterHTML = "Look I am new";
 
@@ -127,7 +129,7 @@ function processRefreshChoice(result) {
 			//if an alt is not null
 			if(alternatives[i] != null){
 			output = output + 
-			"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"handleUpdatingAltClick(this)\">" +
+			"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"handleUpdatingAltClick(this," + i + ")\">" +
 			"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"\">" +
 			"<input type=\"button\" id= \"alt1_view\" name= \"alt1_view\" value=" + alternatives[i]["title"] + " onClick=\"\"><br><br>";
 			}
