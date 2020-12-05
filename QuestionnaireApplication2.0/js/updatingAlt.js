@@ -1,41 +1,28 @@
 
 function handleUpdatingAltClick(e) {
-	
-	
-	var form = document.SignInForm;
-	//String memberID;
-	//String altid;
-	
-	
 	  var data = {};
 	  
 	  //convert everything that was in the hmtl form to the lamda
 	  
 	  //data["title"] = form.titleInput.value;
-	  data["memberID"] = form.username.value;
-	  data["altid"] = form.password.value;
-	  data["id"] = form.choiceId.value;
-	  
-	  
-	  
-	  document.getElementById("choiceID_new").innerHTML
+	  data["memberID"] = document.getElementById("memberID").innerHTML;
+	  data["altid"] = document.getElementById("altID").innerHTML;
 	 
-
 	  var js = JSON.stringify(data);
 	  console.log("JS:" + js);
 
    var xhr = new XMLHttpRequest();
    xhr.open("POST", selectApprover_url, true);
-   xhr.send();
+   xhr.send(js);
    
-   console.log("sent request to add user to appoval");
+   console.log("send to update reaction in alternative (add)");
    
   xhr.onloadend = function () {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       console.log ("XHR:" + xhr.responseText);
       
-      var js = JSON.parse(xhr.responseText);
-      var isAdded_Status = js["statusCode"];
+      var json = JSON.parse(xhr.responseText);
+      var isAdded_Status = json["statusCode"];
       if(isAdded_Status == 200){
     	  console.log("team mate added");
       }
@@ -44,10 +31,10 @@ function handleUpdatingAltClick(e) {
     	  console.log("attempting to remove user from Alt");
     	  xhr = new XMLHttpRequest();
     	   xhr.open("POST", unselectApprover_url, true);
-    	   xhr.send();
+    	   xhr.send(js);
     	   
-    	   js = JSON.parse(xhr.responseText);
-    	   var isRemoved_Status = js["statusCode"];
+    	   json = JSON.parse(xhr.responseText);
+    	   var isRemoved_Status = json["statusCode"];
     	   if(isRemoved_Status == 200){
     		   console.log("team mate removed"); 		   
     	   }
