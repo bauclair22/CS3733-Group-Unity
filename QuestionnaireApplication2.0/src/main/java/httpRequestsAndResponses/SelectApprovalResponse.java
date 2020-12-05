@@ -1,28 +1,28 @@
 package httpRequestsAndResponses;
 
 public class SelectApprovalResponse {
-	public final String username;
+	public final String memberID;
 	public final int statusCode;
 	public final String error;
 	
-	public SelectApprovalResponse (String username, int statusCode) {
-		this.username = username;
+	public SelectApprovalResponse (String memberID, int statusCode) {
+		this.memberID = memberID;
 		//Might also need alternative similar to the request
 		this.statusCode = statusCode;
 		this.error = "";
 	}
 	
-	public SelectApprovalResponse (String username, int statusCode, String errorMessage) {
+	public SelectApprovalResponse (String memberID, int statusCode, String errorMessage) {
 		this.statusCode = statusCode;
 		this.error = errorMessage;
-		this.username = username;
+		this.memberID = memberID;
 	}
 	
 	public String toString() {
 		if (statusCode == 200) {  // too cute?
-			return "ApprovalResponse(" + username + ")";
+			return "ApprovalResponse(" + memberID + ")";
 		} else {
-			return "ErrorResult(" + username + ", statusCode=" + statusCode + ", err=" + error + ")";
+			return "ErrorResult(" + memberID + ", statusCode=" + statusCode + ", err=" + error + ")";
 		}
 	}
 }
