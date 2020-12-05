@@ -465,6 +465,26 @@ public class DAO {
         }
     }
     
+    public String getUserID(String username, String choiceID) throws Exception {
+    	String memberID="";
+    	try {
+            PreparedStatement ps = conn.prepareStatement("SELECT idTeamMember FROM " + tblTeamMember + " WHERE choiceID =? and name =?;"); //
+            ps.setString(1,  choiceID);
+            ps.setString(2,  username);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                memberID = resultSet.getString("idTeamMember");
+            }
+            resultSet.close();
+            ps.close();
+            return memberID;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Failed in getting member ID: " + e.getMessage());
+        }
+    }
+    
     //create feedback function
 
 }
