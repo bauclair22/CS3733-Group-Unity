@@ -16,9 +16,11 @@ public class TestRemoveReaction {
 		String mem1 ="6805ad59-0bb4-4c24-aa88-21f6cf758ba0";
 		String mem2 ="e193ccb9-d584-4f9a-ae15-6498db9b6d31";
 		String mem3 ="1c6d4fa1-de01-4c0d-8cc1-03bdcf15d455";
+	
+
 		
 		try {;
-			dao.deleteReaction(mem1,alt1);
+			dao.deleteReaction("13eba7d4-905f-47c3-9505-ba841ba7fdb5","006729fb-830d-4ba5-b7f0-e829234d9673");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

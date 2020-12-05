@@ -30,7 +30,7 @@ public class UnselectReactionHandler implements RequestHandler<UnselectReactionR
 		//In the DAO
 		//Check if user has already liked or disliked this alternative
 		 try {
-			if(dao.addApprover(req.getmemberID() ,req.getAltid())) {
+			if(dao.deleteReaction(req.getmemberID() ,req.getAltid())) {
 				response = new UnselectReactionResponse(req.getmemberID(), 200);
 			}
 			
