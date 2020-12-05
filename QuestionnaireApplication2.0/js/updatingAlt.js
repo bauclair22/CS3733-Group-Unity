@@ -1,66 +1,113 @@
 
 function handleUpdatingAltClick(e) {
+	  var data = {};
+	  
+	  //convert everything that was in the hmtl form to the lamda
+	  
+	  //data["title"] = form.titleInput.value;
+	  data["memberID"] = document.getElementById("memberID").innerHTML;
+	  data["altid"] = document.getElementById("altID").innerHTML;
+	 
+	  var js = JSON.stringify(data);
+	  console.log("JS:" + js);
 
    var xhr = new XMLHttpRequest();
    xhr.open("POST", selectApprover_url, true);
-   xhr.send();
+   xhr.send(js);
    
-   console.log("sent request to add user to appoval");
+   console.log("send to update reaction in alternative (add)");
    
   xhr.onloadend = function () {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       console.log ("XHR:" + xhr.responseText);
       
-      var js = JSON.parse(xhr.responseText);
-      var isAdded_Status = js["statusCode"];
+      var json = JSON.parse(xhr.responseText);
+      var isAdded_Status = json["statusCode"];
       if(isAdded_Status == 200){
     	  console.log("team mate added");
       }
       else{
     	  
     	  console.log("attempting to remove user from Alt");
+    	  console.log(js);
     	  xhr = new XMLHttpRequest();
+    	  
     	   xhr.open("POST", unselectApprover_url, true);
-    	   xhr.send();
-    	   
-    	   js = JSON.parse(xhr.responseText);
-    	   var isRemoved_Status = js["statusCode"];
-    	   if(isRemoved_Status == 200){
-    		   console.log("team mate removed"); 		   
-    	   }
-    	   else{
-    		   console.log("unable to process request")
+    	   xhr.send(js);
+    	   xhr.onloadend = function(){
+	    	   if(xhr.readyState == XMLHttpRequest.DONE){
+	    		   console.log ("XHR:" + xhr.responseText);
+	    		   json = JSON.parse(xhr.responseText);
+	    		   console.log(json);
+	    		   var isRemoved_Status = json["statusCode"];
+	    		   if(isRemoved_Status == 200){
+	        		   console.log("team mate removed"); 		   
+	        	   }
+	        	   else{
+	        		   console.log("unable to process request")
+	        	   }
+	    	   }
+	    	   else{
+	    		   console.log("something else happened");
+	
+	    	   }
     	   }
       }
     }
+  }
 }
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-/*
-function addTeamMemberToAlt(result) {
+
+
+
+function updateAltDisplay(result) {
   console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
   var js = JSON.parse(result);
+  var approversList = document.getElementById('approvers');       //just ganna place all my code within this space
+  //var disapproverstList = document.getElementById('disapprovers');
   
-
-  var approverstList = document.getElementById('approvers');
+  /*
+  var json = {
+		  "alt":{
+			"title": "vdjsvdcjvd",
+			"approvers" :["iceikking888", "Winnie the Pooo"],
+  			"disapprovers" :["candyPop"],
+			"feedback" : []
+		  },
+		  "statusCode" : 200
+  };
+  */
+  
+  var js = JSON.parse(json);
+  
+  var altTitle = js["title"];
+  var approvers = js["approvers"];
+  var disappovers = js["disapprovers"];
+  var feedback = js["feedback"];
   
   var output = "";
-  for (var i = 0; i < js.list.length; i++) {
-    var constantJson = js.list[i];
-    console.log(constantJson);
-    
-    var cname = constantJson["name"];
-    var cval = constantJson["value"];
-    var sysvar = constantJson["system"];
-    if (sysvar) {
-    	output = output + "<div id=\"const" + cname + "\"><b>" + cname + ":</b> = " + cval + "<br></div>";
-    } else {
-    	output = output + "<div id=\"const" + cname + "\"><b>" + cname + ":</b> = " + cval + "(<a href='javaScript:requestDelete(\"" + cname + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
-    }
+  output = output +
+  "<div id=\"approvers\">" +
+  "<h2>" + altTitle + "</h2>" +
+  "<label>Approvers</label>" +
+  "<p>";
+  
+  for(i = 0; i < approvers.length; i++){
+	  if(approvers[i] != null){
+		output = output + approvers[i] + "<br>";
+		}
   }
+  output = output +
+  "</p>" +	
+  "<label>Disapprovers (Not Installed) </label>" +
+  "</div>";
+  
 
   // Update computation result
-  constList.innerHTML = output;
+  approversList.innerHTML = output;
 }
-*/

@@ -15,7 +15,8 @@
 function initialize() {
   
   // show how the choice will be displayed after the user signs in
-  processRefreshChoice("n/a");
+  //processRefreshChoice("n/a");
+  updateAltDisplay("testing");
 }
 </script>
 
@@ -77,6 +78,10 @@ function initialize() {
 
 <label id = "choiceID_new_description">Your Choice ID: </label><br>
     <p id = "choiceID_new">ID</p><br>
+<label>Member ID</label>
+    <p id = "memberID">Location of Member Id</p><br>
+<label>Alt ID</label>
+    <p id = "altID">47be0e04-de5b-43c4-bc04-a7e33d9a2bff</p>
 
 <div id="selectedChoice" name="selectedChoice"></div>
 
@@ -91,6 +96,8 @@ function initialize() {
 
 <label>Disapprovers</label>
 <div id="disapprovers"><p>All the Disapprovers Go Here...</p><div>
+
+
 
 
 <!-- Missing Currently is the ability to add feedback. Just Worry About the  other features -->

@@ -4,6 +4,7 @@ function formatHeader(choiceTitle, currentUsers, max){
 	/*
 	"httpCode": 200,
 	"response": "everything went through",
+	"memberId";
 	"choice": 
 	{
 	  "description": "why  am i here just to suffer",
@@ -74,7 +75,11 @@ function processRefreshChoice(result) {
   // getting the JSON object
   var status = js["httpCode"];
   var choiceJson = js["choice"];
-  //var choiceJson = JSON.parse(jsChoice);
+  var memberID = js["memberID"];
+  
+  
+ 
+  console.log(altIDList);
   
   console.log(status);
   console.log(choiceJson);
@@ -88,11 +93,31 @@ function processRefreshChoice(result) {
 	var choiceMembers = choiceJson["numMembers"];
 	var alternatives = choiceJson["alternatives"];  //array list
 	
+	
+	//creates an array of the ALt ids to process for later
+	 var altIDList = [];
+	  for(i = 0; i < alternatives.length; i++){
+		  if(alternatives[i] != null){
+			  altIDList.push(alternatives[i]["altID"]);
+		  }
+	  }
+	
 	console.log(choiceTitle);
 	console.log(choiceMembers);
 	console.log(alternatives);
+	console.log(altIDList[0]);
+	console.log(alternatives[0]["altID"]);
 	
 	if (status == 200) {
+		//Storing the member ID  and alt Somewhere
+		document.getElementById("memberID").innerHTML = memberID;
+		//document.getElementById("altID").innterHTML = altIDList[0];
+		//document.getElementById("altID").innterHTML = alternatives[0]["altID"];
+		//document.getElementById("altID").innterHTML = "Look I am new";
+
+		
+		//perform normal operation 
+		
 		output = output +
 		"<div id=\"selectedChoice\">" +  
 		"<form name=\"reactionForm\" method=\"get\">" + 
@@ -102,7 +127,7 @@ function processRefreshChoice(result) {
 			//if an alt is not null
 			if(alternatives[i] != null){
 			output = output + 
-			"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"\">" +
+			"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"handleUpdatingAltClick(this)\">" +
 			"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"\">" +
 			"<input type=\"button\" id= \"alt1_view\" name= \"alt1_view\" value=" + alternatives[i]["title"] + " onClick=\"\"><br><br>";
 			}
