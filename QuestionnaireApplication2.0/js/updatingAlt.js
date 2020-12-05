@@ -63,12 +63,12 @@ function updateAltDisplay(result) {
   var js = {
 		  alt:{
 			title: "vdjsvdcjvd",
-			approvers :["iceikking888", "Hoeny"],
+			approvers :["iceikking888", "Winnie the Pooo"],
   			disapprovers :["candyPop"],
 			feedback : []
 		  },
 		  statusCode : 200
-  }
+  };
   
   var altTitle = js["title"];
   var approvers = js["approvers"];
