@@ -128,7 +128,7 @@ public class Choice {
 		*/
 		String date="";
 		if(dateCompleted != null) {date= dateCompleted.toString();}
-		return "["+"choiceid: " +choiceID + "isCompleated: " +isCompleted + "date created: " +date + "\n" +"]";
+		return "["+"choiceid: " +choiceID + "  isCompleated: " +isCompleted + "  date created: " +date + "]"+ "  " ;
 
 	}
 }
