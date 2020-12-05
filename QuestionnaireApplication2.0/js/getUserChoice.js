@@ -75,7 +75,11 @@ function processRefreshChoice(result) {
   // getting the JSON object
   var status = js["httpCode"];
   var choiceJson = js["choice"];
-  //var choiceJson = JSON.parse(jsChoice);
+  var memberID = js["memberID"];
+  
+  
+ 
+  console.log(altIDList);
   
   console.log(status);
   console.log(choiceJson);
@@ -89,11 +93,24 @@ function processRefreshChoice(result) {
 	var choiceMembers = choiceJson["numMembers"];
 	var alternatives = choiceJson["alternatives"];  //array list
 	
+	
+	//creates an array of the ALt ids to process for later
+	 var altIDList = [];
+	  for(i = 0; i < alternatives.length, i++){
+		  altIDList.push(alternatives[i]["altID"]);
+	  }
+	
 	console.log(choiceTitle);
 	console.log(choiceMembers);
 	console.log(alternatives);
 	
 	if (status == 200) {
+		//Storing the member ID  and alt Somewhere
+		document.memberID.innerHTML = memberID;
+		document.altID.innterHTML = altIDList[0];
+		
+		//perform normal operation 
+		
 		output = output +
 		"<div id=\"selectedChoice\">" +  
 		"<form name=\"reactionForm\" method=\"get\">" + 

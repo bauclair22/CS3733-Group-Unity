@@ -3,15 +3,22 @@ function handleUpdatingAltClick(e) {
 	
 	
 	var form = document.SignInForm;
-	 
+	//String memberID;
+	//String altid;
+	
+	
 	  var data = {};
 	  
 	  //convert everything that was in the hmtl form to the lamda
 	  
 	  //data["title"] = form.titleInput.value;
-	  data["username"] = form.username.value;
-	  data["password"] = form.password.value;
+	  data["memberID"] = form.username.value;
+	  data["altid"] = form.password.value;
 	  data["id"] = form.choiceId.value;
+	  
+	  
+	  
+	  document.getElementById("choiceID_new").innerHTML
 	 
 
 	  var js = JSON.stringify(data);
@@ -57,10 +64,11 @@ function handleUpdatingAltClick(e) {
 function updateAltDisplay(result) {
   console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
-  //var js = JSON.parse(result);
+  var js = JSON.parse(result);
   var approversList = document.getElementById('approvers');       //just ganna place all my code within this space
   //var disapproverstList = document.getElementById('disapprovers');
   
+  /*
   var json = {
 		  "alt":{
 			"title": "vdjsvdcjvd",
@@ -70,6 +78,7 @@ function updateAltDisplay(result) {
 		  },
 		  "statusCode" : 200
   };
+  */
   
   var js = JSON.parse(json);
   
