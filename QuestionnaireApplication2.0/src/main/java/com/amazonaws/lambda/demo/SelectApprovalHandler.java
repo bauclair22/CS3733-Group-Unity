@@ -31,13 +31,13 @@ public class SelectApprovalHandler implements RequestHandler<SelectApprovalReque
 		//Check if user has already liked or disliked this alternative
 		 try {
 			if(dao.addApprover(req.getmemberID() ,req.getAltid())) {
-				
-				response = new SelectApprovalResponse(req.getmemberID(), 200);
+
+				response = new SelectApprovalResponse(dao.getAlternativewithID(req.getAltid()), 200);
 			}
 			
 			//Return error message if an exception is caught
 		} catch (Exception e) {
-			response = new SelectApprovalResponse(req.getmemberID(), 403, "Unable to add approval: " + req.getmemberID() + req.getAltid() + "(" + e.getMessage() + ")");
+			response = new SelectApprovalResponse(403, "Unable to add approval: " + req.getmemberID() + req.getAltid() + "(" + e.getMessage() + ")");
 		}
 		 return response;
     }
