@@ -72,7 +72,7 @@ public class Alternative {
 		return "Alternative [title=" + title + ", AltID=" + AltID + ", approvers=" + approvers + ", disapprovers="
 				+ disapprovers + ", feedback=" + feedback + "]";
 		*/
-		return "[" + title + AltID + approvers + disapprovers + feedback + "]";
+		return "[" + title + AltID + approvers.toString() + disapprovers.toString() + feedback + "]";
 	}
 	
 	
