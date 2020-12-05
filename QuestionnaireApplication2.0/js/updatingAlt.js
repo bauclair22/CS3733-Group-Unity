@@ -61,15 +61,17 @@ function updateAltDisplay(result) {
   var approversList = document.getElementById('approvers');       //just ganna place all my code within this space
   //var disapproverstList = document.getElementById('disapprovers');
   
-  var js = {
-		  alt:{
-			title: "vdjsvdcjvd",
-			approvers :["iceikking888", "Winnie the Pooo"],
-  			disapprovers :["candyPop"],
-			feedback : []
+  var json = {
+		  "alt":{
+			"title": "vdjsvdcjvd",
+			"approvers" :["iceikking888", "Winnie the Pooo"],
+  			"disapprovers" :["candyPop"],
+			"feedback" : []
 		  },
-		  statusCode : 200
+		  "statusCode" : 200
   };
+  
+  var js = JSON.parse(json);
   
   var altTitle = js["title"];
   var approvers = js["approvers"];
