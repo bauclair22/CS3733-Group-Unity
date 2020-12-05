@@ -26,10 +26,15 @@ public class ProduceReportHandler implements RequestHandler<Object, ProduceRepor
     	logger = context.getLogger();
 		logger.log("Loading Java Lambda handler to list all choices");
 
-		ProduceReportResponse response;
+		ProduceReportResponse response = null;
+		String r ="";
 		try {
 			List<Choice> list = getChoices();
-			response = new ProduceReportResponse(list, 200);
+			for(int i=0; i<list.size(); i++) {
+				
+				r = r.concat(list.get(i).choicereport());
+			}
+			response = new ProduceReportResponse(r, 200);
 		} catch (Exception e) {
 			response = new ProduceReportResponse(403, e.getMessage());
 		}

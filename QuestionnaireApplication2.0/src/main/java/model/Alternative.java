@@ -5,6 +5,18 @@ import java.util.ArrayList;
 public class Alternative {
 	String title;
 	String AltID;
+	public String getAltID() {
+		return AltID;
+	}
+
+	public void setAltID(String altID) {
+		AltID = altID;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	ArrayList<String> approvers = new ArrayList<>();
 	ArrayList<String> disapprovers = new ArrayList<>();
 	ArrayList<Feedback> feedback = new ArrayList<>();

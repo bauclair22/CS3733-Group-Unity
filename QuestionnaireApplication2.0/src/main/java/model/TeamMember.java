@@ -26,10 +26,6 @@ public class TeamMember {
 		return this.password;
 	}
 	
-	public int createChoice(String description, Alternative[] alts, int numMembers) {
-		Choice c = new Choice(description, alts, numMembers);
-		return c.idNumber;
-	}
 
 	/**
 	 * Checks to see if the teamMember and their password and username match
