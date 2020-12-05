@@ -31,12 +31,15 @@ public class SelectDisapprovalHandler implements RequestHandler<SelectDisapprova
 		//Check if user has already liked or disliked this alternative
 		 try {
 			if(dao.addDisapprover(req.getmemberID() ,req.getAltid())) {
-				response = new SelectDisapprovalResponse(req.getmemberID(), 200);
+				response = new SelectDisapprovalResponse(dao.getAlternativewithID(req.getAltid()), 200);
+			}
+			else {
+				response = new SelectDisapprovalResponse(404, "User can't disapprove this alternative");
 			}
 			
 			//Return error message if an exception is caught
 		} catch (Exception e) {
-			response = new SelectDisapprovalResponse(req.getmemberID(), 403, "Unable to add disapproval: " + req.getmemberID() + req.getAltid() + "(" + e.getMessage() + ")");
+			response = new SelectDisapprovalResponse(403, "Unable to add disapproval: " + req.getmemberID() + req.getAltid() + "(" + e.getMessage() + ")");
 		}
 		 return response;
     }

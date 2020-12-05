@@ -1,28 +1,30 @@
 package httpRequestsAndResponses;
 
+import model.Alternative;
+
 public class SelectDisapprovalResponse {
-	public final String username;
+	public final Alternative alt;
 	public final int statusCode;
 	public final String error;
 	
-	public SelectDisapprovalResponse (String username, int statusCode) {
-		this.username = username;
+	public SelectDisapprovalResponse (Alternative alt, int statusCode) {
+		this.alt = alt;
 		//Might also need alternative similar to the request
 		this.statusCode = statusCode;
 		this.error = "";
 	}
 	
-	public SelectDisapprovalResponse (String username, int statusCode, String errorMessage) {
+	public SelectDisapprovalResponse ( int statusCode, String errorMessage) {
 		this.statusCode = statusCode;
 		this.error = errorMessage;
-		this.username = username;
+		this.alt =null;
 	}
 	
 	public String toString() {
 		if (statusCode == 200) {  // too cute?
-			return "DisapprovalResponse(" + username + ")";
+			return "DisapprovalResponse(" + alt.toString() + ")";
 		} else {
-			return "ErrorResult(" + username + ", statusCode=" + statusCode + ", err=" + error + ")";
+			return "ErrorResult(" + ", statusCode=" + statusCode + ", err=" + error + ")";
 		}
 	}
 }

@@ -48,7 +48,7 @@ public class DAO {
                 int maxUsers = resultSet.getInt("maxUsers");
                 String description = resultSet.getString("description");
                 Alternative[] alternatives = getChoiceAlternatives(ID);
-                choice = new Choice(description, alternatives, maxUsers);
+                choice = new Choice(ID, description, alternatives, maxUsers);
             }
             resultSet.close();
             ps.close();
@@ -343,7 +343,8 @@ public class DAO {
     	//Need something here to create the alternatives in the choice or need to change the choice constructor
     	Alternative[] alternatives = new Alternative[5];
 		int numMembers = resultSet.getInt("maxUsers"); 
-        return new Choice (description, alternatives, numMembers);
+		String ID = resultSet.getString("idChoice");
+        return new Choice (ID, description, alternatives, numMembers);
     }
     
     
@@ -375,7 +376,7 @@ public class DAO {
 
     public boolean addDisapprover(String memberID, String altid) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID = ? AND alternativeID = ?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID =? AND alternativeID =?;");
             ps.setString(1, memberID);
             ps.setString(2, altid);
             ResultSet resultSet = ps.executeQuery();
@@ -443,10 +444,10 @@ public class DAO {
             while (resultSet.next()) {
             	counter++;
                 String description = resultSet.getString("alternative");
-                String altID = resultSet.getString("idAlternative");
+                //.DAO.String altID = resultSet.getString("idAlternative");
                 //ArrayList<String>  approvers = getLikedBy(altID);
                 //ArrayList<String>  disapprovers = getDislikedBy(altID);
-                alt = new Alternative(description, altID);
+                alt = new Alternative(description, ID);
                 //alt.setApprovers(approvers);
                 //alt.setDisapprovers(disapprovers);
                // alternative= alt;

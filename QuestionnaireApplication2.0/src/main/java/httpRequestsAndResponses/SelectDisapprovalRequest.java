@@ -8,7 +8,7 @@ public class SelectDisapprovalRequest {
 	public void setAltid(String altid) {this.altid = altid;}
 
 	public String getmemberID() {return memberID;}
-	public void setUsername(String username) {this.memberID = username;}
+	public void setmemberID(String memberID) {this.memberID = memberID;}
 	
 	public SelectDisapprovalRequest(String s, String altid) {
 		this.memberID = s;

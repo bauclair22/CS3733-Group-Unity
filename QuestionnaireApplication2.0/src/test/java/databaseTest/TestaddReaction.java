@@ -22,9 +22,9 @@ public class TestaddReaction {
 		String mem3 ="1c6d4fa1-de01-4c0d-8cc1-03bdcf15d455";
 		
 		try {;
-			dao.addApprover(mem1,alt1);
-			dao.addDisapprover(mem2,alt2);
-			dao.addDisapprover(mem3,alt3);
+			//dao.addApprover(mem1,alt1);
+			//dao.addDisapprover(mem2,alt2);
+			dao.addDisapprover("13eba7d4-905f-47c3-9505-ba841ba7fdb5","006729fb-830d-4ba5-b7f0-e829234d9673");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
