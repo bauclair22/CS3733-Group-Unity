@@ -96,8 +96,10 @@ function processRefreshChoice(result) {
 	
 	//creates an array of the ALt ids to process for later
 	 var altIDList = [];
-	  for(i = 0; i < alternatives.length, i++){
-		  altIDList.push(alternatives[i]["altID"]);
+	  for(i = 0; i < alternatives.length; i++){
+		  if(alternatives[i] != null){
+			  altIDList.push(alternatives[i]["altID"]);
+		  }
 	  }
 	
 	console.log(choiceTitle);
