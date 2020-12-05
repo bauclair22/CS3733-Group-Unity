@@ -25,11 +25,13 @@ function handleUpdatingAltClick(e) {
       var isAdded_Status = json["statusCode"];
       if(isAdded_Status == 200){
     	  console.log("team mate added");
+    	  updateAltDisplay(xhr.responseText);
+    	  console.log("updating display");
       }
       else{
     	  
     	  console.log("attempting to remove user from Alt");
-    	  console.log(js);
+    	 // console.log(js);
     	  xhr = new XMLHttpRequest();
     	  
     	   xhr.open("POST", unselectApprover_url, true);
@@ -38,10 +40,12 @@ function handleUpdatingAltClick(e) {
 	    	   if(xhr.readyState == XMLHttpRequest.DONE){
 	    		   console.log ("XHR:" + xhr.responseText);
 	    		   json = JSON.parse(xhr.responseText);
-	    		   console.log(json);
+	    		   //console.log(json);
 	    		   var isRemoved_Status = json["statusCode"];
 	    		   if(isRemoved_Status == 200){
-	        		   console.log("team mate removed"); 		   
+	        		   console.log("team mate removed");
+	        		   updateAltDisplay(xhr.responseText);
+	        		   console.log("updating display");
 	        	   }
 	        	   else{
 	        		   console.log("unable to process request")
@@ -67,7 +71,9 @@ function handleUpdatingAltClick(e) {
 function updateAltDisplay(result) {
   console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
-  var js = JSON.parse(result);
+  var js = JSON.parse(result); 
+  var alt = js["alt"];
+  
   var approversList = document.getElementById('approvers');       //just ganna place all my code within this space
   //var disapproverstList = document.getElementById('disapprovers');
   
@@ -83,18 +89,18 @@ function updateAltDisplay(result) {
   };
   */
   
-  var js = JSON.parse(json);
+  //var js = JSON.parse(json);
   
-  var altTitle = js["title"];
-  var approvers = js["approvers"];
-  var disappovers = js["disapprovers"];
-  var feedback = js["feedback"];
+  var altTitle = alt["title"];
+  var approvers = alt["approvers"];
+  var disappovers = alt["disapprovers"];
+  var feedback = alt["feedback"];
   
   var output = "";
   output = output +
   "<div id=\"approvers\">" +
   "<h2>" + altTitle + "</h2>" +
-  "<label>Approvers</label>" +
+  "<h3>Approvers" + approvers.length + "</h3>" +
   "<p>";
   
   for(i = 0; i < approvers.length; i++){
@@ -104,7 +110,15 @@ function updateAltDisplay(result) {
   }
   output = output +
   "</p>" +	
-  "<label>Disapprovers (Not Installed) </label>" +
+  "<h3>Disapprovers" + disappovers.length + "</h3>" + 
+  "<p>";
+  for(i = 0; i < disappovers.length; i++){
+	  if(disappovers[i] != null){
+		output = output +disappovers[i] + "<br>";
+		}
+  }
+  output + output +
+  "</p>" +
   "</div>";
   
 
