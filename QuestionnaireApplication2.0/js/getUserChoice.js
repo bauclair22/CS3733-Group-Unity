@@ -105,11 +105,13 @@ function processRefreshChoice(result) {
 	console.log(choiceTitle);
 	console.log(choiceMembers);
 	console.log(alternatives);
+	console.log(altIDList);
 	
 	if (status == 200) {
 		//Storing the member ID  and alt Somewhere
-		document.memberID.innerHTML = memberID;
-		document.altID.innterHTML = altIDList[0];
+		document.getElementById("memberID").innerHTML = memberID;
+		//document.getElementById("altID").innterHTML = altIDList[0];
+		document.getElementById("altID").innterHTML = alternatives[0]["altID"];
 		
 		//perform normal operation 
 		
