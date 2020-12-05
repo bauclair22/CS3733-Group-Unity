@@ -65,6 +65,18 @@ public class Alternative {
 	public void setDisapprovers(ArrayList<String> disapprovers) {
 		this.approvers = disapprovers;
 	}
+
+	@Override
+	public String toString() {
+		/*
+		return "Alternative [title=" + title + ", AltID=" + AltID + ", approvers=" + approvers + ", disapprovers="
+				+ disapprovers + ", feedback=" + feedback + "]";
+		*/
+		return "[" + title + AltID + approvers + disapprovers + feedback + "]";
+	}
+	
+	
+	
 	
 	
 }

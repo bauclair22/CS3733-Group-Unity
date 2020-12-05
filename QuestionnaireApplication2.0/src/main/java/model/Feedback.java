@@ -31,4 +31,13 @@ public class Feedback {
 	public Timestamp getTimestamp() {
 		return this.timestamp;
 	}
+	
+	@Override
+	public String toString() {
+		/*
+		return "Alternative [title=" + title + ", AltID=" + AltID + ", approvers=" + approvers + ", disapprovers="
+				+ disapprovers + ", feedback=" + feedback + "]";
+		*/
+		return "[" + memberName + description + timestamp + calendar + "]";
+	}
 }

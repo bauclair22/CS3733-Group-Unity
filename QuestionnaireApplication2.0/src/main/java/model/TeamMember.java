@@ -48,4 +48,13 @@ public class TeamMember {
 	public boolean isEqual(String name, String password) {
 		return this.name == name && this.password == password;
 	}
+	
+	@Override
+	public String toString() {
+		/*
+		return "Alternative [title=" + title + ", AltID=" + AltID + ", approvers=" + approvers + ", disapprovers="
+				+ disapprovers + ", feedback=" + feedback + "]";
+		*/
+		return "[" + name + password + "]";
+	}
 }
