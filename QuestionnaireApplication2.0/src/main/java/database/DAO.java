@@ -429,23 +429,33 @@ public class DAO {
     
     
     public Alternative getAlternativewithID(String ID) throws Exception {
+    	int counter =0;
+    	Alternative alternative = null;
+    	Alternative alt = null;
+    	ArrayList<String>  approvers = getLikedBy(ID);
+        ArrayList<String>  disapprovers = getDislikedBy(ID);
     	try {
-            Alternative alt = null;
+            
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblAlternative + " WHERE idAlternative=?;"); //
             ps.setString(1,  ID);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
+            	counter++;
                 String description = resultSet.getString("alternative");
-                ArrayList<String>  approvers = getLikedBy(ID);
-                ArrayList<String>  disapprovers = getDislikedBy(ID);
-                alt = new Alternative(description, ID);
-                alt.setApprovers(approvers);
-                alt.setDisapprovers(disapprovers);
+                String altID = resultSet.getString("idAlternative");
+                //ArrayList<String>  approvers = getLikedBy(altID);
+                //ArrayList<String>  disapprovers = getDislikedBy(altID);
+                alt = new Alternative(description, altID);
+                //alt.setApprovers(approvers);
+                //alt.setDisapprovers(disapprovers);
+               // alternative= alt;
             }
+            System.out.println(counter);
             resultSet.close();
             ps.close();
-
+            alt.setApprovers(approvers);
+            alt.setDisapprovers(disapprovers);
             return alt;
 
         } catch (Exception e) {
