@@ -74,7 +74,7 @@ function handleApproverAltClick(e,alt) {
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function handleDisappoverAltClick(e,alt) {
+function handleDisapproverAltClick(e,alt) {
 	
 	  var data = {};
 	  
