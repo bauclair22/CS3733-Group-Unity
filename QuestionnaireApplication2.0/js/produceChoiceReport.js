@@ -46,14 +46,16 @@ function printReport(result){
 	for(i = 0; i < choiceReport.length; i++){
 		choiceID = choiceReport[i]["choiceID"];
 		isCompleted = choiceReport[i]["isCompleted"];
-		
+		dateCompleted = choiceReport[i]["dateCompleted"];
+		/*
 		try{
 		dateComplted = choiceReport[i]["dateCompleted"];
 		}
 		catch(e){
-		dateCompleted = "--"
+		dateCompleted =  "--";
 		}
-		
+		*/
+		console.log(dateCompleted);
 		output = output +
 		choiceID + "<br>" +
 		isCompleted + "<br>" +
