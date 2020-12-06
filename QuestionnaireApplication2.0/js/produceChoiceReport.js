@@ -1,4 +1,4 @@
-function hanldleProduceReport(e){
+function handleProduceReport(e){
 	
 	  var xhr = new XMLHttpRequest();
 	  xhr.open("GET", choice_list_url, true);
@@ -57,7 +57,7 @@ function printReport(result){
 		output = output +
 		choiceID + "<br>" +
 		isCompleted + "<br>" +
-		dateCompleted "<br><br>";
+		dateCompleted + "<br><br>";
 		
 	}
 	
