@@ -30,11 +30,13 @@ public class ProduceReportHandler implements RequestHandler<Object, ProduceRepor
 		String r ="";
 		try {
 			List<Choice> list = getChoices();
+			/*
 			for(int i=0; i<list.size(); i++) {
 				
 				r = r.concat(list.get(i).choicereport());
 			}
-			response = new ProduceReportResponse(r, 200);
+			*/
+			response = new ProduceReportResponse(list, 200);
 		} catch (Exception e) {
 			response = new ProduceReportResponse(403, e.getMessage());
 		}

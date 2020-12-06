@@ -7,11 +7,11 @@ import model.Choice;
 
 
 public class ProduceReportResponse {
-	public final String choiceReport;
+	public final List<Choice> choiceReport;
 	public final int statusCode;
 	public final String error;
 	
-	public ProduceReportResponse ( String choiceReport, int code) {
+	public ProduceReportResponse ( List<Choice> choiceReport, int code) {
 		this.choiceReport = choiceReport;
 		this.statusCode = code;
 		this.error = "";
