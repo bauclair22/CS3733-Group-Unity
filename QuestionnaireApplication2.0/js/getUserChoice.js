@@ -129,8 +129,8 @@ function processRefreshChoice(result) {
 			//if an alt is not null
 			if(alternatives[i] != null){
 			output = output + 
-			"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"handleUpdatingAltClick(this," + i + ")\">" +
-			"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"\">" +
+			"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"handleApproverAltClick(this," + i + ")\">" +
+			"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"handleDisapproverAltClick(this," + i + ")\">" +
 			"<input type=\"button\" id= \"alt1_view\" name= \"alt1_view\" value=" + alternatives[i]["title"] + " onClick=\"\"><br><br>";
 			}
 		}
