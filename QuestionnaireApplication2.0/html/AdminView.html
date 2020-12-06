@@ -4,7 +4,16 @@
 <meta charset="ISO-8859-1">
 <title>AdminView</title>
 </head>
-<body>
+
+<script type='text/javascript' src='../js/produceChoiceReport.js'></script>
+
+<script type="text/javascript">
+function initialize() {
+	hanldleProduceReport(this);
+}
+</script>
+
+<body onload = "initialize()">
 
 <form name="adminform" method="get">
 
@@ -20,7 +29,7 @@
 	<input id="deleteButton" type="button" value="Delete"><br><br>
 	
 	<input id="reportChoices" type="button" value="Report Choices"><br>
-	<p id="choices">Location for Choices </p>
+	<div id="choiceReport"><p>Location for Choices </p></div>
 </form>
 
 </body>
