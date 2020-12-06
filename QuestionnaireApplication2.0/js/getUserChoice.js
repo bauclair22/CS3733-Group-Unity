@@ -114,7 +114,7 @@ function processRefreshChoice(result) {
 		"<div id=\"selectedChoice\">" +  
 		"<form name=\"reactionForm\" method=\"get\">" + 
 		"<h2>" + choiceTitle + "</h2>" +
-		"<input type= \"button\" value= \"Refresh Choice\"  onClick=\"handleRefreshChoice(this)\"><br>";
+		"<input type= \"button\" value= \"Refresh Choice\"  onClick=\"handleRefreshChoiceClick(this)\"><br>";
 		
 		for(i = 0; i < alternatives.length; i++){
 			//if an alt is not null

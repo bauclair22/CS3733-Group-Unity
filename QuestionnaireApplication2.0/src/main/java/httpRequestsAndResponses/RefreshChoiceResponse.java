@@ -7,18 +7,18 @@ import model.Choice;
 
 public class RefreshChoiceResponse {
 	public final Choice choice;
-	public final int statusCode;
+	public final int httpCode;
 	public final String error;
 	
 	public RefreshChoiceResponse (Choice choice, int code) {
 		this.choice = choice;
-		this.statusCode = code;
+		this.httpCode = code;
 		this.error = "";
 	}
 	
 	public RefreshChoiceResponse (int code, String errorMessage) {
 		this.choice = null;
-		this.statusCode = code;
+		this.httpCode = code;
 		this.error = errorMessage;
 	}
 	

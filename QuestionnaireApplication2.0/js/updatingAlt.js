@@ -34,7 +34,7 @@ function handleApproverAltClick(e,alt) {
       console.log ("XHR:" + xhr.responseText);
       
       var json = JSON.parse(xhr.responseText);
-      var isAdded_Status = json["statusCode"];
+      var isAdded_Status = json["httpCode"];
       if(isAdded_Status == 200){
     	  console.log("team mate added");
     	  updateAltDisplay(xhr.responseText);
@@ -53,7 +53,7 @@ function handleApproverAltClick(e,alt) {
 	    		   console.log ("XHR:" + xhr.responseText);
 	    		   json = JSON.parse(xhr.responseText);
 	    		   //console.log(json);
-	    		   var isRemoved_Status = json["statusCode"];
+	    		   var isRemoved_Status = json["httpCode"];
 	    		   if(isRemoved_Status == 200){
 	        		   console.log("team mate removed");
 	        		   updateAltDisplay(xhr.responseText);
@@ -103,7 +103,7 @@ xhr.onloadend = function () {
     console.log ("XHR:" + xhr.responseText);
     
     var json = JSON.parse(xhr.responseText);
-    var isAdded_Status = json["statusCode"];
+    var isAdded_Status = json["httpCode"];
     if(isAdded_Status == 200){
   	  console.log("team mate added");
   	  updateAltDisplay(xhr.responseText);
@@ -122,7 +122,7 @@ xhr.onloadend = function () {
 	    		   console.log ("XHR:" + xhr.responseText);
 	    		   json = JSON.parse(xhr.responseText);
 	    		   //console.log(json);
-	    		   var isRemoved_Status = json["statusCode"];
+	    		   var isRemoved_Status = json["httpCode"];
 	    		   if(isRemoved_Status == 200){
 	        		   console.log("team mate removed");
 	        		   updateAltDisplay(xhr.responseText);
