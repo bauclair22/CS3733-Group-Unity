@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Choice;
+import model.ChoiceReport;
 
 
 public class ProduceReportResponse {
-	public final List<Choice> choiceReport;
+	public final List<ChoiceReport> choiceReport;
 	public final int statusCode;
 	public final String error;
 	
-	public ProduceReportResponse ( List<Choice> choiceReport, int code) {
+	public ProduceReportResponse (List<ChoiceReport>  choiceReport, int code) {
 		this.choiceReport = choiceReport;
 		this.statusCode = code;
 		this.error = "";

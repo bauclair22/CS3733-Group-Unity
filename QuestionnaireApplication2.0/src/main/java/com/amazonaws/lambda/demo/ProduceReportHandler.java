@@ -9,12 +9,13 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import database.DAO;
 import httpRequestsAndResponses.ProduceReportResponse;
 import model.Choice;
+import model.ChoiceReport;
 
 public class ProduceReportHandler implements RequestHandler<Object, ProduceReportResponse> {
 	
 	public LambdaLogger logger;
 	
-	List<Choice> getChoices() throws Exception {
+	List<ChoiceReport> getChoices() throws Exception {
 		logger.log("in getChoices");
 		DAO dao = new DAO();
 		
@@ -29,7 +30,7 @@ public class ProduceReportHandler implements RequestHandler<Object, ProduceRepor
 		ProduceReportResponse response = null;
 		String r ="";
 		try {
-			List<Choice> list = getChoices();
+			List<ChoiceReport> list = getChoices();
 			/*
 			for(int i=0; i<list.size(); i++) {
 				

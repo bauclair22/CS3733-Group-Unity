@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 import model.Choice;
+import model.ChoiceReport;
 import model.Alternative;
 import model.Feedback;
 import model.TeamMember;
@@ -318,16 +319,16 @@ public class DAO {
         }
     }
     
-    public List<Choice> getAllChoices() throws Exception {
+    public List<ChoiceReport> getAllChoices() throws Exception {
         
-        List<Choice> allChoices = new ArrayList<>();
+        List<ChoiceReport> allChoices = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
             String query = "SELECT * FROM " + tblchoices + ";";
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                Choice c = generateChoice(resultSet);
+                ChoiceReport c = generateChoice(resultSet);
                 allChoices.add(c);
             }
             resultSet.close();
@@ -339,14 +340,19 @@ public class DAO {
         }
     }
     
-    private Choice generateChoice(ResultSet resultSet) throws Exception {
-    	String description = resultSet.getString("description");
+    private ChoiceReport generateChoice(ResultSet resultSet) throws Exception {
+    	//String description = resultSet.getString("description");
     	//Need something here to create the alternatives in the choice or need to change the choice constructor
-    	Alternative[] alternatives = new Alternative[5];
-		int numMembers = resultSet.getInt("maxUsers"); 
+    	//Alternative[] alternatives = new Alternative[5];
+		//int numMembers = resultSet.getInt("maxUsers"); 
+    	boolean isCompleted = resultSet.getBoolean("isCompleted");
 		String ID = resultSet.getString("idChoice");
 		Timestamp date = resultSet.getTimestamp("DateCreated");
-        return new Choice (ID, description, alternatives, numMembers, date);
+		String s = null;
+		if(date != null) {
+			s = date.toString();
+		}
+        return new ChoiceReport (ID, isCompleted, s);
     }
     
     
