@@ -27,6 +27,10 @@ function processCreateChoiceResponse(result) {
 
 
 
+
+
+
+
 function handleCreateClick(e) {
 	console.log("Starting to porcess Choice");
 	document.getElementById("choiceID_new").innerHTML = "Processing our choice..wait for a moment";

@@ -1,45 +1,5 @@
 
 
-function formatHeader(choiceTitle, currentUsers, max){
-	/*
-	"httpCode": 200,
-	"response": "everything went through",
-	"memberId";
-	"choice": 
-	{
-	  "description": "why  am i here just to suffer",
-	  "alternatives": [
-	    {
-	      "title": "dwhlawlidjaw",
-	      "approvers": [],
-	      "disapprovers": [],
-	      "feedback": []
-	    },
-	    {
-	      "title": "a3wrdae2weaw",
-	      "approvers": [],
-	      "disapprovers": [],
-	      "feedback": []
-	    },
-	    {
-	      "title": "dwghukcaw",
-	      "approvers": [],
-	      "disapprovers": [],
-	      "feedback": []
-	    },
-	    null,
-	    null
-	  ],
-	  "numMembers": 17,
-	  "isCompleted": false,
-	  "ID": 1
-	}
-	}
-	*/
-}
-
-
-
 /**
  * Refresh constant list from server
  *
@@ -63,6 +23,36 @@ function handleRefreshChoice(e) {
     }
   };
 }
+
+function handleRefreshChoiceClick(e) {
+		var data = {};
+		    	
+		data["choiceID"] = document.getElementById("choiceID_new").innerHTML;
+		data["memberID"] = document.getElementById("memberID").innerHTML;
+		var js = JSON.stringify(data);
+	
+	   var xhr = new XMLHttpRequest();
+	   xhr.open("POST", updateChoice_url , true);  //makes sure to call the lamda function
+	   xhr.send(js);
+	   
+	   console.log("Refreshing Choice");
+
+	  // This will process results and update HTML as appropriate. 
+	  xhr.onloadend = function () {
+	    if (xhr.readyState == XMLHttpRequest.DONE) {
+	      console.log ("XHR:" + xhr.responseText);
+	      processRefreshChoice(xhr.responseText);
+	    } else {
+	    	processRefreshChoice("N/A");
+	    }
+	  };
+	}
+
+
+
+
+
+
 
 /**
  * Loads the choice that the user signs into
@@ -123,7 +113,8 @@ function processRefreshChoice(result) {
 		output = output +
 		"<div id=\"selectedChoice\">" +  
 		"<form name=\"reactionForm\" method=\"get\">" + 
-		"<h2>" + choiceTitle + "</h2>";
+		"<h2>" + choiceTitle + "</h2>" +
+		"<input type= \"button\" value= \"Refresh Choice\"  onClick=\"handleRefreshChoice(this)\"><br>";
 		
 		for(i = 0; i < alternatives.length; i++){
 			//if an alt is not null
