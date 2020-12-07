@@ -3,12 +3,15 @@ package database;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import model.Choice;
@@ -24,6 +27,7 @@ public class DAO {
     final String tblAlternative = "Alternatives";
     final String tblTeamMember = "TeamMember";
     final String viewFeedbacksWithName = "feedback_withName";
+    final String tblFeedback ="Feedbacks";
     final String viewLikedBy = "Likedby";
     final String viewDislikedBy = "Dislikedby";
     final String tblReactions = "Reactions";
@@ -159,7 +163,7 @@ public class DAO {
                 Timestamp time = resultSet.getTimestamp("time");
                 String comment = resultSet.getString("feedback");
                 String name = resultSet.getString("name");
-                Feedback f = new Feedback(name,comment,time);
+                Feedback f = new Feedback(name,altid, comment,time);
                 feedback.add(f);
             }
             resultSet.close();
@@ -409,18 +413,23 @@ public class DAO {
     }
     
     //when old choices are deleted do they have to have been completed?
-    public boolean deleteStaleChoices(Timestamp expiration) throws Exception { //might need to delete the alternatiives and teamMembers asociated wit this
+    public List<ChoiceReport> deleteStaleChoices(Timestamp expiration) throws Exception { 
+    	boolean deleted = false;
+    	List<ChoiceReport> choiceReports = null;
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblchoices +  "WHERE DateCreated > ?;"); //Not sure if this is entirely correct
-            //Should we clear approval for all alternatives in the choice or just one specific alternative in the choice?
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblchoices +  "WHERE DateCreated > ?;"); 
             ps.setTimestamp(1, expiration);
             ps.executeUpdate();
             ps.close();
-            return true;
+            deleted= true;
 
         } catch (Exception e) {
             throw new Exception("Failed to delete old choices: " + e.getMessage());
         }
+         if(deleted) {
+        	 choiceReports =getAllChoices();
+        }
+         return choiceReports;
     }
     
     public boolean completeChoice( String choiceID) throws Exception {
@@ -493,7 +502,47 @@ public class DAO {
         }
     }
     
-    //create feedback function
+    public String getUserNameWithID(String ID) {
+    	String name="";
+         try {
+        	 PreparedStatement ps = conn.prepareStatement("SELECT name FROM " + tblTeamMember+ " WHERE idTeamMember=?;");
+             ps.setString(1, ID);
+             ResultSet resultSet = ps.executeQuery();
+             while (resultSet.next()) {
+                 name = resultSet.getString("name");
+             }
+             resultSet.close();
+             ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return name;
+    }
+    
+    public Feedback giveFeedback(String memberID,String altid, String feedback) throws Exception {
+    	Feedback fb = null;
+        try {
+        	PreparedStatement ps = conn.prepareStatement("INSERT INTO " + tblFeedback + " (idFeedback, memberID, alternativeID, time, feedback) values(?,?,?,?,?);"); 
+             String newID = UUID.randomUUID().toString();
+             ps.setString(1, newID);
+             ps.setString(2, memberID);
+             ps.setString(3, altid);
+             LocalDateTime myTime = LocalDateTime.now();
+     		 Timestamp ts= Timestamp.valueOf(myTime);
+             ps.setTimestamp(4, ts);
+             ps.setString(5,feedback);
+             ps.execute();
+             ps.close();
+             
+             String name= getUserNameWithID(memberID);
+             fb = new Feedback(name,altid,feedback, ts);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Failed in getting Feedback: " + e.getMessage());
+        }
+        return fb;
+    }
 
 }
 
