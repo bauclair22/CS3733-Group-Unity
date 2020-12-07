@@ -24,8 +24,18 @@ function handleRefreshChoice(e) {
   };
 }
 
+/**
+ * 
+ */
 function handleRefreshChoiceClick(e) {
 		var data = {};
+		
+		var output = output +
+		"<div id=\"selectedChoice\">" + 
+		"<p>Loading Choice...</p>" +
+		"</div>";
+		document.getElementById('selectedChoice').innerHTML = output;
+		
 		    	
 		data["choiceID"] = document.getElementById("choiceID_new").innerHTML;
 		data["memberID"] = document.getElementById("memberID").innerHTML;
@@ -62,6 +72,8 @@ function processRefreshChoice(result) {
   
   // getting the response and the http code
   var js = JSON.parse(result);
+  console.log(js);
+  
   // getting the JSON object
   var status = js["httpCode"];
   var choiceJson = js["choice"];
@@ -92,20 +104,23 @@ function processRefreshChoice(result) {
 		  }
 	  }
 	
-	//console.log(choiceTitle);
-	//console.log(choiceMembers);
-	//console.log(alternatives);
-	//console.log(altIDList[0]);
-	//console.log(alternatives[0]["altID"]);
-	
 	if (status == 200) {
 		//Storing the member ID  and alt Somewhere
 		
 		
 		document.getElementById("memberID").innerHTML = memberID;
 		document.getElementById("altID").innerHTML = altIDList.toString();
-		//document.getElementById("altID").innterHTML = alternatives[0]["altID"];
-		//document.getElementById("altID").innterHTML = "Look I am new";
+		
+		document.getElementById("memberID_meta").content = memberID;
+		document.getElementById("altID_meta").content = altIDList.toString();
+		{
+			if(document.getElementById("memberID_meta").content != "0"){
+				console.log("memberID_meta success");
+			}
+			if(document.getElementById("altID_meta").content != "0"){
+				console.log("altID_meta success");
+			}
+		}
 
 		
 		//perform normal operation 
@@ -119,10 +134,17 @@ function processRefreshChoice(result) {
 		for(i = 0; i < alternatives.length; i++){
 			//if an alt is not null
 			if(alternatives[i] != null){
+				
+			//handles creating the headers for each choice	
 			output = output + 
 			"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"handleApproverAltClick(this," + i + ")\">" +
 			"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"handleDisapproverAltClick(this," + i + ")\">" +
+			"<label>" + alternatives[i]["title"] + "</label>" +
 			"<input type=\"button\" id= \"alt1_view\" name= \"alt1_view\" value=" + alternatives[i]["title"] + " onClick=\"\"><br><br>";
+			
+			
+			//if we are able to see alternatives when the choice is give, return that
+			
 			}
 		}
 	 	output = output +
@@ -136,19 +158,7 @@ function processRefreshChoice(result) {
 		"</div>";
 	}
 		
-		/*
-		<div id="selectedChoice" > 
-		<form name="reactionForm" method="get">
 
-		<h2>(5/7) Choice</h2>
-		<input type="button" id= "alt1_agree" name= "alt1_agree" value="^"  onClick="">
-	  	<input type="button" id= "alt1_disagree" name= "alt1_disagree" value="v"  onClick="">
-		<input type="button" id= "alt1_view" name= "alt1_view" value="alt1"  onClick=""><br><br>
-		
-	 	 <!-- <input type="button" value="Save Changes"  onClick=""> -->
-	 	 </form>
-	 	</div>
-	 	*/
   // Update computation result
   choiceDisplay.innerHTML = output;
 }

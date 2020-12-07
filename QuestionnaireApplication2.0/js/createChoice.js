@@ -30,8 +30,8 @@ function processCreateChoiceResponse(result) {
   if (status == 200) {
     // Update computation result
 	  document.getElementById("choiceID_new").innerHTML = id;
-	  document.getElementByID(choiceID_meta).content = id;
-	  var choiceID_Meta = document.getElementByID(choiceID_meta).content;
+	  document.getElementById("choiceID_meta").content = id;
+	  var choiceID_Meta = document.getElementById("choiceID_meta").content;
 	  if(choiceID_Meta != "0"){
 		  console.log("update to choice meta as been successful: " + choiceID_Meta )
 	  }
