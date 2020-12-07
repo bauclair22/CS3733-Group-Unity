@@ -68,41 +68,36 @@ function handleRefreshChoiceClick(e) {
  * Loads the choice that the user signs into
  */
 function processRefreshChoice(result) {
-  console.log("result: " + result);
+	console.log("result: " + result);
   
-  // getting the response and the http code
-  var js = JSON.parse(result);
-  console.log(js);
+	var choiceDisplay = document.getElementById('selectedChoice');
+	// getting the response and the http code
+	var js = JSON.parse(result);
+	console.log(js);
   
-  // getting the JSON object
-  var status = js["httpCode"];
-  var choiceJson = js["choice"];
-  var memberID = js["memberID"];
-  
-  
- 
-  console.log(altIDList);
-  
-  console.log(status);
-  console.log(choiceJson);
-  //console.log("choice parsed:" + choiceJson);
-  
-  var choiceDisplay = document.getElementById('selectedChoice');
-  
-  var output = "";
- 
-	var choiceTitle = choiceJson["description"];
-	var choiceMembers = choiceJson["numMembers"];
-	var alternatives = choiceJson["alternatives"];  //array list
+	// getting the JSON object
+  	var status = js["httpCode"];
+  	var choice = js["choice"];
+
+  	
+	var choiceTitle = choice["description"];
+	var choiceMembers = choice["numMembers"];
+	var alternatives = choice["alternatives"];  //array list
 	
+	 var output = "";
 	
 	//creates an array of the ALt ids to process for later
+	 var choiceID = choice["ID"];
+	 var memberID = js["memberID"];
 	 var altIDList = [];
 	  for(i = 0; i < alternatives.length; i++){
 		  if(alternatives[i] != null){
 			  altIDList.push(alternatives[i]["altID"]);
 		  }
 	  }
+	  
+	  
+	 
 	
 	if (status == 200) {
 		//Storing the member ID  and alt Somewhere
@@ -110,15 +105,21 @@ function processRefreshChoice(result) {
 		
 		document.getElementById("memberID").innerHTML = memberID;
 		document.getElementById("altID").innerHTML = altIDList.toString();
+		document.getElementById("choiceID_new").innerHTML = choiceID;
 		
 		document.getElementById("memberID_meta").content = memberID;
 		document.getElementById("altID_meta").content = altIDList.toString();
+		document.getElementById("choiceID_meta").content = choiceID;
+		console.log("verify that metadata has changed");
 		{
 			if(document.getElementById("memberID_meta").content != "0"){
 				console.log("memberID_meta success");
 			}
 			if(document.getElementById("altID_meta").content != "0"){
 				console.log("altID_meta success");
+			}
+			if(document.getElementById("choiceID_meta").content != "0"){
+				console.log("choiceID_meta success");
 			}
 		}
 
@@ -139,11 +140,33 @@ function processRefreshChoice(result) {
 			output = output + 
 			"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"handleApproverAltClick(this," + i + ")\">" +
 			"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"handleDisapproverAltClick(this," + i + ")\">" +
-			"<label>" + alternatives[i]["title"] + "</label>" +
-			"<input type=\"button\" id= \"alt1_view\" name= \"alt1_view\" value=" + alternatives[i]["title"] + " onClick=\"\"><br><br>";
+			"<label>" + alternatives[i]["title"] + "</label>";
 			
 			
 			//if we are able to see alternatives when the choice is give, return that
+			var approvers = alternatives[i]["approvers"];
+			var disapprovers = alternatives[i]["disapprovers"];
+			
+			output = output + 
+			"<h3>Approvers" + approvers.length + "</h3>" +
+			  "<p>";
+			  
+			  for(i = 0; i < approvers.length; i++){
+				  if(approvers[i] != null){
+					output = output + approvers[i] + "<br>";
+					}
+			  }
+			  output = output +
+			  "</p>" +	
+			  "<h3>Disapprovers" + disapprovers.length + "</h3>" + 
+			  "<p>";
+			  for(i = 0; i < disapprovers.length; i++){
+				  if(disapprovers[i] != null){
+					output = output +disapprovers[i] + "<br>";
+					}
+			  }
+			  output + output +
+			  "</p>" ;
 			
 			}
 		}
