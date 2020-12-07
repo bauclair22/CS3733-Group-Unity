@@ -8,14 +8,14 @@ import java.util.TimeZone;
 
 public class Feedback {
 	String memberName;
+	String altID;
 	String description;
 	Timestamp timestamp;
-	Calendar calendar;
+	//Calendar calendar;
 	
-	public Feedback(String memberName, String description, Timestamp timeStamp2) {
-		TimeZone est=TimeZone.getTimeZone("EST");
-		this.calendar =Calendar.getInstance(est);
+	public Feedback(String memberName, String altID, String description, Timestamp timeStamp2) {
 		this.memberName = memberName;
+		this.altID= altID;
 		this.description = description;
 		this.timestamp = timeStamp2;
 	}
@@ -38,6 +38,9 @@ public class Feedback {
 		return "Alternative [title=" + title + ", AltID=" + AltID + ", approvers=" + approvers + ", disapprovers="
 				+ disapprovers + ", feedback=" + feedback + "]";
 		*/
-		return "[" + memberName + description + timestamp + calendar + "]";
+		String time = "";
+		if(timestamp != null) {time = timestamp.toString();}
+		
+		return "[" + memberName + description + time + "]";
 	}
 }
