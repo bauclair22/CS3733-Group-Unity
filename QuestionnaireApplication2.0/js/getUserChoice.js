@@ -149,7 +149,7 @@ function processRefreshChoice(result) {
 			
 			output = output + 
 			"<p># of Approvers: " + approvers.length + "</p>" +
-			  "<p.a>";
+			  "<p class= \"a\">";
 			  
 			  for(j = 0; j < approvers.length; j++){
 				  if(approvers[j] != null){
@@ -159,14 +159,14 @@ function processRefreshChoice(result) {
 			  output = output +
 			  "</p>" +	
 			  "<p># of Disapprovers: " + disapprovers.length + "</p>" + 
-			  "<p.a>";
+			  "<p class= \"a\">";
 			  for(k = 0; k < disapprovers.length; k++){
 				  if(disapprovers[k] != null){
 					output = output +disapprovers[k] + "<br>";
 					}
 			  }
 			  output + output +
-			  "<br></p>" ;
+			  "</p><br>" ;
 			
 			}
 		}

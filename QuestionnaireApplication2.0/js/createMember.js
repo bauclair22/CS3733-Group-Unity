@@ -36,7 +36,7 @@ function handleCreateMemberClick(e) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
     	 if (xhr.status == 200) {
     		 console.log ("XHR:" + xhr.responseText);
-    		 formMessage.innerHTML = "Welcome" + form.username.value;
+    		 formMessage.innerHTML = "Welcome " + form.username.value;
     		 processCreateMemberResponse(xhr.responseText);
     	 } else {
     		 console.log("issue with adding member - login -")

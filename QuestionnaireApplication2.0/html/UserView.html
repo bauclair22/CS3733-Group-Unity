@@ -5,7 +5,12 @@
 	<meta id = "choiceID_meta" content = "0">
 	<meta id = "memberID_meta" content = "0">
 	<meta id = "altID_meta" content = "0">	
-<title>UserView</title>
+	<style>
+	p.a {
+		text-indent: 30px;
+	}
+	</style>
+	<title>UserView</title>
 </head>
 
 <script type='text/javascript' src='../js/api.js'></script>
@@ -15,18 +20,14 @@
 <script type='text/javascript' src='../js/updatingAlt.js'></script>
 
 <script type="text/javascript">
-function initialize() {
-  
-  // show how the choice will be displayed after the user signs in
-  //processRefreshChoice("n/a");
-  //updateAltDisplay("testing");
-}
-p.a {
-	//controls the size of indent 
-	text-indent: 30px;
-}
-
+	function initialize() {
+	  
+	  // show how the choice will be displayed after the user signs in
+	  //processRefreshChoice("n/a");
+	  //updateAltDisplay("testing");
+	}
 </script>
+
 
 
 
@@ -46,7 +47,9 @@ p.a {
   	<input name="choiceId" type="text" id="choiceId" value=""><br><br>
  	<input type="button" value="Sign In"  onClick="handleCreateMemberClick(this)">
 </form>
-	<p id= "SignInMessage"></p>
+
+<p id= "SignInMessage"></p>
+	
 <h2>Create A Choice</h2>
 
 <form name="createChoiceForm" method="post">
@@ -97,10 +100,6 @@ p.a {
 <!--  <label>Approvers</label> -->
 <div id="approvers"><p>All the Approvers and Disapprovers Go Here...<p></div>
 
-<!-- 
-<label>Disapprovers</label>
-<div id="disapprovers"><p>All the Disapprovers Go Here...</p><div>
- -->
 
 
 <!-- Missing Currently is the ability to add feedback. Just Worry About the  other features -->
