@@ -104,7 +104,7 @@ function processRefreshChoice(result) {
 		//Storing the member ID  and alt Somewhere
 		
 		
-		document.getElementById("memberID").innerHTML = memberID;
+		//document.getElementById("memberID").innerHTML = memberID;
 		//document.getElementById("altID").innerHTML = altIDList.toString();
 		//document.getElementById("choiceID_new").innerHTML = choiceID;
 		

@@ -12,11 +12,11 @@ function handleApproverAltClick(e,alt) {
 	  //convert everything that was in the hmtl form to the lamda
 	  
 	  //data["title"] = form.titleInput.value;
-	  data["memberID"] = document.getElementById("memberID").innerHTML;
+	  data["memberID"] = document.getElementById("memberID_meta").context;
 	  
 	  
 	  //gets, and splits the alt id array and gives back one to process
-	  var altIDString = document.getElementById("altID").innerHTML;
+	  var altIDString = document.getElementById("altID_meta").context;
 	  var altID = altIDString.split(",")[alt];
 	  data["altid"] = altID
 	 
