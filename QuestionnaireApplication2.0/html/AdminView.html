@@ -3,6 +3,22 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>AdminView</title>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 </head>
 
 <script type='text/javascript' src='../js/produceChoiceReport.js'></script>
@@ -18,16 +34,9 @@ function initialize() {
 
 <form name="adminform" method="get">
 
-	<!-- -Sign In 
-	-Password(optional)
-	-Choice Id
-
-	-added required or optional
-	-remove title -->
-
 	<label for="daysToDelete" >Enter number of Days</label><br>
 	<input id="daysToDelete" type="text" value=""><br>
-	<input id="deleteButton" type="button" value="Delete"><br><br>
+	<input id="deleteButton" type="button" value="Delete" onClick="clearCompletedChoices(this)"><br><br>
 	
 	<input id="reportChoices" type="button" value="Report Choices"><br>
 	<div id="choiceReport"><p>Location for Choices </p></div>

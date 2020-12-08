@@ -37,8 +37,9 @@ function handleRefreshChoiceClick(e) {
 		document.getElementById('selectedChoice').innerHTML = output;
 		
 		    	
-		data["choiceID"] = document.getElementById("choiceID_new").innerHTML;
-		data["memberID"] = document.getElementById("memberID").innerHTML;
+		data["choiceID"] = document.getElementById("choiceID_meta").context;
+		data["memberID"] = document.getElementById("memberID_meta").context;
+		
 		var js = JSON.stringify(data);
 	
 	   var xhr = new XMLHttpRequest();
@@ -104,8 +105,8 @@ function processRefreshChoice(result) {
 		
 		
 		document.getElementById("memberID").innerHTML = memberID;
-		document.getElementById("altID").innerHTML = altIDList.toString();
-		document.getElementById("choiceID_new").innerHTML = choiceID;
+		//document.getElementById("altID").innerHTML = altIDList.toString();
+		//document.getElementById("choiceID_new").innerHTML = choiceID;
 		
 		document.getElementById("memberID_meta").content = memberID;
 		document.getElementById("altID_meta").content = altIDList.toString();

@@ -25,8 +25,42 @@ function handleProduceReport(e){
 
 }
 
+function clearCompletedChoices(e){
+	var days = document.getElementById("daysToDelete").value;
+	var data = {};
+	data[""] = days;
+	var js = JSON.stringify(data);
+	
+	  var xhr = new XMLHttpRequest();
+	  xhr.open("POST", clearCompleted_url, true);
+	  xhr.send(js);
+
+	  // This will process results and update HTML as appropriate. 
+	  xhr.onloadend = function () {
+	    console.log(xhr);
+	    console.log(xhr.request);
+	    if (xhr.readyState == XMLHttpRequest.DONE) {
+	    	 if (xhr.status == 200) {
+		      console.log ("XHR:" + xhr.responseText);
+		      printReport(xhr.responseText);
+	    	 } else {
+	    		 console.log("issue with construction")
+				  //var js = JSON.parse(xhr.responseText);
+				  //var err = js["response"];
+				  //alert (err);
+	    	 }
+	    } else {
+	      printReport("N/A");
+	    }
+	  };
+}
 
 
+/**
+ * Prints the choices as a table
+ * @param result
+ * @returns
+ */
 function printReport(result){
 	
 	console.log("result:" + result);
@@ -41,7 +75,8 @@ function printReport(result){
 	
 	
 	output = output +
-	"<div id=\"choiceReport\"><p>";
+	"<div id=\"choiceReport\"><table>" + 
+	"<tr><th>\"ChoiceID\"</th><th>\"isCompleted\"</th><th>\"dateCompleted\"</th></tr>";
 	
 	for(i = 0; i < choiceReport.length; i++){
 		choiceID = choiceReport[i]["choiceID"];
@@ -57,14 +92,21 @@ function printReport(result){
 		*/
 		console.log(dateCompleted);
 		output = output +
-		choiceID + "<br>" +
-		isCompleted + "<br>" +
-		dateCompleted + "<br><br>";
+		"<tr>" +
+		"<td>" + choiceID + "</td>" +
+		"<td>" + isCompleted + "</td>" +
+		"<td>" + dateCompleted + "</td>" +
+		"</tr>";
+		
+		//output = output +
+		//choiceID + "<br>" +
+		//isCompleted + "<br>" +
+		//dateCompleted + "<br><br>";
 		
 	}
 	
 	outut = output +
-	"</p></div>";
+	"</table></div>";
 	
 	document.getElementById("choiceReport").innerHTML = output;
 
