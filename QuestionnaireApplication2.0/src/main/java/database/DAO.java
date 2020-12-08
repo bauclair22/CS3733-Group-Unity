@@ -445,10 +445,27 @@ public class DAO {
         }
     }
     
+    public boolean isCompleted( String choiceID) throws Exception {
+    	boolean isCompleted = false;
+    	int data =0;
+        try {
+        	PreparedStatement ps = conn.prepareStatement("SELECT isCompleted FROM " + tblchoices + " Where idChoice= ?"); 
+            ps.setString(1, choiceID);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                data  = resultSet.getInt("isCompleted");
+            }
+            if(data==1) {isCompleted = true;}
+
+        } catch (Exception e) {
+            throw new Exception("Failed to find if the choice is completed: " + e.getMessage());
+        }
+        return isCompleted;
+    }
+    
     
     public Alternative getAlternativewithID(String ID) throws Exception {
     	int counter =0;
-    	Alternative alternative = null;
     	Alternative alt = null;
     	ArrayList<String>  approvers = getLikedBy(ID);
         ArrayList<String>  disapprovers = getDislikedBy(ID);
