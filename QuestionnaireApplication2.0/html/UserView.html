@@ -21,6 +21,11 @@ function initialize() {
   //processRefreshChoice("n/a");
   //updateAltDisplay("testing");
 }
+p.a {
+	//controls the size of indent 
+	text-indent: 30px;
+}
+
 </script>
 
 
@@ -41,7 +46,7 @@ function initialize() {
   	<input name="choiceId" type="text" id="choiceId" value=""><br><br>
  	<input type="button" value="Sign In"  onClick="handleCreateMemberClick(this)">
 </form>
-
+	<p id= "SignInMessage"></p>
 <h2>Create A Choice</h2>
 
 <form name="createChoiceForm" method="post">
@@ -53,8 +58,7 @@ function initialize() {
     -->
 
     <label for="DescriptionInput">Choice Description:</label><br>
-    <textarea name="dInput" id="dInput" maxlength = "280" rows="4" cols="50">
-    </textarea><br><br>
+    <textarea name="dInput" id="dInput" maxlength = "280" rows="4" cols="50"></textarea><br><br>
 
     <label for="MaxUsers">Max Users:</label>
     <input name="maxUsers" value="" id="maxUsers"/><br><br>
@@ -63,16 +67,12 @@ function initialize() {
     
     <label for="Alternate1">(Required)Alternate 1:</label>
     <input name=alt1 id = "alt1" value=""/><br><br>
-
     <label for="Alternate2">(Required)Alternate 2:</label>
     <input name=alt2 id = "alt2" value=""/><br><br>
-    
     <label for="Alternate3">(Optional)Alternate 3:</label>
     <input name=alt3 id = "alt3" value=""/><br><br>
-
     <label for="Alternate4">(Optional)Alternate 4:</label>
     <input name=alt4 id = "alt4" value=""/><br><br>
-
     <label for="Alternate5">(Optional)Alternate 5:</label>
     <input name=alt5 id = "alt5" value=""/><br><br>
  

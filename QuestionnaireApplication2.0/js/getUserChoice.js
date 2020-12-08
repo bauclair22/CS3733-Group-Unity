@@ -130,7 +130,7 @@ function processRefreshChoice(result) {
 		"<div id=\"selectedChoice\">" +  
 		"<form name=\"reactionForm\" method=\"get\">" + 
 		"<h2>" + choiceTitle + "</h2>" +
-		"<input type= \"button\" value= \"Refresh Choice\"  onClick=\"handleRefreshChoiceClick(this)\"><br>";
+		"<input type= \"button\" value= \"Refresh Choice\"  onClick=\"handleRefreshChoiceClick(this)\"><br><br>";
 		
 		for(i = 0; i < alternatives.length; i++){
 			//if an alt is not null
@@ -148,25 +148,25 @@ function processRefreshChoice(result) {
 			var disapprovers = alternatives[i]["disapprovers"];
 			
 			output = output + 
-			"<h3>Approvers" + approvers.length + "</h3>" +
-			  "<p>";
+			"<p># of Approvers: " + approvers.length + "</p>" +
+			  "<p.a>";
 			  
-			  for(i = 0; i < approvers.length; i++){
-				  if(approvers[i] != null){
-					output = output + approvers[i] + "<br>";
+			  for(j = 0; j < approvers.length; j++){
+				  if(approvers[j] != null){
+					output = output + approvers[j] + "<br>";
 					}
 			  }
 			  output = output +
 			  "</p>" +	
-			  "<h3>Disapprovers" + disapprovers.length + "</h3>" + 
-			  "<p>";
-			  for(i = 0; i < disapprovers.length; i++){
-				  if(disapprovers[i] != null){
-					output = output +disapprovers[i] + "<br>";
+			  "<p># of Disapprovers: " + disapprovers.length + "</p>" + 
+			  "<p.a>";
+			  for(k = 0; k < disapprovers.length; k++){
+				  if(disapprovers[k] != null){
+					output = output +disapprovers[k] + "<br>";
 					}
 			  }
 			  output + output +
-			  "</p>" ;
+			  "<br></p>" ;
 			
 			}
 		}
