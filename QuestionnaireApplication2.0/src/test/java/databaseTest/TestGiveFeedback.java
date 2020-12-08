@@ -14,9 +14,9 @@ public class TestGiveFeedback {
 	@Test
 	public void test() {
 		DAO dao = new DAO();
-		String memberID ="03ea1a71-fa8c-4b41-9d62-f4fd54e5908d"; //iceiking981
-		String altid="b654273c-a5b6-4598-91db-bcd2fcd4054f";
-		String feedback="I am very happy";
+		String memberID ="13eba7d4-905f-47c3-9505-ba841ba7fdb5"; //iceiking981
+		String altid="006729fb-830d-4ba5-b7f0-e829234d9673";
+		String feedback="I am very happy2";
 		Feedback fb = null;
 		try {
 			fb = dao.giveFeedback(memberID,altid, feedback);

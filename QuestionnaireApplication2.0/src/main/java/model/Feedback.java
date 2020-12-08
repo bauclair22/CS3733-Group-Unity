@@ -10,10 +10,10 @@ public class Feedback {
 	String memberName;
 	String altID;
 	String description;
-	Timestamp timestamp;
+	String timestamp;
 	//Calendar calendar;
 	
-	public Feedback(String memberName, String altID, String description, Timestamp timeStamp2) {
+	public Feedback(String memberName, String altID, String description, String timeStamp2) {
 		this.memberName = memberName;
 		this.altID= altID;
 		this.description = description;
@@ -28,7 +28,7 @@ public class Feedback {
 		return description;
 	}
 
-	public Timestamp getTimestamp() {
+	public String getTimestamp() {
 		return this.timestamp;
 	}
 	
@@ -39,8 +39,8 @@ public class Feedback {
 				+ disapprovers + ", feedback=" + feedback + "]";
 		*/
 		String time = "";
-		if(timestamp != null) {time = timestamp.toString();}
 		
-		return "[" + memberName + description + time + "]";
+		
+		return "[" + memberName + description + timestamp + "]";
 	}
 }
