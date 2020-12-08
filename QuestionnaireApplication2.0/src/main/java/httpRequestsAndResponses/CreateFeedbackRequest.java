@@ -1,24 +1,26 @@
 package httpRequestsAndResponses;
 
 public class CreateFeedbackRequest {
-	String memberName;
+	String memberID;
+	String altid;
 	String description;
 	
 	public CreateFeedbackRequest() {
 		
 	}
 
-	public CreateFeedbackRequest(String memberName, String description) {
-		this.memberName = memberName;
+	public CreateFeedbackRequest(String memberID, String altid, String description) {
+		this.memberID = memberID;
+		this.altid = altid;
 		this.description = description;
 	}
 
-	public String getMemberName() {
-		return memberName;
+	public String getMemberID() {
+		return memberID;
 	}
 
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
+	public void setMemberName(String memberID) {
+		this.memberID = memberID;
 	}
 
 	public String getDescription() {
@@ -31,6 +33,14 @@ public class CreateFeedbackRequest {
 	
 	@Override
 	public String toString() {
-		return "CreateFeedbackRequest("+memberName + "," + description + ")";
+		return "CreateFeedbackRequest("+memberID + "," + altid + "," + description + ")";
+	}
+
+	public String getAltid() {
+		return altid;
+	}
+
+	public void setAltid(String altid) {
+		this.altid = altid;
 	}
 }

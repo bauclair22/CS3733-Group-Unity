@@ -1,17 +1,22 @@
 package httpRequestsAndResponses;
 
+import model.Feedback;
+
 public class CreateFeedbackResponse {
-	public String response;
+	public Feedback response;
+	public String errorMessage;
 	public final int httpCode;
 	
-	public CreateFeedbackResponse (String s, int code) {
-		this.response = s;
+	public CreateFeedbackResponse (String errorMessage, int code) {
+		this.response = null;
 		this.httpCode = code;
+		this.errorMessage = errorMessage;
 	}
 	
-	public CreateFeedbackResponse (String s) {
-		this.response = s;
+	public CreateFeedbackResponse (Feedback f) {
+		this.response = f;
 		this.httpCode = 200;
+		this.errorMessage = "";
 	}
 	
 	public String toString() {
