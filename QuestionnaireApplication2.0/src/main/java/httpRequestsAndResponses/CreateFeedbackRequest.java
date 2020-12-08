@@ -19,7 +19,7 @@ public class CreateFeedbackRequest {
 		return memberID;
 	}
 
-	public void setMemberName(String memberID) {
+	public void setMemberID(String memberID) {
 		this.memberID = memberID;
 	}
 

@@ -163,7 +163,7 @@ public class DAO {
                 Timestamp time = resultSet.getTimestamp("time");
                 String comment = resultSet.getString("feedback");
                 String name = resultSet.getString("name");
-                Feedback f = new Feedback(name,altid, comment,time);
+                Feedback f = new Feedback(name,altid, comment,time.toString());
                 feedback.add(f);
             }
             resultSet.close();
@@ -413,11 +413,19 @@ public class DAO {
     }
     
     //when old choices are deleted do they have to have been completed?
-    public List<ChoiceReport> deleteStaleChoices(Timestamp expiration) throws Exception { 
+    public List<ChoiceReport> deleteStaleChoices(float n) throws Exception { 
+    	Timestamp expiration = getExpirationDate(n);
     	boolean deleted = false;
     	List<ChoiceReport> choiceReports = null;
+    	/*try {
+    		PreparedStatement ps = conn.prepareStatement("Set SQL_SAFE_UPDATES =0;");
+    		ps.execute();
+            ps.close();
+    	} catch (Exception e) {
+            throw new Exception("Failed to disable safe uodate: " + e.getMessage());
+        }*/
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblchoices +  "WHERE DateCreated > ?;"); 
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblchoices +  " WHERE DateCreated <=?;"); 
             ps.setTimestamp(1, expiration);
             ps.executeUpdate();
             ps.close();
@@ -553,12 +561,23 @@ public class DAO {
              ps.close();
              
              String name= getUserNameWithID(memberID);
-             fb = new Feedback(name,altid,feedback, ts);
+             fb = new Feedback(name,altid,feedback, ts.toString());
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("Failed in getting Feedback: " + e.getMessage());
         }
         return fb;
+    }
+    
+    public Timestamp getExpirationDate(float days) {
+		LocalDateTime myTime = LocalDateTime.now();
+		Timestamp today= Timestamp.valueOf(myTime);
+		float milli = 86400000 * days;
+		long milliseconds = (long) milli;
+		long time = today.getTime()- milliseconds;
+		Timestamp expiration = new Timestamp(time);
+		
+		return expiration;
     }
 
 }
