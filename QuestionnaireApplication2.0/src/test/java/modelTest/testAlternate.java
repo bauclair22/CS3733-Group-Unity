@@ -25,12 +25,12 @@ public class testAlternate {
 		Ben = new TeamMember("Ben","Ten");
 		David = new TeamMember("David", "password");
 		Bob = new TeamMember("Bob");
-		fromDavid = new Feedback("David", "Yeah No", (Timestamp) null);
+		fromDavid = new Feedback("David", "id76",  "I think your idea is bad", (Timestamp) null);
 		
-		alt = new Alternative("alt1" , 0);
-		alt.addApprover(Bob);
-		alt.addApprover(David);
-		alt.addDisapprover(Ben);
+		alt = new Alternative("alt1" ,"id76");
+		alt.addApprover("Bob");
+		alt.addApprover("David");
+		alt.addDisapprover("Ben");
 		alt.addFeedback(fromDavid);
 	}
 	
@@ -44,13 +44,13 @@ public class testAlternate {
 		assertTrue(alt.getDisapprovers().size() == 1);
 		
 		//make sure that the teamMembers are in the right list
-		assertTrue(alt.getApprovers().contains(Bob));
-		assertTrue(alt.getApprovers().contains(David));
-		assertFalse(alt.getApprovers().contains(Ben));
+		assertTrue(alt.getApprovers().contains("Bob"));
+		assertTrue(alt.getApprovers().contains("David"));
+		assertFalse(alt.getApprovers().contains("Ben"));
 		
-		assertFalse(alt.getDisapprovers().contains(Bob));
-		assertFalse(alt.getDisapprovers().contains(David));
-		assertTrue(alt.getDisapprovers().contains(Ben));
+		assertFalse(alt.getDisapprovers().contains("Bob"));
+		assertFalse(alt.getDisapprovers().contains("David"));
+		assertTrue(alt.getDisapprovers().contains("Ben"));
 	}
 
 }

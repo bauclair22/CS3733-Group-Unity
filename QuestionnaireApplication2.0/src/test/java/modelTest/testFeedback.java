@@ -14,8 +14,8 @@ public class testFeedback {
 		@Test
 		public void feedbackConstructor() {
 			
-			Feedback f = new Feedback("Bob", "hi", null);
-			assertTrue(f.getDescription() == "hi");
+			Feedback f = new Feedback("Bob", "ID2132","your idea is still bad",(Timestamp) null);
+			assertTrue(f.getDescription() == "your idea is still bad");
 			assertTrue(f.getMemberName() == "Bob");
 		}
 
