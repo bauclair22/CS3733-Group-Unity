@@ -1,5 +1,17 @@
 
 /**
+ * Loads the create choice form
+ * @param e event
+ * @returns
+ * the creat choice form
+ */
+function loadCreateChoiceForm(e){
+	//if we have time I would like to have the choice only be displayed when in use.
+}
+
+
+
+/**
  * Respond to server JSON object. And Gives the Choice ID
  *
  */
@@ -18,22 +30,30 @@ function processCreateChoiceResponse(result) {
   if (status == 200) {
     // Update computation result
 	  document.getElementById("choiceID_new").innerHTML = id;
+	  document.getElementById("choiceID_meta").content = id;
+	  var choiceID_Meta = document.getElementById("choiceID_meta").content;
+	  if(choiceID_Meta != "0"){
+		  console.log("update to choice meta as been successful: " + choiceID_Meta )
+	  }
   } else {
     var msg = js["error"];
-    document.getElementById("choiceID_new").innerHTML = "error";
+    document.getElementById("choiceID_new").innerHTML = "Sorry, there seems to be an issue with your submission. Try Again.";
   }
-  //refreshChoicesList();
+  
 }
 
-
-
-
-
-
-
+/**
+ * After the user has filled out the form, the data is sent back to get a response back
+ * input: 	"description"
+ * 			"numMembers"
+ * output:	"response"  -> choice id
+ * 			"httpCode"
+ * 			"error messages"
+ * 
+ */
 function handleCreateClick(e) {
 	console.log("Starting to porcess Choice");
-	document.getElementById("choiceID_new").innerHTML = "Processing our choice..wait for a moment";
+	document.getElementById("choiceID_new").innerHTML = "Processing our choice..please wait for a moment";
 	
   var form = document.createChoiceForm;
  

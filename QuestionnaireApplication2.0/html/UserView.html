@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>UserView</title>
+	<meta charset="ISO-8859-1">
+	<meta id = "choiceID_meta" content = "0">
+	<meta id = "memberID_meta" content = "0">
+	<meta id = "altID_meta" content = "0">	
+	<style>
+	p.a {
+		text-indent: 30px;
+	}
+	</style>
+	<title>UserView</title>
 </head>
 
 <script type='text/javascript' src='../js/api.js'></script>
@@ -12,16 +20,13 @@
 <script type='text/javascript' src='../js/updatingAlt.js'></script>
 
 <script type="text/javascript">
-function initialize() {
-  
-  // show how the choice will be displayed after the user signs in
-  //processRefreshChoice("n/a");
-  //updateAltDisplay("testing");
-}
+	function initialize() {
+	  
+	  // show how the choice will be displayed after the user signs in
+	  //processRefreshChoice("n/a");
+	  //updateAltDisplay("testing");
+	}
 </script>
-
-
-
 
 <body onload="initialize()">
 
@@ -39,6 +44,8 @@ function initialize() {
  	<input type="button" value="Sign In"  onClick="handleCreateMemberClick(this)">
 </form>
 
+<p id= "SignInMessage"></p>
+	
 <h2>Create A Choice</h2>
 
 <form name="createChoiceForm" method="post">
@@ -50,8 +57,7 @@ function initialize() {
     -->
 
     <label for="DescriptionInput">Choice Description:</label><br>
-    <textarea name="dInput" id="dInput" maxlength = "280" rows="4" cols="50">
-    </textarea><br><br>
+    <textarea name="dInput" id="dInput" maxlength = "280" rows="4" cols="50"></textarea><br><br>
 
     <label for="MaxUsers">Max Users:</label>
     <input name="maxUsers" value="" id="maxUsers"/><br><br>
@@ -60,16 +66,12 @@ function initialize() {
     
     <label for="Alternate1">(Required)Alternate 1:</label>
     <input name=alt1 id = "alt1" value=""/><br><br>
-
     <label for="Alternate2">(Required)Alternate 2:</label>
     <input name=alt2 id = "alt2" value=""/><br><br>
-    
     <label for="Alternate3">(Optional)Alternate 3:</label>
     <input name=alt3 id = "alt3" value=""/><br><br>
-
     <label for="Alternate4">(Optional)Alternate 4:</label>
     <input name=alt4 id = "alt4" value=""/><br><br>
-
     <label for="Alternate5">(Optional)Alternate 5:</label>
     <input name=alt5 id = "alt5" value=""/><br><br>
  
@@ -83,27 +85,18 @@ function initialize() {
 <label>Alt ID</label>
     <p id = "altID">Location of Alt Ids</p>
    
-
 <div id="selectedChoice" name="selectedChoice"></div>
 
 <h2>Feedback</h2>
 
-<!--  <form name="feedbackForm" method="post"> -->
 
-<!-- <h3 id="selectedViewAlternative">Alternative 1</h3> -->
-
-<!--  <label>Approvers</label> -->
 <div id="approvers"><p>All the Approvers and Disapprovers Go Here...<p></div>
-
-<!-- 
-<label>Disapprovers</label>
-<div id="disapprovers"><p>All the Disapprovers Go Here...</p><div>
- -->
+<div id="feedback">></div>
 
 
 <!-- Missing Currently is the ability to add feedback. Just Worry About the  other features -->
 
-</form>
+
 
 </body>
 </html>

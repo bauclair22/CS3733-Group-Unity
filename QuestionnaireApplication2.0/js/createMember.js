@@ -8,9 +8,10 @@ function processCreateMemberResponse(result) {
 
 function handleCreateMemberClick(e) {
   var form = document.SignInForm;
- 
+  var formMessage = document.getElementById("SignInMessage");
   var data = {};
   
+  formMessage.innerHTML = "Wait as we process your information";
   //convert everything that was in the hmtl form to the lamda
   
   //data["title"] = form.titleInput.value;
@@ -34,10 +35,12 @@ function handleCreateMemberClick(e) {
     console.log(xhr.request);
     if (xhr.readyState == XMLHttpRequest.DONE) {
     	 if (xhr.status == 200) {
-	      console.log ("XHR:" + xhr.responseText);
-	      processCreateMemberResponse(xhr.responseText);
+    		 console.log ("XHR:" + xhr.responseText);
+    		 formMessage.innerHTML = "Welcome " + form.username.value;
+    		 processCreateMemberResponse(xhr.responseText);
     	 } else {
     		 console.log("issue with adding member - login -")
+    		 formMessage.innerHTML = "There seems to be an issue with your sign in";
 			  //var js = JSON.parse(xhr.responseText);
 			  //var err = js["response"];
 			  //alert (err);
