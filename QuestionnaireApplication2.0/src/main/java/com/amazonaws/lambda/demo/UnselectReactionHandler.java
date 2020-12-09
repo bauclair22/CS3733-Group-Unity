@@ -33,6 +33,8 @@ public class UnselectReactionHandler implements RequestHandler<UnselectReactionR
 			if(dao.deleteReaction(req.getmemberID() ,req.getAltid())) {
 				
 				response = new UnselectReactionResponse(dao.getAlternativewithID(req.getAltid()), 200);
+			} else {
+				response = new UnselectReactionResponse(422, "Failed to delete reaction");
 			}
 			
 			//Return error message if an exception is caught

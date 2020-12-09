@@ -36,7 +36,7 @@ public class SelectApprovalHandler implements RequestHandler<SelectApprovalReque
 				response = new SelectApprovalResponse(dao.getAlternativewithID(req.getAltid()), 200);
 			}
 			else {
-				response = new SelectApprovalResponse(404, "User can't approve this alternative");
+				response = new SelectApprovalResponse(404, "Failed to add approver");
 			}
 			
 			//Return error message if an exception is caught

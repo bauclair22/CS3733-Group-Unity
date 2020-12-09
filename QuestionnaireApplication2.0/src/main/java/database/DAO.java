@@ -129,7 +129,7 @@ public class DAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception("Failed in getting constant: " + e.getMessage());
+            throw new Exception("Failed in getting approvers: " + e.getMessage());
         }
     }
 
@@ -157,7 +157,7 @@ public class DAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception("Failed in getting constant: " + e.getMessage());
+            throw new Exception("Failed in getting disapprovers: " + e.getMessage());
         }
     }
 
@@ -185,7 +185,7 @@ public class DAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception("Failed in getting constant: " + e.getMessage());
+            throw new Exception("Failed in getting feedback: " + e.getMessage());
         }
     }
 
@@ -250,7 +250,6 @@ public class DAO {
 
     	boolean flagMatchFound = false;
     	boolean added =false;
-    	if(canAdd(choiceid)) {
 	        try {
 	            PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblTeamMember + " WHERE name=? AND choiceID=?;");
 	            ps.setString(1,Username);
@@ -262,16 +261,16 @@ public class DAO {
 	                String correctPassword = resultSet.getString("password");
 	                if(correctPassword.contentEquals(password)) {
 	                	 added= true;
-	                }else {throw new Exception("Password is NOT NOT incorrect");}
+	                }else {throw new Exception("Password is incorrect");}
 	            }
 	            resultSet.close();
 	            ps.close();
 	
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	            throw new Exception("Failed in getting constant: " + e.getMessage());
+	            throw new Exception("Failed in adding user: " + e.getMessage());
 	        }
-	        if(!flagMatchFound) {
+	        if(!flagMatchFound && canAdd(choiceid)) { 
 	        	try {
 	                String query = "INSERT INTO " + tblTeamMember + "  VALUES (?, ?, ?, ?);";
 	                String newMemberID = UUID.randomUUID().toString();
@@ -288,7 +287,6 @@ public class DAO {
 	                throw new Exception("Failed to update report: " + e.getMessage());
 	            }
 	        }
-    	}
         return added;
     }
     
@@ -318,7 +316,7 @@ public class DAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception("Failed in getting constant: " + e.getMessage());
+            throw new Exception("Failed in checking users: " + e.getMessage());
         }
     	return canadd;
     }
@@ -389,7 +387,7 @@ public class DAO {
             // already present?
             while (resultSet.next()) {
                 resultSet.close();
-                return false;
+                throw new Exception("User has already approved or disapproved this alternative");
             }
             ps = conn.prepareStatement("INSERT INTO " + tblReactions + " (idReaction, alternativeID, memberID, reaction) values(?,?,?,?);"); 
             String newID = UUID.randomUUID().toString();
@@ -402,7 +400,7 @@ public class DAO {
 
         } catch (Exception e) {
         	success=false;
-            throw new Exception("Failed to insert disapprover: " + e.getMessage());
+            throw new Exception("Failed to insert approver: " + e.getMessage());
         }
 	   return success;
     }
@@ -419,7 +417,7 @@ public class DAO {
             // already present?
             while (resultSet.next()) {
                 resultSet.close();
-                return false;
+                throw new Exception("User has already approved or disapproved this alternative");
             }
             ps = conn.prepareStatement("INSERT INTO " + tblReactions + " (idReaction, alternativeID, memberID, reaction) values(?,?,?,?);"); 
             String newID = UUID.randomUUID().toString();
@@ -471,7 +469,7 @@ public class DAO {
 
         } catch (Exception e) {
         	success= false;
-            throw new Exception("Failed to compleate choice: " + e.getMessage());
+            throw new Exception("Failed to complete choice: " + e.getMessage());
         }
         return success;
     }
