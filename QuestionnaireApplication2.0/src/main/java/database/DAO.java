@@ -270,7 +270,7 @@ public class DAO {
 	            e.printStackTrace();
 	            throw new Exception("Failed in adding user: " + e.getMessage());
 	        }
-	        if(!flagMatchFound && canAdd(choiceid)) { 
+	        if(!flagMatchFound && canAdd(choiceid) && !isCompleted(choiceid)) { 
 	        	try {
 	                String query = "INSERT INTO " + tblTeamMember + "  VALUES (?, ?, ?, ?);";
 	                String newMemberID = UUID.randomUUID().toString();
@@ -478,6 +478,7 @@ public class DAO {
     //returns true if a choice is completed
     public boolean isCompleted( String choiceID) throws Exception {
     	boolean isCompleted = false;
+    	boolean choiceExists =false;
     	int data =0;
         try {
         	PreparedStatement ps = conn.prepareStatement("SELECT isCompleted FROM " + tblchoices + " Where idChoice= ?"); 
@@ -485,7 +486,9 @@ public class DAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 data  = resultSet.getInt("isCompleted");
+                choiceExists=true;
             }
+            if(!choiceExists) {throw new Exception("The choice does NOT exist");}
             if(data==1) {isCompleted = true;}
 
         } catch (Exception e) {
