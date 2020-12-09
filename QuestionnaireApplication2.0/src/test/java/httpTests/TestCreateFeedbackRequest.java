@@ -15,12 +15,21 @@ public class TestCreateFeedbackRequest {
 		cfr.setDescription("description");
 		assertEquals("description", cfr.getDescription());
 		
-		cfr.setMemberName("TestName");
-		assertEquals("TestName", cfr.getMemberName());
+		cfr.setMemberID("TestName");
+		assertEquals("TestName", cfr.getMemberID());
 		
-		cfr = new CreateFeedbackRequest("TestName", "description");
+		cfr.setAltid("Altid");
+		assertEquals("Altid", cfr.getAltid());
+		
+		cfr.setChoiceID("ChoiceID");
+		assertEquals("ChoiceID", cfr.getChoiceID());
+		
+		
+		cfr = new CreateFeedbackRequest("TestName", "Altid", "description","ChoiceID");
 		assertEquals("description", cfr.getDescription());
-		assertEquals("TestName", cfr.getMemberName());
+		assertEquals("TestName", cfr.getMemberID());
+		assertEquals("Altid", cfr.getAltid());
+		assertEquals("ChoiceID", cfr.getChoiceID());
 	}
 
 }
