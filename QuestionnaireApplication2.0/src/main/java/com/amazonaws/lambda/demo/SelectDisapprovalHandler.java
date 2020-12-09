@@ -11,6 +11,7 @@ import httpRequestsAndResponses.SelectApprovalRequest;
 import httpRequestsAndResponses.SelectApprovalResponse;
 import httpRequestsAndResponses.SelectDisapprovalRequest;
 import httpRequestsAndResponses.SelectDisapprovalResponse;
+import model.Choice;
 import model.TeamMember;
 
 public class SelectDisapprovalHandler implements RequestHandler<SelectDisapprovalRequest, SelectDisapprovalResponse> {
@@ -31,7 +32,8 @@ public class SelectDisapprovalHandler implements RequestHandler<SelectDisapprova
 		//Check if user has already liked or disliked this alternative
 		 try {
 			if(dao.addDisapprover(req.getmemberID() ,req.getAltid())) {
-				response = new SelectDisapprovalResponse(dao.getAlternativewithID(req.getAltid()), 200);
+				Choice myChoice = dao.getChoiceswithID(req.getChoiceID());
+				response = new SelectDisapprovalResponse(myChoice, 200);
 			}
 			else {
 				response = new SelectDisapprovalResponse(404, "Failed to add disapprover");

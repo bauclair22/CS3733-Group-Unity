@@ -11,6 +11,7 @@ import httpRequestsAndResponses.SelectApprovalRequest;
 import httpRequestsAndResponses.SelectApprovalResponse;
 import httpRequestsAndResponses.UnselectReactionRequest;
 import httpRequestsAndResponses.UnselectReactionResponse;
+import model.Choice;
 import model.TeamMember;
 
 public class UnselectReactionHandler implements RequestHandler<UnselectReactionRequest, UnselectReactionResponse> {
@@ -31,8 +32,8 @@ public class UnselectReactionHandler implements RequestHandler<UnselectReactionR
 		//Check if user has already liked or disliked this alternative
 		 try {
 			if(dao.deleteReaction(req.getmemberID() ,req.getAltid())) {
-				
-				response = new UnselectReactionResponse(dao.getAlternativewithID(req.getAltid()), 200);
+				Choice myChoice = dao.getChoiceswithID(req.getChoiceID());
+				response = new UnselectReactionResponse(myChoice, 200);
 			} else {
 				response = new UnselectReactionResponse(422, "Failed to delete reaction");
 			}
