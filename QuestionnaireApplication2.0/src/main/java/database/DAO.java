@@ -41,6 +41,8 @@ public class DAO {
         }
     }
 
+    //input Choice id
+    //returns choice object complete will all the alternatives and the alternatives have reactions and feedback
     public Choice getChoiceswithID(String ID) throws Exception {
 
         try {
@@ -63,10 +65,13 @@ public class DAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception("Failed in getting constant: " + e.getMessage());
+            throw new Exception("Failed in getting choice: " + e.getMessage());
         }
     }
 
+    
+    //input choiceId
+    //returns all the alternatives of the choice inputed, alternatives have reactions and feedback
     public Alternative[] getChoiceAlternatives(String choiceid) throws Exception {
 
         try {
@@ -96,10 +101,13 @@ public class DAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception("Failed in getting constant: " + e.getMessage());
+            throw new Exception("Failed in getting alternatives: " + e.getMessage());
         }
     }
 
+    
+    //input alternative ID
+    //returns a list of srtings with the name of the usere's who liked the alternative
     public ArrayList<String> getLikedBy(String altid) throws Exception {
 
         try {
@@ -125,6 +133,8 @@ public class DAO {
         }
     }
 
+    //input alternative ID
+    //returns a list of srtings with the name of the usere's who disliked the alternative
     public ArrayList<String> getDislikedBy(String altid) throws Exception {
 
         try {
@@ -151,6 +161,8 @@ public class DAO {
         }
     }
 
+    //input alternative id
+    //returns a list with the feedback objects of the alternative
     public ArrayList<Feedback> getAlternativesFeedback(String altid) throws Exception {
 
         try {
@@ -177,7 +189,8 @@ public class DAO {
         }
     }
 
-
+    
+    //stores a choice in the database and returns the choice ID randomly assigned to it
     public String createChoice(int maxUsers, String description, String[] titleAlt) throws Exception {
     	String newID =null;
     	boolean flag = true;
@@ -212,6 +225,7 @@ public class DAO {
         return newID;
     }
     
+    //stores the alternative in the database and returns the alternative id randomly assigned to it
     public String createAlternative(String title, String choiceID) throws Exception {
     	String newID;
         try {
@@ -231,6 +245,7 @@ public class DAO {
         return newID;
     }
     
+    //stores a new user, if that user already exists and the password is correct nothing happens, if if the password is incorrect throws an error
     public boolean addUser(String Username, String password, String choiceid) throws Exception {
 
     	boolean flagMatchFound = false;
@@ -277,6 +292,7 @@ public class DAO {
         return added;
     }
     
+    //checks if there is space for a user to be added to choice without exceeding the user limit
     public boolean canAdd(String ChoiceID) throws Exception {
     	boolean canadd = false;
     	int participating=0;
@@ -307,7 +323,7 @@ public class DAO {
     	return canadd;
     }
     
-    
+    //deletes a reaction and returns a boolean of weather the delete was successful
     public boolean deleteReaction(String memberID, String altid) throws Exception {
         try {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblReactions +  " WHERE memberID=? AND alternativeID=?;"); 
@@ -323,6 +339,7 @@ public class DAO {
         }
     }
     
+    //returns a list of choiceReports including all the choices in existence
     public List<ChoiceReport> getAllChoices() throws Exception {
         
         List<ChoiceReport> allChoices = new ArrayList<>();
@@ -344,6 +361,7 @@ public class DAO {
         }
     }
     
+    //used by getAllChoices to create the choiceReport object
     private ChoiceReport generateChoice(ResultSet resultSet) throws Exception {
     	//String description = resultSet.getString("description");
     	//Need something here to create the alternatives in the choice or need to change the choice constructor
@@ -359,8 +377,9 @@ public class DAO {
         return new ChoiceReport (ID, isCompleted, s);
     }
     
-    
+   //adds a new record of an approver to the database and returns a boolean of weather it succeed
    public boolean addApprover(String memberID, String altid) throws Exception {
+	   boolean success = false;
 	   try {
 		    PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID = ? AND alternativeID = ?;");
             ps.setString(1, memberID);
@@ -379,14 +398,18 @@ public class DAO {
             ps.setString(3, memberID);
             ps.setString(4, "Like");
             ps.execute();
-            return true;
+            success=true;
 
         } catch (Exception e) {
+        	success=false;
             throw new Exception("Failed to insert disapprover: " + e.getMessage());
         }
+	   return success;
     }
 
+   //adds a new record of a disapprover to the database and returns a boolean of weather it succeed
     public boolean addDisapprover(String memberID, String altid) throws Exception {
+    	boolean success = false;
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID =? AND alternativeID =?;");
             ps.setString(1, memberID);
@@ -405,25 +428,21 @@ public class DAO {
             ps.setString(3, memberID);
             ps.setString(4, "Dislike");
             ps.execute();
-            return true;
+            success =true;
 
         } catch (Exception e) {
+        	success=false;
             throw new Exception("Failed to insert disapprover: " + e.getMessage());
         }
+        return success;
     }
     
-    //when old choices are deleted do they have to have been completed?
+    //Deletes all choices n days old an returns an updated list of choiceReports
     public List<ChoiceReport> deleteStaleChoices(float n) throws Exception { 
     	Timestamp expiration = getExpirationDate(n);
     	boolean deleted = false;
     	List<ChoiceReport> choiceReports = null;
-    	/*try {
-    		PreparedStatement ps = conn.prepareStatement("Set SQL_SAFE_UPDATES =0;");
-    		ps.execute();
-            ps.close();
-    	} catch (Exception e) {
-            throw new Exception("Failed to disable safe uodate: " + e.getMessage());
-        }*/
+    	
         try {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblchoices +  " WHERE DateCreated <=?;"); 
             ps.setTimestamp(1, expiration);
@@ -440,19 +459,25 @@ public class DAO {
          return choiceReports;
     }
     
+    //completes choice and returns a boolean of if it was successful
     public boolean completeChoice( String choiceID) throws Exception {
+    	boolean success = false;
         try {
         	PreparedStatement ps = conn.prepareStatement("UPDATE " + tblchoices + " set isCompleted = ? Where idchoice = ?"); 
             ps.setInt(1, 1);
             ps.setString(2, choiceID);
             ps.execute();
-            return true;
+            success=true;
 
         } catch (Exception e) {
+        	success= false;
             throw new Exception("Failed to compleate choice: " + e.getMessage());
         }
+        return success;
     }
     
+    //checks if the given choice is completed
+    //returns true if a choice is completed
     public boolean isCompleted( String choiceID) throws Exception {
     	boolean isCompleted = false;
     	int data =0;
@@ -471,7 +496,8 @@ public class DAO {
         return isCompleted;
     }
     
-    
+    //gets an alternative object with ID
+    //*add reactions and feedback
     public Alternative getAlternativewithID(String ID) throws Exception {
     	int counter =0;
     	Alternative alt = null;
@@ -507,6 +533,8 @@ public class DAO {
         }
     }
     
+    //returns user ID from name and choiceID
+    //I could just return user id when we create a user and we may not need this function
     public String getUserID(String username, String choiceID) throws Exception {
     	String memberID="";
     	try {
@@ -527,6 +555,7 @@ public class DAO {
         }
     }
     
+    //returns the name of the user form a given ID
     public String getUserNameWithID(String ID) {
     	String name="";
          try {
@@ -545,6 +574,7 @@ public class DAO {
         return name;
     }
     
+    //stores a feedback in the database and returns that feedback in object form
     public Feedback giveFeedback(String memberID,String altid, String feedback) throws Exception {
     	Feedback fb = null;
         try {
@@ -569,6 +599,8 @@ public class DAO {
         return fb;
     }
     
+    //given the number of days imputed, will return a Timestamp that is that number of days before the current time
+    //used by the function that deletes stale choices
     public Timestamp getExpirationDate(float days) {
 		LocalDateTime myTime = LocalDateTime.now();
 		Timestamp today= Timestamp.valueOf(myTime);
