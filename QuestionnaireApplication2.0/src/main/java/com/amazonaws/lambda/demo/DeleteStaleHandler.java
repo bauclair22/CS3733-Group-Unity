@@ -10,10 +10,12 @@ import com.amazonaws.services.s3.AmazonS3;
 import database.DAO;
 import httpRequestsAndResponses.DeleteStaleRequest;
 import httpRequestsAndResponses.DeleteStaleResponse;
+import httpRequestsAndResponses.ProduceReportResponse;
 import model.ChoiceReport;
 
 public class DeleteStaleHandler implements RequestHandler<DeleteStaleRequest, DeleteStaleResponse> {
-
+	//DeleteStaleResponse
+	
 	LambdaLogger logger;
 
 	private AmazonS3 s3 = null;
@@ -26,7 +28,7 @@ public class DeleteStaleHandler implements RequestHandler<DeleteStaleRequest, De
 		// Create new ChoiceDAO
 		// Check if correct number of alternatives and alternativeTitles
 
-		if (daysOld>= 0) {
+		if (daysOld >= 0) {
 			DAO dao = new DAO();
 			return dao.deleteStaleChoices(daysOld);
 		}
@@ -43,12 +45,12 @@ public class DeleteStaleHandler implements RequestHandler<DeleteStaleRequest, De
 		try {
 			List<ChoiceReport> myID = deleteStale(req.getDaysOld());
 			if (myID != null) {
-				response = new DeleteStaleResponse(myID.toString());
+				response = new DeleteStaleResponse(myID, 200);
 			} else {
-				response = new DeleteStaleResponse("Unable to delete Stale", 422);
+				response = new DeleteStaleResponse(442,"Unable to delete Stale");
 			}
 		} catch (Exception e) {
-			response = new DeleteStaleResponse("Unable to delete stale: " + "(" + e.getMessage() + ")", 400);
+			response = new DeleteStaleResponse(400, "Unable to delete stale: " + "(" + e.getMessage() + ")");
 		}
 
 		return response;
