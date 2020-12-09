@@ -1,7 +1,6 @@
 package httpRequestsAndResponses;
 
 import model.Choice;
-import model.Feedback;
 
 public class CreateFeedbackResponse {
 	public Choice choice;
@@ -21,6 +20,11 @@ public class CreateFeedbackResponse {
 	}
 	
 	public String toString() {
-		return "Response(" + choice + ")";
+		if(httpCode == 200) {
+			return "Response(" + choice + ")";
+		}
+		else {
+			return "ErrorResult(" + httpCode + ", err=" + ")";
+		}
 	}
 }
