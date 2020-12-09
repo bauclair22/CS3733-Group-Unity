@@ -4,15 +4,17 @@ public class CreateFeedbackRequest {
 	String memberID;
 	String altid;
 	String description;
+	String choiceID;
 	
 	public CreateFeedbackRequest() {
 		
 	}
 
-	public CreateFeedbackRequest(String memberID, String altid, String description) {
+	public CreateFeedbackRequest(String memberID, String altid, String description, String choiceID) {
 		this.memberID = memberID;
 		this.altid = altid;
 		this.description = description;
+		this.choiceID = choiceID;
 	}
 
 	public String getMemberID() {
@@ -33,7 +35,15 @@ public class CreateFeedbackRequest {
 	
 	@Override
 	public String toString() {
-		return "CreateFeedbackRequest("+memberID + "," + altid + "," + description + ")";
+		return "CreateFeedbackRequest("+memberID + "," + altid + "," + description + "," + choiceID + ")";
+	}
+
+	public String getChoiceID() {
+		return choiceID;
+	}
+
+	public void setChoiceID(String choiceID) {
+		this.choiceID = choiceID;
 	}
 
 	public String getAltid() {

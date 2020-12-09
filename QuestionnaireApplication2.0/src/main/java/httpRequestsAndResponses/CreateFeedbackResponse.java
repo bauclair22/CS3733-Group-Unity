@@ -1,9 +1,10 @@
 package httpRequestsAndResponses;
 
+import model.Choice;
 import model.Feedback;
 
 public class CreateFeedbackResponse {
-	public Feedback response;
+	public Choice response;
 	public String errorMessage;
 	public final int httpCode;
 	
@@ -13,8 +14,8 @@ public class CreateFeedbackResponse {
 		this.errorMessage = errorMessage;
 	}
 	
-	public CreateFeedbackResponse (Feedback f) {
-		this.response = f;
+	public CreateFeedbackResponse (Choice c) {
+		this.response = c;
 		this.httpCode = 200;
 		this.errorMessage = "";
 	}

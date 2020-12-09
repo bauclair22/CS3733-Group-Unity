@@ -10,6 +10,7 @@ import database.DAO;
 import httpRequestsAndResponses.SelectApprovalRequest;
 import httpRequestsAndResponses.SelectApprovalResponse;
 import httpRequestsAndResponses.SelectDisapprovalResponse;
+import model.Choice;
 import model.TeamMember;
 
 public class SelectApprovalHandler implements RequestHandler<SelectApprovalRequest, SelectApprovalResponse> {
@@ -32,8 +33,8 @@ public class SelectApprovalHandler implements RequestHandler<SelectApprovalReque
 		//Check if user has already liked or disliked this alternative
 		 try {
 			if(dao.addApprover(req.getmemberID() ,req.getAltid())) {
-
-				response = new SelectApprovalResponse(dao.getAlternativewithID(req.getAltid()), 200);
+				Choice myChoice = dao.getChoiceswithID(req.getChoiceID());
+				response = new SelectApprovalResponse(myChoice, 200);
 			}
 			else {
 				response = new SelectApprovalResponse(404, "Failed to add approver");

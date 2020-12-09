@@ -7,6 +7,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import database.DAO;
 import httpRequestsAndResponses.CreateFeedbackRequest;
 import httpRequestsAndResponses.CreateFeedbackResponse;
+import model.Choice;
 import model.Feedback;
 
 public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackRequest, CreateFeedbackResponse> {
@@ -27,12 +28,14 @@ public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackReque
     public CreateFeedbackResponse handleRequest(CreateFeedbackRequest req, Context context) {
     	 logger = context.getLogger();
          logger.log(req.toString());
+         DAO dao = new DAO();
 
          CreateFeedbackResponse response;
  		try {
  			Feedback myFeedback = createFeedback( req.getMemberID(), req.getAltid(), req.getDescription());
  			if (myFeedback != null) {
- 				response = new CreateFeedbackResponse(myFeedback);
+ 				Choice myChoice = dao.getChoiceswithID(req.getChoiceID());
+ 				response = new CreateFeedbackResponse(myChoice);
  			} else {
  				response = new CreateFeedbackResponse("Unable to create Feedback", 422);
  			}
