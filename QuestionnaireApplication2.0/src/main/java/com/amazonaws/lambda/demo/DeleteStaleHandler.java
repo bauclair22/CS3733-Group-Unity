@@ -30,6 +30,7 @@ public class DeleteStaleHandler implements RequestHandler<DeleteStaleRequest, De
 
 		if (daysOld >= 0) {
 			DAO dao = new DAO();
+			
 			return dao.deleteStaleChoices(daysOld);
 		}
 		// If parameters incorrect return false
@@ -44,7 +45,9 @@ public class DeleteStaleHandler implements RequestHandler<DeleteStaleRequest, De
 		DeleteStaleResponse response;
 		try {
 			List<ChoiceReport> myID = deleteStale(req.getDaysOld());
+			logger.log("myID: " + myID);
 			if (myID != null) {
+				
 				response = new DeleteStaleResponse(myID, 200);
 			} else {
 				response = new DeleteStaleResponse(442,"Unable to delete Stale");
