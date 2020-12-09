@@ -20,6 +20,7 @@ function handleProduceReport(e){
 	    	 }
 	    } else {
 	      printReport("N/A");
+	      console.log("issue with produceChoiceReport.js >> handleProduceReport ");
 	    }
 	  };
 
@@ -51,6 +52,7 @@ function clearCompletedChoices(e){
 	    	 }
 	    } else {
 	      printReport("N/A");
+	      console.log("issue with produceChoiceReport.js >> clearCompletedChoices ");
 	    }
 	  };
 }
@@ -70,16 +72,18 @@ function printReport(result){
 	var output = "";
 	
 	var choiceID;
+	var choiceDescription;
 	var isCompleted;
 	var dateCompleted;
 	
 	
 	output = output +
 	"<div id=\"choiceReport\"><table>" + 
-	"<tr><th>\"ChoiceID\"</th><th>\"isCompleted\"</th><th>\"dateCompleted\"</th></tr>";
+	"<tr><th>Choice ID</th><th>Choice Description</th><th>Completed?</th><th>Date Created</th></tr>";
 	
 	for(i = 0; i < choiceReport.length; i++){
 		choiceID = choiceReport[i]["choiceID"];
+		choiceDescription = choiceReport[i]["description"];
 		isCompleted = choiceReport[i]["isCompleted"];
 		dateCompleted = choiceReport[i]["dateCompleted"];
 		/*
@@ -94,6 +98,7 @@ function printReport(result){
 		output = output +
 		"<tr>" +
 		"<td>" + choiceID + "</td>" +
+		"<td>" + choiceDescription + "</td>" +
 		"<td>" + isCompleted + "</td>" +
 		"<td>" + dateCompleted + "</td>" +
 		"</tr>";

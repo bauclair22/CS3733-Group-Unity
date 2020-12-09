@@ -11,7 +11,11 @@ var unselectApprover_url = base_url + "/unselectreaction"; // post
 var selectDisapprover_url = base_url + "/selectdisapproval"; //post
 var unselectDisapprover_url = base_url + "/unselectreaction" ;// post
 
-var updateChoice_url = base_url + "updatechoice"; //post
+var updateChoice_url = base_url + "/updatechoice"; //post
+
+var addFeedback_url = base_url + "/createfeedback";  //post
+
+var clearCompleted_url = base_url + "/choicereport" //post
 
 
 

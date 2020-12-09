@@ -130,8 +130,9 @@ function processRefreshChoice(result) {
 		output = output +
 		"<div id=\"selectedChoice\">" +  
 		"<form name=\"reactionForm\" method=\"get\">" + 
-		"<h2>" + choiceTitle + "</h2>" +
-		"<input type= \"button\" value= \"Refresh Choice\"  onClick=\"handleRefreshChoiceClick(this)\"><br><br>";
+		"<input type= \"button\" value= \"&#128260;\"  onClick=\"handleRefreshChoiceClick(this)\"> +" +
+		"<div id=\"addFeedbackDiv\" name=\"addfeedbackDiv\"></div>" + 
+		"<h2>" + choiceTitle + "</h2>";
 		
 		for(i = 0; i < alternatives.length; i++){
 			//if an alt is not null
@@ -139,8 +140,14 @@ function processRefreshChoice(result) {
 				
 			//handles creating the headers for each choice	
 			output = output + 
-			"<input type=\"button\" id= \" alt1_agree\" name= \"alt1_agree\" value=\"^\"  onClick=\"handleApproverAltClick(this," + i + ")\">" +
-			"<input type=\"button\" id= \" alt1_disagree\" name= \"alt1_disagree\" value=\"v\"  onClick=\"handleDisapproverAltClick(this," + i + ")\">" +
+			//approver
+			//disapprover
+			//feedback
+			//formward feedback
+			"<input class=\"alt\" type=\"button\" value=\"&#9989;\"  onClick=\"handleApproverAltClick(this," + i + ")\">" +
+			"<input class=\"alt\" type=\"button\" value=\"&#10062;\"  onClick=\"handleDisapproverAltClick(this," + i + ")\">" +
+			"<input class=\"alt\" type=\"button\" value=\"&#128172;\"  onClick=\"openAddFeedbackForm(this," +  i + ")\">" + 
+			"<input class=\"alt\" type=\"button\" value=\"&#9193;\"  onClick=\"\">" + 
 			"<label>" + alternatives[i]["title"] + "</label>";
 			
 			
