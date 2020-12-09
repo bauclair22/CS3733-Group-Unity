@@ -1,5 +1,7 @@
 package com.amazonaws.lambda.demo;
 
+import java.util.List;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -8,6 +10,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import database.DAO;
 import httpRequestsAndResponses.DeleteStaleRequest;
 import httpRequestsAndResponses.DeleteStaleResponse;
+import model.ChoiceReport;
 
 public class DeleteStaleHandler implements RequestHandler<DeleteStaleRequest, DeleteStaleResponse> {
 
@@ -15,7 +18,7 @@ public class DeleteStaleHandler implements RequestHandler<DeleteStaleRequest, De
 
 	private AmazonS3 s3 = null;
 
-	String deleteStale(float daysOld) throws Exception {
+	List<ChoiceReport> deleteStale(float daysOld) throws Exception {
 
 		if (logger != null) {
 			logger.log("in deleteStale");
@@ -25,7 +28,7 @@ public class DeleteStaleHandler implements RequestHandler<DeleteStaleRequest, De
 
 		if (daysOld>= 0) {
 			DAO dao = new DAO();
-			//return dao.deleteStale(daysOld);
+			return dao.deleteStaleChoices(daysOld);
 		}
 		// If parameters incorrect return false
 		return null;
@@ -38,9 +41,9 @@ public class DeleteStaleHandler implements RequestHandler<DeleteStaleRequest, De
 
 		DeleteStaleResponse response;
 		try {
-			String myID = deleteStale(req.getDaysOld());
+			List<ChoiceReport> myID = deleteStale(req.getDaysOld());
 			if (myID != null) {
-				response = new DeleteStaleResponse(myID);
+				response = new DeleteStaleResponse(myID.toString());
 			} else {
 				response = new DeleteStaleResponse("Unable to delete Stale", 422);
 			}
