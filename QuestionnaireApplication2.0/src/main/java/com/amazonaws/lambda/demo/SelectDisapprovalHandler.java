@@ -34,7 +34,7 @@ public class SelectDisapprovalHandler implements RequestHandler<SelectDisapprova
 				response = new SelectDisapprovalResponse(dao.getAlternativewithID(req.getAltid()), 200);
 			}
 			else {
-				response = new SelectDisapprovalResponse(404, "User can't disapprove this alternative");
+				response = new SelectDisapprovalResponse(404, "Failed to add disapprover");
 			}
 			
 			//Return error message if an exception is caught

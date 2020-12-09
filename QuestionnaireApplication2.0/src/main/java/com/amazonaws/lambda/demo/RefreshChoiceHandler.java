@@ -7,7 +7,6 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import database.DAO;
-import httpRequestsAndResponses.ProduceReportResponse;
 import httpRequestsAndResponses.RefreshChoiceRequest;
 import httpRequestsAndResponses.RefreshChoiceResponse;
 import model.Choice;
@@ -31,7 +30,11 @@ public LambdaLogger logger;
 		RefreshChoiceResponse response;
 		try {
 			Choice choice = getChoice(req.getChoiceID());
-			response = new RefreshChoiceResponse(choice, 200);
+			if (choice != null) {
+				response = new RefreshChoiceResponse(choice, 200);
+			} else {
+				response = new RefreshChoiceResponse(422, "Unable to get choice");
+			}
 		} catch (Exception e) {
 			response = new RefreshChoiceResponse(403, e.getMessage());
 		}
