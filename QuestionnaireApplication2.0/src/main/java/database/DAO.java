@@ -368,11 +368,12 @@ public class DAO {
     	boolean isCompleted = resultSet.getBoolean("isCompleted");
 		String ID = resultSet.getString("idChoice");
 		Timestamp date = resultSet.getTimestamp("DateCreated");
+		String desc=resultSet.getString("description");
 		String s = null;
 		if(date != null) {
 			s = date.toString();
 		}
-        return new ChoiceReport (ID, isCompleted, s);
+        return new ChoiceReport (ID,desc, isCompleted, s);
     }
     
    //adds a new record of an approver to the database and returns a boolean of weather it succeed
