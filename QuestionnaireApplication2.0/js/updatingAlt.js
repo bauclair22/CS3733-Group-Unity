@@ -61,11 +61,13 @@ function handleApproverAltClick(e,alt) {
 	    		   var isRemoved_Status = json["httpCode"];
 	    		   if(isRemoved_Status == 200){
 	        		   console.log("team mate removed");
-	        		   updateAltDisplay(xhr.responseText);
+	        		   processRefreshChoice(xhr.responseText);
+	        		   //updateAltDisplay(xhr.responseText);
 	        		   console.log("updating display");
 	        	   }
 	        	   else{
 	        		   console.log("unable to process request")
+	        		   processRefreshChoice("N/A");
 	        	   }
 	    	   }
 	    	   else{
@@ -130,11 +132,13 @@ xhr.onloadend = function () {
 	    		   var isRemoved_Status = json["httpCode"];
 	    		   if(isRemoved_Status == 200){
 	        		   console.log("team mate removed");
-	        		   updateAltDisplay(xhr.responseText);
+	        		   processRefreshChoice(xhr.responseText);
+	        		   //updateAltDisplay(xhr.responseText);
 	        		   console.log("updating display");
 	        	   }
 	        	   else{
 	        		   console.log("unable to process request")
+	        		   processRefreshChoice("N/A");
 	        	   }
 	    	   }
 	    	   else{

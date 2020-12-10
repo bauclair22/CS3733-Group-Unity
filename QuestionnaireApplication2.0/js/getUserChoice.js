@@ -61,10 +61,6 @@ function handleRefreshChoiceClick(e) {
 
 
 
-
-
-
-
 /**
  * Loads the choice that the user signs into
  */

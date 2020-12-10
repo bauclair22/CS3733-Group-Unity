@@ -7,7 +7,7 @@ function getAltID(n){
 }
 
 function setAltID(ids){
-	document.getElementById("altID_meta").content; = ids;
+	document.getElementById("altID_meta").content = ids;
 }
 
 function getMemberID(){

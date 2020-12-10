@@ -41,12 +41,14 @@ function handleAddFeedbackClick(e){
 	var form = document.addFeedbackForm;
 	var data = {};
 	
+	
+	data["choiceID"] = getChoiceID();
 	data["memberID"] = getMemberID();
 	data["altid"] = getAltID(feedbackNum);
 	data["description"] = form.description.value;   //again the message that they wanna get
 	
 	
-	var js = var js = JSON.stringify(data);
+	var js = JSON.stringify(data);
 	
 	var xhr = new XMLHttpRequest();
 	   xhr.open("POST", addFeedback_url, true);  //makes sure to call the lamda function

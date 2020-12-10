@@ -15,7 +15,9 @@ var updateChoice_url = base_url + "/updatechoice"; //post
 
 var addFeedback_url = base_url + "/createfeedback";  //post
 
-var clearCompleted_url = base_url + "/choicereport" //post
+var clearCompleted_url = base_url + "/completeChoice" //post
+
+var deleteStale = base_url + "/deleteStale" //post
 
 
 
