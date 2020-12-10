@@ -37,9 +37,10 @@ function openAddFeedbackForm(e, feedbackNum){
 
 
 function handleAddFeedbackClick(e){
-	console.log("attempting to add feedback for: " + feedbackNum);
+	//console.log("attempting to add feedback for: " + feedbackNum);
 	var form = document.addFeedbackForm;
 	var data = {};
+	var feedbackNum = getFeedbackNum();
 	
 	
 	data["choiceID"] = getChoiceID();

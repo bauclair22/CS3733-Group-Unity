@@ -63,8 +63,6 @@ function handleRefreshChoiceClick(e) {
 	  };
 	}
 
-
-
 /**
  * Loads the choice that the user signs into
  */
@@ -181,6 +179,8 @@ function displayUncompletedChoice(choice){
 		  }
 		  output + output +
 		  "</p><br>" ;
+		  console.log("alt: " + i);
+		  console.log("Length of feedback for alt is: " + alternatives[i]["feedback"].length);
 		
 		}
 	}
