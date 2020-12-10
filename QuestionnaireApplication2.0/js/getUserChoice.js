@@ -6,7 +6,9 @@
  *    GET list_url
  *    RESPONSE  list of [name, value, system] constants 
  */
+/*
 function handleRefreshChoice(e) {
+	
    var xhr = new XMLHttpRequest();
    xhr.open("POST", create_member_url, true);  //makes sure to call the lamda function
    xhr.send();
@@ -23,6 +25,7 @@ function handleRefreshChoice(e) {
     }
   };
 }
+*/
 
 /**
  * 
@@ -30,15 +33,16 @@ function handleRefreshChoice(e) {
 function handleRefreshChoiceClick(e) {
 		var data = {};
 		
+		/*
 		var output = output +
 		"<div id=\"selectedChoice\">" + 
 		"<p>Loading Choice...</p>" +
 		"</div>";
 		document.getElementById('selectedChoice').innerHTML = output;
-		
-		    	
-		data["choiceID"] = document.getElementById("choiceID_meta").context;
-		data["memberID"] = document.getElementById("memberID_meta").context;
+		*/
+		   	
+		data["choiceID"] = getChoiceID();
+		data["memberID"] = getMemberID();
 		
 		var js = JSON.stringify(data);
 	

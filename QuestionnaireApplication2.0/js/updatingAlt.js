@@ -54,7 +54,7 @@ function handleApproverAltClick(e,alt) {
    xhr.open("POST", selectApprover_url, true);
    xhr.send(js);
    
-   console.log("send to update reaction in alternative (add)");
+   console.log("adding user to approver");
    
   xhr.onloadend = function () {
     if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -64,10 +64,11 @@ function handleApproverAltClick(e,alt) {
       var isAdded_Status = json["httpCode"];
       if(isAdded_Status == 200){
     	  console.log("team mate added");
-    	  processRefreshChoice(xhr.responseText);
     	  console.log("updating display");
+    	  processRefreshChoice(xhr.responseText);
       }
       else{
+    	  console.log("user already added, attempting to unselect");
     	  // attemps to remove the approver from the alt
     	  handleRemoveapprover(js);
     	  
@@ -78,67 +79,40 @@ function handleApproverAltClick(e,alt) {
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function handleDisapproverAltClick(e,alt) {
-	
 	  var data = {};
 	  
-	  //convert everything that was in the hmtl form to the lamda
 	  data["memberID"] = getMemberID();
 	  data["choiceID"] = getChoiceID();
 	  data["altid"] = getAltID(alt);
-	  
+	 
 	  var js = JSON.stringify(data);
 	  console.log("JS:" + js);
 
- var xhr = new XMLHttpRequest();
- xhr.open("POST", selectDisapprover_url, true);
- xhr.send(js);
- 
- console.log("send to update reaction in alternative (add)");
- 
-xhr.onloadend = function () {
-  if (xhr.readyState == XMLHttpRequest.DONE) {
-    console.log ("XHR:" + xhr.responseText);
-    
-    var json = JSON.parse(xhr.responseText);
-    var isAdded_Status = json["httpCode"];
-    if(isAdded_Status == 200){
-  	  console.log("team mate added");
-  	  processRefreshChoice(xhr.responseText);
-  	  console.log("updating display");
-    }
-    else{
-  	  
-  	  console.log("attempting to remove user from Alt");
-  	 // console.log(js);
-  	  xhr = new XMLHttpRequest();
-  	  
-  	   xhr.open("POST", unselectDisapprover_url, true);
-  	   xhr.send(js);
-  	   xhr.onloadend = function(){
-	    	   if(xhr.readyState == XMLHttpRequest.DONE){
-	    		   console.log ("XHR:" + xhr.responseText);
-	    		   json = JSON.parse(xhr.responseText);
-	    		   //console.log(json);
-	    		   var isRemoved_Status = json["httpCode"];
-	    		   if(isRemoved_Status == 200){
-	        		   console.log("team mate removed");
-	        		   processRefreshChoice(xhr.responseText);
-	        		   //updateAltDisplay(xhr.responseText);
-	        		   console.log("updating display");
-	        	   }
-	        	   else{
-	        		   console.log("unable to process request")
-	        		   processRefreshChoice("N/A");
-	        	   }
-	    	   }
-	    	   else{
-	    		   console.log("something else happened");
-	
-	    	   }
-  	   }
+   var xhr = new XMLHttpRequest();
+   xhr.open("POST", selectDisapprover_url, true);
+   xhr.send(js);
+   
+   console.log("adding user to disapprover");
+   
+  xhr.onloadend = function () {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      console.log ("XHR:" + xhr.responseText);
+      
+      var json = JSON.parse(xhr.responseText);
+      var isAdded_Status = json["httpCode"];
+      if(isAdded_Status == 200){
+    	  console.log("team mate added");
+    	  console.log("updating display");
+    	  processRefreshChoice(xhr.responseText);
+      }
+      else{
+    	  console.log("user already added, attempting to unselect");
+    	  // attemps to remove the disapprover from the alt
+    	  handleRemoveapprover(js);
+    	  
+      }
     }
   }
-}
 }
 
 
