@@ -42,7 +42,7 @@ function handleApproverAltClick(e,alt) {
       var isAdded_Status = json["httpCode"];
       if(isAdded_Status == 200){
     	  console.log("team mate added");
-    	  updateAltDisplay(xhr.responseText);
+    	  processRefreshChoice(xhr.responseText);
     	  console.log("updating display");
       }
       else{
@@ -113,7 +113,7 @@ xhr.onloadend = function () {
     var isAdded_Status = json["httpCode"];
     if(isAdded_Status == 200){
   	  console.log("team mate added");
-  	  updateAltDisplay(xhr.responseText);
+  	  processRefreshChoice(xhr.responseText);
   	  console.log("updating display");
     }
     else{
