@@ -88,6 +88,7 @@ function processRefreshChoice(result) {
 	 var output = "";
 	
 	//creates an array of the ALt ids to process for later
+	 
 	 var choiceID = choice["ID"];
 	 var memberID = js["memberID"];
 	 var altIDList = [];
@@ -103,29 +104,9 @@ function processRefreshChoice(result) {
 	if (status == 200) {
 		//Storing the member ID  and alt Somewhere
 		
-		
-		//document.getElementById("memberID").innerHTML = memberID;
-		//document.getElementById("altID").innerHTML = altIDList.toString();
-		//document.getElementById("choiceID_new").innerHTML = choiceID;
-		
-		document.getElementById("memberID_meta").content = memberID;
-		document.getElementById("altID_meta").content = altIDList.toString();
-		document.getElementById("choiceID_meta").content = choiceID;
-		
-		console.log("verify that metadata has changed");
-		{
-			if(document.getElementById("memberID_meta").content != memberID){
-				console.log("memberID_meta success");
-			}
-			if(document.getElementById("altID_meta").content != ){
-				console.log("altID_meta success");
-			}
-			if(document.getElementById("choiceID_meta").content != "0"){
-				console.log("choiceID_meta success");
-			}
-		}
-
-		
+		setMemberID(memberID);
+		setAltID(altIDList.toString());
+		setChoiceID(choiceID);
 		//perform normal operation 
 		
 		output = output +
