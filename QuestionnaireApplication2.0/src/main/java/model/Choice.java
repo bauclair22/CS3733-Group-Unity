@@ -37,6 +37,10 @@ public class Choice {
 		return false;
 	}
 	
+	public ArrayList<String> getTeamMembers(){
+		return this.teamMembers;
+	}
+	
 	
 	/**
 	 * Add an Alternative to the array of alternatives to the next empty spot, if there are already 5 alternatives nothing will be added
@@ -89,7 +93,7 @@ public class Choice {
 		String output ="";
 		String s = "";
 		for(int i =0; i<this.alternatives.length; i++) {
-			s= alternatives[i].title;
+			s= this.alternatives[i].getTitle();
 			output = output.concat(s);
 			output = output.concat(", ");
 		}
