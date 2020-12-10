@@ -121,8 +121,12 @@ function openNewChoice(result){
 	}
 }
 
-
-function displayUncompleteChoice(choice){
+/**
+ * Displays The Choice
+ * @param choice
+ * @returns
+ */
+function displayUncompletedChoice(choice){
 	
 	var choiceTitle = choice["description"];
 	var alternatives = choice["alternatives"];  //array list
