@@ -107,12 +107,13 @@ function processRefreshChoice(result) {
 		document.getElementById("memberID_meta").content = memberID;
 		document.getElementById("altID_meta").content = altIDList.toString();
 		document.getElementById("choiceID_meta").content = choiceID;
+		
 		console.log("verify that metadata has changed");
 		{
-			if(document.getElementById("memberID_meta").content != "0"){
+			if(document.getElementById("memberID_meta").content != memberID){
 				console.log("memberID_meta success");
 			}
-			if(document.getElementById("altID_meta").content != "0"){
+			if(document.getElementById("altID_meta").content != ){
 				console.log("altID_meta success");
 			}
 			if(document.getElementById("choiceID_meta").content != "0"){

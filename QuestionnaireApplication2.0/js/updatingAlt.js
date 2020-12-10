@@ -1,5 +1,34 @@
 
-
+function handleRemoveapprover(js){
+	console.log("attempting to remove user from Alt");
+	 // console.log(js);
+	  xhr = new XMLHttpRequest();
+	  
+	   xhr.open("POST", unselectApprover_url, true);
+	   xhr.send(js);
+	   xhr.onloadend = function(){
+	   	   if(xhr.readyState == XMLHttpRequest.DONE){
+	   		   console.log ("XHR:" + xhr.responseText);
+	   		   json = JSON.parse(xhr.responseText);
+	   		   //console.log(json);
+	   		   var isRemoved_Status = json["httpCode"];
+	   		   if(isRemoved_Status == 200){
+	       		   console.log("team mate removed");
+	       		   processRefreshChoice(xhr.responseText);
+	       		   //updateAltDisplay(xhr.responseText);
+	       		   console.log("updating display");
+	       	   }
+	       	   else{
+	       		   console.log("unable to process request")
+	       		   processRefreshChoice("N/A");
+	       	   }
+	   	   }
+	   	   else{
+	   		   console.log("something else happened");
+	
+	   	   }
+	   }
+}
 
 
 
@@ -14,16 +43,9 @@ function handleApproverAltClick(e,alt) {
 	
 	  var data = {};
 	  
-	  //convert everything that was in the hmtl form to the lamda
-	  
-	  //data["title"] = form.titleInput.value;
-	  data["memberID"] = document.getElementById("memberID_meta").content;
-	  
-	  
-	  //gets, and splits the alt id array and gives back one to process
-	  var altIDString = document.getElementById("altID_meta").content;
-	  var altID = altIDString.split(",")[alt];
-	  data["altid"] = altID
+	  data["memberID"] = getMemberID();
+	  data["choiceID"] = getChoiceID();
+	  data["altid"] = getAltID(alt);
 	 
 	  var js = JSON.stringify(data);
 	  console.log("JS:" + js);
@@ -46,35 +68,9 @@ function handleApproverAltClick(e,alt) {
     	  console.log("updating display");
       }
       else{
+    	  // attemps to remove the approver from the alt
+    	  handleRemoveapprover(js);
     	  
-    	  console.log("attempting to remove user from Alt");
-    	 // console.log(js);
-    	  xhr = new XMLHttpRequest();
-    	  
-    	   xhr.open("POST", unselectApprover_url, true);
-    	   xhr.send(js);
-    	   xhr.onloadend = function(){
-	    	   if(xhr.readyState == XMLHttpRequest.DONE){
-	    		   console.log ("XHR:" + xhr.responseText);
-	    		   json = JSON.parse(xhr.responseText);
-	    		   //console.log(json);
-	    		   var isRemoved_Status = json["httpCode"];
-	    		   if(isRemoved_Status == 200){
-	        		   console.log("team mate removed");
-	        		   processRefreshChoice(xhr.responseText);
-	        		   //updateAltDisplay(xhr.responseText);
-	        		   console.log("updating display");
-	        	   }
-	        	   else{
-	        		   console.log("unable to process request")
-	        		   processRefreshChoice("N/A");
-	        	   }
-	    	   }
-	    	   else{
-	    		   console.log("something else happened");
-	
-	    	   }
-    	   }
       }
     }
   }
@@ -86,16 +82,10 @@ function handleDisapproverAltClick(e,alt) {
 	  var data = {};
 	  
 	  //convert everything that was in the hmtl form to the lamda
+	  data["memberID"] = getMemberID();
+	  data["choiceID"] = getChoiceID();
+	  data["altid"] = getAltID(alt);
 	  
-	  //data["title"] = form.titleInput.value;
-	  data["memberID"] = document.getElementById("memberID_meta").content;
-	  
-	  
-	  //gets, and splits the alt id array and gives back one to process
-	  var altIDString = document.getElementById("altID_meta").content;
-	  var altID = altIDString.split(",")[alt];
-	  data["altid"] = altID
-	 
 	  var js = JSON.stringify(data);
 	  console.log("JS:" + js);
 

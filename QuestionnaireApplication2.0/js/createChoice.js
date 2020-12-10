@@ -32,7 +32,7 @@ function processCreateChoiceResponse(result) {
 	  document.getElementById("choiceID_new").innerHTML = id;
 	  document.getElementById("choiceID_meta").content = id;
 	  var choiceID_Meta = document.getElementById("choiceID_meta").content;
-	  if(choiceID_Meta != "0"){
+	  if(choiceID_Meta != id){
 		  console.log("update to choice meta as been successful: " + choiceID_Meta )
 	  }
   } else {
