@@ -1,8 +1,24 @@
 function processCreateMemberResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
-  console.log("result:" + result);
-  openNewChoice(result);
+	var formMessage = document.getElementById("SignInMessage");
+	console.log("result:" + result);
+
+	var json = JSON.parse(result);
+	var status = json["httpCode"];
+	
+	
+	//422 -> the choice is completed
+	//200 -> okay
+	
+	if(status == 200){
+		openNewChoice(result);
+		
+	}
+	else{
+		var error = json["response"];
+		formMessage.innerHTML = error;
+	}
 
 }
 

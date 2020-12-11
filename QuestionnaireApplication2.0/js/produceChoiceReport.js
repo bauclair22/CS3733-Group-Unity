@@ -26,14 +26,16 @@ function handleProduceReport(e){
 
 }
 
+
+//delete stale
 function clearCompletedChoices(e){
 	var days = document.getElementById("daysToDelete").value;
 	var data = {};
-	data[""] = days;
+	data["daysOld"] = days;
 	var js = JSON.stringify(data);
 	
 	  var xhr = new XMLHttpRequest();
-	  xhr.open("POST", clearCompleted_url, true);
+	  xhr.open("POST", deleteStale, true);
 	  xhr.send(js);
 
 	  // This will process results and update HTML as appropriate. 
@@ -83,7 +85,7 @@ function printReport(result){
 	
 	for(i = 0; i < choiceReport.length; i++){
 		choiceID = choiceReport[i]["choiceID"];
-		choiceDescription = choiceReport[i]["description"];
+		choiceDescription = choiceReport[i]["choiceDescription"];
 		isCompleted = choiceReport[i]["isCompleted"];
 		dateCompleted = choiceReport[i]["dateCompleted"];
 		/*
