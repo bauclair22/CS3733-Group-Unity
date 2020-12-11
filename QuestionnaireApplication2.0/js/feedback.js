@@ -53,7 +53,7 @@ function handleAddFeedbackClick(e, feedbackNum){
 	
 	var xhr = new XMLHttpRequest();
 	   xhr.open("POST", addFeedback_url, true);  //makes sure to call the lamda function
-	   xhr.send();
+	   xhr.send(js);
 	   
 	   console.log("Attemp to Add Feedback to: " + getAltID(feedbackNum));
 

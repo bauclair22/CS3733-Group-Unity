@@ -178,10 +178,21 @@ function displayUncompletedChoice(choice){
 				}
 		  }
 		  output + output +
-		  "</p><br>" ;
+		  "</p> +" +
+		  "<p>Feedback:<br>";
+		  var feedback = alternatives[i]["feedback"];
 		  console.log("alt: " + i);
-		  console.log("Length of feedback for alt is: " + alternatives[i]["feedback"].length);
-		
+		  console.log("Length of feedback for alt is: " + feedback.length);
+		  
+		  for(L = 0; L < approvers.length; L++){
+			  if(feedback[L] != null){
+				output = output + feedback[L]["memberName"] + "<br>";
+				output = output + feedback[L]["description"] + "<br>";
+				output = output + feedback[L]["timestamp"] + "<br>";
+				} 	
+		  }	
+		  output = output +
+		  "</p><br>";
 		}
 	}
  	output = output +
