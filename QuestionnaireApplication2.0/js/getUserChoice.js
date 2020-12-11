@@ -65,7 +65,7 @@ function handleRefreshChoiceClick(e) {
 
 /**
  * Loads the choice that the user signs into
- */
+ */	
 function processRefreshChoice(result) {
 	console.log("result: " + result);
   
@@ -153,7 +153,7 @@ function displayUncompletedChoice(choice){
 		"<input class=\"alt\" type=\"button\" value=\"&#9989;\"  onClick=\"handleApproverAltClick(this," + i + ")\">" +
 		"<input class=\"alt\" type=\"button\" value=\"&#10062;\"  onClick=\"handleDisapproverAltClick(this," + i + ")\">" +
 		"<input class=\"alt\" type=\"button\" value=\"&#128172;\"  onClick=\"openAddFeedbackForm(this," +  i + ")\">" + 
-		"<input class=\"alt\" type=\"button\" value=\"&#9193;\"  onClick=\"\">" + 
+		"<input class=\"alt\" type=\"button\" value=\"&#9193;\"  onClick= \"handleCompleteChoice(this," + i + ")>" + 
 		"<label>" + alternatives[i]["title"] + "</label>";
 		
 		

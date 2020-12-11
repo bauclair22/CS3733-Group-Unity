@@ -1,7 +1,7 @@
 
 
 function cancelAddFeedbackForm(e){
-	console.log("User Requested To Cancel Feedback");
+	console.log("User Requested To Close Feedback");
 	var div = document.getElementById("addFeedbackDiv");
 	
 	setFeedbackNum(null);
@@ -25,8 +25,8 @@ function openAddFeedbackForm(e, feedbackNum){
 	"<div id=\"addFeedbackDiv\">" +
 	"<form name=\"addFeedbackForm\" id=\"addFeedbackForm\">" +
 	"<label>Add Your Feedback</label><br>" +
-	"<textarea name=\"description\" rows=\"4\" cols=\"30\"></textarea><br>" +
-	"<input type=\"button\" value=\"Add\" onClick=\"handleAddFeedbackClick(this)\"></input>" +
+	"<textarea name=\"descriptionFeedback\" id=\"descriptionFeedback\" rows=\"4\" cols=\"30\"></textarea><br>" +
+	"<input type=\"button\" value=\"Add\" onClick=\"handleAddFeedbackClick(this," + feedbackNum + ")\"></input>" +
 	"<input type=\"button\" value=\"Cancel\" onClick=\"cancelAddFeedbackForm(this)\"></input>" +
 	"</form>" +
 	"</div>";
@@ -36,19 +36,19 @@ function openAddFeedbackForm(e, feedbackNum){
 
 
 
-function handleAddFeedbackClick(e){
-	//console.log("attempting to add feedback for: " + feedbackNum);
-	var form = document.addFeedbackForm;
+function handleAddFeedbackClick(e, feedbackNum){	
+	//var div = document.getElementById("addFeedbackDiv");
+	//var form = div.getElementById("addFeedbackForm");	
 	var data = {};
-	var feedbackNum = getFeedbackNum();
+	//var feedbackNum = getFeedbackNum();
 	
 	
 	data["choiceID"] = getChoiceID();
 	data["memberID"] = getMemberID();
 	data["altid"] = getAltID(feedbackNum);
-	data["description"] = form.description.value;   //again the message that they wanna get
+	data["description"] = document.getElementById("descriptionFeedback").value;   //again the message that they wanna get
 	
-	
+		
 	var js = JSON.stringify(data);
 	
 	var xhr = new XMLHttpRequest();
