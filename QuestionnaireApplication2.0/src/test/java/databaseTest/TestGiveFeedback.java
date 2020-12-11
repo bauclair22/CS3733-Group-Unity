@@ -19,7 +19,7 @@ public class TestGiveFeedback {
 		String feedback="I am very happy2";
 		Feedback fb = null;
 		try {
-			fb = dao.giveFeedback(memberID,altid, feedback);
+			fb = dao.giveFeedback("f8c9c86d-c463-4e4f-b729-b4e92bbc1520","226c3854-9d3f-472b-b3bf-0bbcba876933","testFeedback", "438e6414-6826-431a-a8e1-67b33210da28");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

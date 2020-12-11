@@ -24,7 +24,7 @@ public class TestaddReaction {
 		try {;
 			//dao.addApprover(mem1,alt1);
 			//dao.addDisapprover(mem2,alt2);
-			dao.addDisapprover("13eba7d4-905f-47c3-9505-ba841ba7fdb5","006729fb-830d-4ba5-b7f0-e829234d9673");
+			dao.addDisapprover("f8c9c86d-c463-4e4f-b729-b4e92bbc1520","226c3854-9d3f-472b-b3bf-0bbcba876933","438e6414-6826-431a-a8e1-67b33210da28");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

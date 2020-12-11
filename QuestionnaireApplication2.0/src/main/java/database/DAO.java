@@ -327,7 +327,7 @@ public class DAO {
     
     //deletes a reaction and returns a boolean of weather the delete was successful
     public boolean deleteReaction(String memberID, String altid, String choiceID) throws Exception {
-    	if(isCompleted(choiceID)) {throw new Exception("Choice is complete you can't react");}
+    	if(isCompleted(choiceID)) {throw new Exception("Choice is complete you can't unselect reaction");}
         try {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblReactions +  " WHERE memberID=? AND alternativeID=?;"); 
             ps.setString(1, memberID);

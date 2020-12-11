@@ -40,7 +40,7 @@ public class UnselectReactionHandler implements RequestHandler<UnselectReactionR
 			
 			//Return error message if an exception is caught
 		} catch (Exception e) {
-			response = new UnselectReactionResponse(403, "Unable to add approval: " + req.getmemberID() + req.getAltid() + "(" + e.getMessage() + ")");
+			response = new UnselectReactionResponse(403, "Unable to unselect reaction: " + req.getmemberID() + req.getAltid() + "(" + e.getMessage() + ")");
 		}
 		 return response;
     }
