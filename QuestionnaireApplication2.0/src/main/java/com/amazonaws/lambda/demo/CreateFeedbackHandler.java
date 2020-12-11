@@ -14,12 +14,12 @@ public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackReque
 	
 	LambdaLogger logger;
 	
-	Feedback createFeedback(String memberID, String altid, String feedback) throws Exception {
+	Feedback createFeedback(String memberID, String altid, String feedback, String choiceID) throws Exception {
 		
 		if (logger != null) { logger.log("in createFeedback");
 			
 			DAO dao = new DAO();
-			return dao.giveFeedback(memberID, altid, feedback);
+			return dao.giveFeedback(memberID, altid, feedback, choiceID);
 		}
 		return null;
 	}
@@ -32,7 +32,7 @@ public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackReque
 
          CreateFeedbackResponse response;
  		try {
- 			Feedback myFeedback = createFeedback( req.getMemberID(), req.getAltid(), req.getDescription());
+ 			Feedback myFeedback = createFeedback( req.getMemberID(), req.getAltid(), req.getDescription(), req.getChoiceID());
  			if (myFeedback != null) {
  				Choice myChoice = dao.getChoiceswithID(req.getChoiceID());
  				response = new CreateFeedbackResponse(myChoice);

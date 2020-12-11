@@ -16,7 +16,7 @@ public class TestdeleteStaleChoices {
 	@Test
 	public void test() {
 		DAO dao = new DAO();
-		float days = 30f;
+		float days = 7f;
 		List<ChoiceReport> r = null;
 		//run this in sql first to have something to delete:
 		//INSERT INTO Choices (idChoice, maxUsers, description, DateCreated, isCompleted) VALUES ("choiceIDToDelete2", 3, "toTestDeleteOld2", "2020-11-08 00:38:28", 1);
