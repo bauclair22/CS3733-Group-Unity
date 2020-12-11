@@ -1,8 +1,27 @@
 function processCreateMemberResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
-  console.log("result:" + result);
-  openNewChoice(result);
+	var formMessage = document.getElementById("SignInMessage");
+	console.log("result:" + result);
+
+	var json = JSON.parse(result);
+	var status = json["httpCode"];
+	//var isCompleted = json["choice"]["isCompleted"];
+	//422 -> the choice is completed
+	//200 -> okay
+	
+	if(status == 200){
+		//if(isCompleted){
+		//	formMessage.innerHTML = "The choice is already Complete";
+		//}
+		//else{
+			openNewChoice(result);
+		//}
+	}
+	else{
+		var error = json["response"];
+		formMessage.innerHTML = error;
+	}
 
 }
 
@@ -34,10 +53,22 @@ function handleCreateMemberClick(e) {
     console.log(xhr);
     console.log(xhr.request);
     if (xhr.readyState == XMLHttpRequest.DONE) {
-    	 if (xhr.status == 200) {
+    	
+    	var json = JSON.parse(xhr.responseText);
+    	var status = json["status"];
+    	var status = json["httpCode"];
+    	
+    	
+    	 if (status == 200) {
+    		 var isCompleted = json["choice"]["isCompleted"];
     		 console.log ("XHR:" + xhr.responseText);
-    		 formMessage.innerHTML = "Welcome " + form.username.value;
+    		 if(isCompleted){
+    			 formMessage.innerHTML = "The choice is already Complete";
+    		 }
+    		 else{
+    			  formMessage.innerHTML = "Welcome " + form.username.value;
     		 processCreateMemberResponse(xhr.responseText);
+    		 }
     	 } else {
     		 console.log("issue with adding member - login -")
     		 formMessage.innerHTML = "There seems to be an issue with your sign in";

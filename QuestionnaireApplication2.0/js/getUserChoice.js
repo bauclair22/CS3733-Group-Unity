@@ -63,11 +63,9 @@ function handleRefreshChoiceClick(e) {
 	  };
 	}
 
-
-
 /**
  * Loads the choice that the user signs into
- */
+ */	
 function processRefreshChoice(result) {
 	console.log("result: " + result);
   
@@ -78,9 +76,40 @@ function processRefreshChoice(result) {
 	// getting the JSON object
   	var status = js["httpCode"];
   	var choice = js["choice"];
+	var isCompleted = choice["isCompleted"];
   	
+  
 	if (status == 200) {
-		displayUncompletedChoice(choice);
+		if(isCompleted == false){
+			displayUncompletedChoice(choice);
+		}
+		else{
+			var formMessage = document.getElementById("SignInMessage");
+			formMessage.innerHTML = "The choice is already Complete";
+		}
+	}
+}
+
+function processRefreshChoice(result, altNum) {
+	console.log("result: " + result);
+  
+	// getting the response and the http code
+	var js = JSON.parse(result);
+	console.log(js);
+  
+	// getting the JSON object
+  	var status = js["httpCode"];
+  	var choice = js["choice"];
+	var isCompleted = choice["isCompleted"];
+  	
+  
+	if (status == 200) {
+		if(isCompleted == false){
+			displayUncompletedChoice(choice);
+		}
+		else{
+			displayCompletedChoice(choice, altNum);
+		}
 	}
 }
 
@@ -152,10 +181,10 @@ function displayUncompletedChoice(choice){
 		//disapprover
 		//feedback
 		//formward feedback
-		"<input class=\"alt\" type=\"button\" value=\"&#9989;\"  onClick=\"handleApproverAltClick(this," + i + ")\">" +
+		"<input class=\"alt\" type=\"button\" value=\"&#9989;\"  onClick=\"handleApproverAltClick(this," + i + ")\">" +	
 		"<input class=\"alt\" type=\"button\" value=\"&#10062;\"  onClick=\"handleDisapproverAltClick(this," + i + ")\">" +
 		"<input class=\"alt\" type=\"button\" value=\"&#128172;\"  onClick=\"openAddFeedbackForm(this," +  i + ")\">" + 
-		"<input class=\"alt\" type=\"button\" value=\"&#9193;\"  onClick=\"\">" + 
+		"<input class=\"alt\" type=\"button\" value=\"&#9193;\"  onClick= \"handleCompleteChoice(this," + i + ")\">" + 
 		"<label>" + alternatives[i]["title"] + "</label>";
 		
 		
@@ -180,8 +209,21 @@ function displayUncompletedChoice(choice){
 				}
 		  }
 		  output + output +
-		  "</p><br>" ;
-		
+		  "</p> +" +
+		  "<p>Feedback:<br>";
+		  var feedback = alternatives[i]["feedback"];
+		  console.log("alt: " + i);
+		  console.log("Length of feedback for alt is: " + feedback.length);
+		  
+		  for(L = 0; L < feedback.length; L++){
+			  if(feedback[L] != null){
+				output = output + feedback[L]["memberName"] + "<br>";
+				output = output + feedback[L]["description"] + "<br>";
+				output = output + feedback[L]["timestamp"] + "<br>";
+				} 	
+		  }		
+		  output = output +
+		  "</p><br>";
 		}
 	}
  	output = output +
@@ -189,6 +231,27 @@ function displayUncompletedChoice(choice){
  	"</div>";
  	
  	choiceDisplay.innerHTML = output;
+}
+
+
+function displayCompletedChoice(choice, altNum){
+	var choiceTitle = choice["description"];
+	var alternatives = choice["alternatives"];  //array list
+	var selectedAlternative = alternatives[altNum]["title"];
+	
+	//perform normal operation 
+	var choiceDisplay = document.getElementById('selectedChoice');
+	var output = "";
+	
+	output = output +
+	"<div id=\"selectedChoice\">" +  
+	"<h2>" + choiceTitle + " is Completed, Chosen: "+  selectedAlternative +"</h2>";
+ 	output = output +
+ 	"</div>";
+ 	
+ 	choiceDisplay.innerHTML = output;
+	
+	
 }
 
 

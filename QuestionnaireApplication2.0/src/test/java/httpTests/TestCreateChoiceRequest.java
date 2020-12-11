@@ -29,6 +29,8 @@ public class TestCreateChoiceRequest {
 		assertEquals(3, ccr.getNumMembers());
 		assertEquals(testTitles[0], ccr.getAlternativeTitle(0));
 		assertEquals(testTitles[1], ccr.getAlternativeTitle(1));
+		String rep = ccr.toString();
+		assertTrue(rep.startsWith("CreateChoiceRequest"));
 	}
 
 }

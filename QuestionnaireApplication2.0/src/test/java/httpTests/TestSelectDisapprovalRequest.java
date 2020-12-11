@@ -24,6 +24,8 @@ public class TestSelectDisapprovalRequest {
 		assertEquals("AltID", sdr.getAltid());
 		assertEquals("ChoiceID", sdr.getChoiceID());
 		assertEquals("MemberID", sdr.getmemberID());
+		String rep = sdr.toString();
+		assertTrue(rep.startsWith("MemberID"));
 	}
 
 }

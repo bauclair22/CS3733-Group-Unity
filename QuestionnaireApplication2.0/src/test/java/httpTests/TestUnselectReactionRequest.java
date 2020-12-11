@@ -24,6 +24,8 @@ public class TestUnselectReactionRequest {
 		assertEquals("AltID", urr.getAltid());
 		assertEquals("ChoiceID", urr.getChoiceID());
 		assertEquals("MemberID", urr.getmemberID());
+		String rep = urr.toString();
+		assertTrue(rep.startsWith("MemberID"));
 	}
 
 }
