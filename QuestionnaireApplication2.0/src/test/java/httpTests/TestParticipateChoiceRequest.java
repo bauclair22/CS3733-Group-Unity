@@ -24,6 +24,13 @@ public class TestParticipateChoiceRequest {
 		assertEquals("ChoiceID", pcr.getId());
 		assertEquals("Password", pcr.getPassword());
 		assertEquals("MyUsername", pcr.getUsername());
+		String rep = pcr.toString();
+		assertTrue(rep.startsWith("ParticipateChoiceRequest"));
+		
+		pcr = new ParticipateChoiceRequest("Username2", "ChoiceID2");
+		assertEquals("ChoiceID2", pcr.getId());
+		assertEquals(null, pcr.getPassword());
+		assertEquals("Username2", pcr.getUsername());
 	}
 
 }
