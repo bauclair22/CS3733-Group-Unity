@@ -16,7 +16,7 @@ function handleCompleteChoice(e, altNum){
 	  xhr.onloadend = function () {
 	    if (xhr.readyState == XMLHttpRequest.DONE) {
 	      console.log ("XHR:" + xhr.responseText);
-	      processRefreshChoice(xhr.responseText);
+	      processRefreshChoice(xhr.responseText, altNum);
 	    } else {
 	    	processRefreshChoice("N/A");
 	    }
@@ -24,5 +24,3 @@ function handleCompleteChoice(e, altNum){
 }
 
 
-function processComplteChoice(e){
-}

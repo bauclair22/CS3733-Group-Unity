@@ -76,9 +76,36 @@ function processRefreshChoice(result) {
 	// getting the JSON object
   	var status = js["httpCode"];
   	var choice = js["choice"];
+	var isCompleted = js["isCompleted"];
   	
+  
 	if (status == 200) {
-		displayUncompletedChoice(choice);
+		if(isCompleted == false){
+			displayUncompletedChoice(choice);
+		}
+	}
+}
+
+function processRefreshChoice(result, altNum) {
+	console.log("result: " + result);
+  
+	// getting the response and the http code
+	var js = JSON.parse(result);
+	console.log(js);
+  
+	// getting the JSON object
+  	var status = js["httpCode"];
+  	var choice = js["choice"];
+	var isCompleted = js["isCompleted"];
+  	
+  
+	if (status == 200) {
+		if(isCompleted == false){
+			displayUncompletedChoice(choice);
+		}
+		else{
+			displayCompletedChoice(choice, altNum);
+		}
 	}
 }
 
@@ -184,13 +211,13 @@ function displayUncompletedChoice(choice){
 		  console.log("alt: " + i);
 		  console.log("Length of feedback for alt is: " + feedback.length);
 		  
-		  for(L = 0; L < approvers.length; L++){
+		  for(L = 0; L < feedback.length; L++){
 			  if(feedback[L] != null){
 				output = output + feedback[L]["memberName"] + "<br>";
 				output = output + feedback[L]["description"] + "<br>";
 				output = output + feedback[L]["timestamp"] + "<br>";
 				} 	
-		  }	
+		  }		
 		  output = output +
 		  "</p><br>";
 		}
@@ -200,6 +227,29 @@ function displayUncompletedChoice(choice){
  	"</div>";
  	
  	choiceDisplay.innerHTML = output;
+}
+
+
+function displayCompletedChoice(choice, altNum){
+	var choiceTitle = choice["description"];
+	var alternatives = choice["alternatives"];  //array list
+	var selectedAlternative = alternatives[altNum]["title"];
+	
+	//perform normal operation 
+	var choiceDisplay = document.getElementById('selectedChoice');
+	var output = "";
+	
+	output = output +
+	"<div id=\"selectedChoice\">" +  
+	"<h2>" + choiceTitle + "</h2>";
+	"<p>This Choice is closed(completed), The choosen alternative was " + selectedAlternative + "</p>";
+	
+ 	output = output +
+ 	"</div>";
+ 	
+ 	choiceDisplay.innerHTML = output;
+	
+	
 }
 
 
