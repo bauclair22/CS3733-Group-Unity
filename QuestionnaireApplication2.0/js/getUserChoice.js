@@ -150,10 +150,10 @@ function displayUncompletedChoice(choice){
 		//disapprover
 		//feedback
 		//formward feedback
-		"<input class=\"alt\" type=\"button\" value=\"&#9989;\"  onClick=\"handleApproverAltClick(this," + i + ")\">" +
+		"<input class=\"alt\" type=\"button\" value=\"&#9989;\"  onClick=\"handleApproverAltClick(this," + i + ")\">" +	
 		"<input class=\"alt\" type=\"button\" value=\"&#10062;\"  onClick=\"handleDisapproverAltClick(this," + i + ")\">" +
 		"<input class=\"alt\" type=\"button\" value=\"&#128172;\"  onClick=\"openAddFeedbackForm(this," +  i + ")\">" + 
-		"<input class=\"alt\" type=\"button\" value=\"&#9193;\"  onClick= \"handleCompleteChoice(this," + i + ")>" + 
+		"<input class=\"alt\" type=\"button\" value=\"&#9193;\"  onClick= \"handleCompleteChoice(this," + i + ")\">" + 
 		"<label>" + alternatives[i]["title"] + "</label>";
 		
 		

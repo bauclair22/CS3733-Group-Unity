@@ -7,7 +7,7 @@ function handleCompleteChoice(e, altNum){
 	var js = JSON.stringify(data);
 	
 	   var xhr = new XMLHttpRequest();
-	   xhr.open("POST", completeChoice_url , true);  //makes sure to call the lamda function
+	   xhr.open("POST", completed_url , true);  //makes sure to call the lamda function
 	   xhr.send(js);
 	   
 	   console.log("Complete Choice");
