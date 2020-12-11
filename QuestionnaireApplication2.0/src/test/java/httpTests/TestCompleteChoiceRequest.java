@@ -20,6 +20,8 @@ public class TestCompleteChoiceRequest {
 		ccr = new CompleteChoiceRequest("ChoiceID", "Altid");
 		assertEquals("Altid", ccr.getAltid());
 		assertEquals("ChoiceID", ccr.getChoiceID());
+		String rep = ccr.toString();
+		assertTrue(rep.startsWith("Altid"));
 	}
 
 }

@@ -18,6 +18,10 @@ public class TestCreateChoiceResponse {
 		ccr = new CreateChoiceResponse ("some error", 403);
 		rep = ccr.toString();
 		assertTrue(rep.startsWith("ErrorResult"));
+		
+		ccr = new CreateChoiceResponse ("Choice2");
+		rep = ccr.toString();
+		assertTrue(rep.startsWith("Response"));
 	}
 
 }
