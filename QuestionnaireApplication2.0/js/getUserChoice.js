@@ -241,9 +241,7 @@ function displayCompletedChoice(choice, altNum){
 	
 	output = output +
 	"<div id=\"selectedChoice\">" +  
-	"<h2>" + choiceTitle + "</h2>";
-	"<p>This Choice is closed(completed), The choosen alternative was " + selectedAlternative + "</p>";
-	
+	"<h2>" + choiceTitle + " is Completed, Choosen: "+  selectedAlternative +"</h2>";
  	output = output +
  	"</div>";
  	
