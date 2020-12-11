@@ -55,10 +55,11 @@ function handleCreateMemberClick(e) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
     	
     	var json = JSON.parse(xhr.responseText);
+    	var status = json["status"];
     	var status = json["httpCode"];
     	
     	
-    	 if (xhr.status == 200) {
+    	 if (status == 200) {
     		 var isCompleted = json["choice"]["isCompleted"];
     		 console.log ("XHR:" + xhr.responseText);
     		 if(isCompleted){
