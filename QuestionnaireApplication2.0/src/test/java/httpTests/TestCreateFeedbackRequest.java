@@ -30,6 +30,8 @@ public class TestCreateFeedbackRequest {
 		assertEquals("TestName", cfr.getMemberID());
 		assertEquals("Altid", cfr.getAltid());
 		assertEquals("ChoiceID", cfr.getChoiceID());
+		String rep = cfr.toString();
+		assertTrue(rep.startsWith("CreateFeedbackRequest"));
 	}
 
 }

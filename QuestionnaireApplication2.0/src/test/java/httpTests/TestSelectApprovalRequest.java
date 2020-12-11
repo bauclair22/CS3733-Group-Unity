@@ -24,6 +24,8 @@ public class TestSelectApprovalRequest {
 		assertEquals("AltID", sar.getAltid());
 		assertEquals("ChoiceID", sar.getChoiceID());
 		assertEquals("MemberID", sar.getmemberID());
+		String rep = sar.toString();
+		assertTrue(rep.startsWith("MemberID"));
 	}
 
 }

@@ -20,6 +20,8 @@ public class TestRefreshChoiceRequest {
 		rcr = new RefreshChoiceRequest("ChoiceID", "MemberID");
 		assertEquals("ChoiceID", rcr.getChoiceID());
 		assertEquals("MemberID", rcr.getMemberID());
+		String rep = rcr.toString();
+		assertTrue(rep.startsWith("RefreshChoiceRequest"));
 	}
 
 }

@@ -17,6 +17,8 @@ public class TestDeleteStaleRequest {
 		dsr = new DeleteStaleRequest((float) 6.5);
 		result = dsr.getDaysOld();
 		assertTrue(result == 6.5);
+		String rep = dsr.toString();
+		assertTrue(rep.startsWith("DeleteStaleRequest"));
 	}
 
 }
