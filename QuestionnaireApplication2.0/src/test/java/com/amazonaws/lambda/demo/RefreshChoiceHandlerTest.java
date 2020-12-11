@@ -21,7 +21,7 @@ public class RefreshChoiceHandlerTest {
         input = null;
     }
 
-    private Context createContext() {
+    public Context createContext() {
         TestContext ctx = new TestContext();
 
         // TODO: customize your context here if needed.
