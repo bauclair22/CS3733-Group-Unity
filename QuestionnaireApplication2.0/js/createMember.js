@@ -56,9 +56,10 @@ function handleCreateMemberClick(e) {
     	
     	var json = JSON.parse(xhr.responseText);
     	var status = json["httpCode"];
-    	var isCompleted = json["choice"]["isCompleted"];
+    	
     	
     	 if (xhr.status == 200) {
+    		 var isCompleted = json["choice"]["isCompleted"];
     		 console.log ("XHR:" + xhr.responseText);
     		 if(isCompleted){
     			 formMessage.innerHTML = "The choice is already Complete";
