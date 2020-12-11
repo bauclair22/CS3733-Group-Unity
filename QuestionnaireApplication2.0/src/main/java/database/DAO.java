@@ -55,8 +55,12 @@ public class DAO {
                 int maxUsers = resultSet.getInt("maxUsers");
                 String description = resultSet.getString("description");
                 Timestamp time = resultSet.getTimestamp("DateCreated");
+                int isCompletednum = resultSet.getInt("isCompleted");
+                boolean isCompleted = false;
+                if(isCompletednum == 1) {isCompleted=true;}
                 Alternative[] alternatives = getChoiceAlternatives(ID);
                 choice = new Choice(ID, description, alternatives, maxUsers, time);
+                choice.setIsCompleted(isCompleted);
             }
             resultSet.close();
             ps.close();
@@ -322,7 +326,8 @@ public class DAO {
     }
     
     //deletes a reaction and returns a boolean of weather the delete was successful
-    public boolean deleteReaction(String memberID, String altid) throws Exception {
+    public boolean deleteReaction(String memberID, String altid, String choiceID) throws Exception {
+    	if(isCompleted(choiceID)) {throw new Exception("Choice is complete you can't react");}
         try {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM " + tblReactions +  " WHERE memberID=? AND alternativeID=?;"); 
             ps.setString(1, memberID);
@@ -377,8 +382,9 @@ public class DAO {
     }
     
    //adds a new record of an approver to the database and returns a boolean of weather it succeed
-   public boolean addApprover(String memberID, String altid) throws Exception {
+   public boolean addApprover(String memberID, String altid, String choiceID) throws Exception {
 	   boolean success = false;
+	   if(isCompleted(choiceID)) {throw new Exception("Choice is complete you can't react");}
 	   try {
 		    PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID = ? AND alternativeID = ?;");
             ps.setString(1, memberID);
@@ -407,8 +413,9 @@ public class DAO {
     }
 
    //adds a new record of a disapprover to the database and returns a boolean of weather it succeed
-    public boolean addDisapprover(String memberID, String altid) throws Exception {
+    public boolean addDisapprover(String memberID, String altid, String choiceID) throws Exception {
     	boolean success = false;
+    	if(isCompleted(choiceID)) {throw new Exception("Choice is complete you can't react");}
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblReactions + " WHERE memberID =? AND alternativeID =?;");
             ps.setString(1, memberID);
@@ -577,8 +584,11 @@ public class DAO {
     }
     
     //stores a feedback in the database and returns that feedback in object form
-    public Feedback giveFeedback(String memberID,String altid, String feedback) throws Exception {
+    public Feedback giveFeedback(String memberID,String altid, String feedback, String choiceID) throws Exception {
     	Feedback fb = null;
+    	if(isCompleted(choiceID)) {
+    		throw new Exception("Choice is complete you can't react");
+    	}
         try {
         	PreparedStatement ps = conn.prepareStatement("INSERT INTO " + tblFeedback + " (idFeedback, memberID, alternativeID, time, feedback) values(?,?,?,?,?);"); 
              String newID = UUID.randomUUID().toString();

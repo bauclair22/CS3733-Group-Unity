@@ -32,7 +32,7 @@ public class SelectApprovalHandler implements RequestHandler<SelectApprovalReque
 		//In the DAO
 		//Check if user has already liked or disliked this alternative
 		 try {
-			if(dao.addApprover(req.getmemberID() ,req.getAltid())) {
+			if(dao.addApprover(req.getmemberID() ,req.getAltid(), req.getChoiceID())) {
 				Choice myChoice = dao.getChoiceswithID(req.getChoiceID());
 				response = new SelectApprovalResponse(myChoice, 200);
 			}

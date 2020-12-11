@@ -17,7 +17,7 @@ public class TestCompleateChoice {
 		LocalDateTime myTime = LocalDateTime.now();
 		Timestamp ts= Timestamp.valueOf(myTime);
 		try {
-			dao.completeChoice("00e8cbb7-9173-4eb6-92b2-6bee02e2f0e1");
+			dao.completeChoice("9762f2ef-0bfa-48b0-9fff-160df7ab450a");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
