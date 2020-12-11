@@ -76,12 +76,16 @@ function processRefreshChoice(result) {
 	// getting the JSON object
   	var status = js["httpCode"];
   	var choice = js["choice"];
-	var isCompleted = js["isCompleted"];
+	var isCompleted = choice["isCompleted"];
   	
   
 	if (status == 200) {
 		if(isCompleted == false){
 			displayUncompletedChoice(choice);
+		}
+		else{
+			var formMessage = document.getElementById("SignInMessage");
+			formMessage.innerHTML = "The choice is already Complete";
 		}
 	}
 }
@@ -96,7 +100,7 @@ function processRefreshChoice(result, altNum) {
 	// getting the JSON object
   	var status = js["httpCode"];
   	var choice = js["choice"];
-	var isCompleted = js["isCompleted"];
+	var isCompleted = choice["isCompleted"];
   	
   
 	if (status == 200) {
@@ -241,7 +245,7 @@ function displayCompletedChoice(choice, altNum){
 	
 	output = output +
 	"<div id=\"selectedChoice\">" +  
-	"<h2>" + choiceTitle + " is Completed, Choosen: "+  selectedAlternative +"</h2>";
+	"<h2>" + choiceTitle + " is Completed, Chosen: "+  selectedAlternative +"</h2>";
  	output = output +
  	"</div>";
  	

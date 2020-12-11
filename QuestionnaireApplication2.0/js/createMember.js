@@ -6,14 +6,19 @@ function processCreateMemberResponse(result) {
 
 	var json = JSON.parse(result);
 	var status = json["httpCode"];
+	var isCompleted = json["choice"]["isCompleted"];
 	
 	
 	//422 -> the choice is completed
 	//200 -> okay
 	
 	if(status == 200){
-		openNewChoice(result);
-		
+		if(isCompleted){
+			formMessage.innerHTML = "The choice is already Complete";
+		}
+		else{
+			openNewChoice(result);
+		}
 	}
 	else{
 		var error = json["response"];
