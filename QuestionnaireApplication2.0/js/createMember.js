@@ -6,21 +6,14 @@ function processCreateMemberResponse(result) {
 
 	var json = JSON.parse(result);
 	var status = json["httpCode"];
-	//var isCompleted = json["choice"]["isCompleted"];
-	//422 -> the choice is completed
-	//200 -> okay
 	
 	if(status == 200){
-		//if(isCompleted){
-		//	formMessage.innerHTML = "The choice is already Complete";
-		//}
-		//else{
 			openNewChoice(result);
-		//}
 	}
 	else{
 		var error = json["response"];
-		formMessage.innerHTML = error;
+		console.log(error);
+		//formMessage.innerHTML = error;
 	}
 
 }
@@ -70,8 +63,10 @@ function handleCreateMemberClick(e) {
     		 processCreateMemberResponse(xhr.responseText);
     		 }
     	 } else {
-    		 console.log("issue with adding member - login -")
-    		 formMessage.innerHTML = "There seems to be an issue with your sign in";
+    		 console.log()
+    		 console.log("Some Issue With The Login -")
+    		 var error = json["response"];
+    		 formMessage.innerHTML = error;
 			  //var js = JSON.parse(xhr.responseText);
 			  //var err = js["response"];
 			  //alert (err);

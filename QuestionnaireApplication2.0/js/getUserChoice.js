@@ -86,6 +86,7 @@ function processRefreshChoice(result) {
 		else{
 			var formMessage = document.getElementById("SignInMessage");
 			formMessage.innerHTML = "The choice is already Complete";
+			displayCompletedChoice(choice, null);
 		}
 	}
 }
@@ -209,7 +210,7 @@ function displayUncompletedChoice(choice){
 				}
 		  }
 		  output + output +
-		  "</p> +" +
+		  "</p><br>" +
 		  "<p>Feedback:<br>";
 		  var feedback = alternatives[i]["feedback"];
 		  console.log("alt: " + i);
@@ -243,15 +244,24 @@ function displayCompletedChoice(choice, altNum){
 	var choiceDisplay = document.getElementById('selectedChoice');
 	var output = "";
 	
-	output = output +
-	"<div id=\"selectedChoice\">" +  
-	"<h2>" + choiceTitle + " is Completed, Chosen: "+  selectedAlternative +"</h2>";
- 	output = output +
- 	"</div>";
+	 
+	
+	if(altNum == null){
+		output = output +
+		"<div id=\"selectedChoice\">" 
+		"<h2>" + choiceTitle + " is Completed </h2>" +
+	 	"</div>";
+	}
+	else{
+		output = output +
+		"<div id=\"selectedChoice\">" 
+		"<h2>" + choiceTitle + " is Completed, Chosen: "+  selectedAlternative +"</h2>" +
+	 	"</div>";
+		
+	}
+	
  	
  	choiceDisplay.innerHTML = output;
-	
-	
 }
 
 
