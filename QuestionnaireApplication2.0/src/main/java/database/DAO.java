@@ -248,13 +248,13 @@ public class DAO {
 			ps.setString(3, title);
 			ps.executeUpdate();
 			ps.close();
-
 		} catch (Exception e) {
 			newID = null;
 			throw new Exception("Failed to update report: " + e.getMessage());
 		}
 		return newID;
 	}
+
 
 	// stores a new user, if that user already exists and the password is correct
 	// nothing happens, if if the password is incorrect throws an error

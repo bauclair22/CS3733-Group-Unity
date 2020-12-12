@@ -25,7 +25,7 @@ public class testAlternate {
 		Ben = new TeamMember("Ben","Ten");
 		David = new TeamMember("David", "password");
 		Bob = new TeamMember("Bob");
-		fromDavid = new Feedback("David", "id76",  "I think your idea is bad", (Timestamp) null);
+		fromDavid = new Feedback("David", "id76",  "I think your idea is bad", "");
 		
 		alt = new Alternative("alt1" ,"id76");
 		alt.addApprover("Bob");
