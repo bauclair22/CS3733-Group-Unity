@@ -82,7 +82,7 @@ public class DAO {
 		try {
 			Alternative A[] = new Alternative[5];
 			int counter = 0;
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblAlternative + " WHERE choiceID=?;");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM " + tblAlternative + " WHERE choiceID=? order by num;");
 			ps.setString(1, choiceid);
 			ResultSet resultSet = ps.executeQuery();
 
@@ -227,7 +227,7 @@ public class DAO {
 
 		if (flag) {
 			for (int i = 0; i < titleAlt.length; i++) {
-				createAlternative(titleAlt[i], newID);
+				createAlternative(titleAlt[i], newID, i);
 			}
 		}
 
@@ -236,16 +236,17 @@ public class DAO {
 
 	// stores the alternative in the database and returns the alternative id
 	// randomly assigned to it
-	public String createAlternative(String title, String choiceID) throws Exception {
+	public String createAlternative(String title, String choiceID, int altnum) throws Exception {
 		String newID;
 		try {
 			String query = "INSERT INTO " + tblAlternative
-					+ " (idAlternative, choiceID, alternative) VALUES (?, ?, ?);";
+					+ " (idAlternative, choiceID, alternative, num) VALUES (?, ?, ?, ?);";
 			PreparedStatement ps = conn.prepareStatement(query);
 			newID = UUID.randomUUID().toString();
 			ps.setString(1, newID);
 			ps.setString(2, choiceID);
 			ps.setString(3, title);
+			ps.setInt(4, altnum);
 			ps.executeUpdate();
 			ps.close();
 		} catch (Exception e) {
