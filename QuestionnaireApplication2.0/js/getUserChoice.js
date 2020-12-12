@@ -238,7 +238,6 @@ function displayUncompletedChoice(choice){
 function displayCompletedChoice(choice, altNum){
 	var choiceTitle = choice["description"];
 	var alternatives = choice["alternatives"];  //array list
-	var selectedAlternative = alternatives[altNum]["title"];
 	
 	//perform normal operation 
 	var choiceDisplay = document.getElementById('selectedChoice');
@@ -253,6 +252,7 @@ function displayCompletedChoice(choice, altNum){
 	 	"</div>";
 	}
 	else{
+		var selectedAlternative = alternatives[altNum]["title"];
 		output = output +
 		"<div id=\"selectedChoice\">" 
 		"<h2>" + choiceTitle + " is Completed, Chosen: "+  selectedAlternative +"</h2>" +
@@ -260,7 +260,6 @@ function displayCompletedChoice(choice, altNum){
 		
 	}
 	
- 	
  	choiceDisplay.innerHTML = output;
 }
 
